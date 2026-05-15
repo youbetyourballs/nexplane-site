@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexplane — The Security Control Plane</title>
+  <meta name="description" content="Nexplane is the security control plane for your infrastructure — the single layer where every change is planned, approved, executed, and can be undone. Patching, hardening, identity, credentials. Nothing changes without going through Nexplane." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="#rollback">Rollback</a>
+      <a href="#platform">Platform</a>
+      <a href="#ai-safety">AI Safety</a>
+      <a href="#early-access" class="btn-nav">Request Access</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Now in private beta</div>
+    <h1>The security control plane<br>where <span class="gradient-text">every change is undoable.</span></h1>
+    <p class="hero-sub">
+      Nexplane is the security control plane for your infrastructure — the single layer where every change is planned, approved, executed, and can be undone. Patching, hardening, identity, credentials. Nothing changes without going through Nexplane.
+    </p>
+    <div class="hero-cta">
+      <a href="#early-access" class="btn-primary">Get early access</a>
+      <a href="#rollback" class="btn-secondary">How rollback works →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label">of changes have rollback</span></div>
+      <div class="stat"><span class="stat-num">80+</span><span class="stat-label">change types supported</span></div>
+      <div class="stat"><span class="stat-num">60s</span><span class="stat-label">emergency user lockout</span></div>
+    </div>
+  </div>
+  <div class="hero-code">
+    <div class="code-window">
+      <div class="code-bar">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="code-title">Change Request · CR-2847</span>
+      </div>
+      <pre><code><span class="c-dim"># Zero-day detected — CVE-2024-9999</span>
+<span class="c-key">change_type:</span> <span class="c-val">configure_seccomp</span>
+<span class="c-key">target:</span>      <span class="c-val">tag:env=production</span>  <span class="c-dim"># 47 hosts</span>
+<span class="c-key">priority:</span>    <span class="c-val">emergency</span>
+
+<span class="c-dim">▶ Pre-change snapshot: saved</span>
+<span class="c-dim">▶ Approved by: sarah@acme.com</span>
+<span class="c-green">✓ 47/47 hosts hardened</span>
+<span class="c-green">✓ Finding CVE-2024-9999 auto-closed</span>
+<span class="c-dim">  Rollback available: one click</span></code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<section class="logos">
+  <p class="logos-label">Built for teams running on</p>
+  <div class="logo-row">
+    <span class="logo-pill">AWS</span>
+    <span class="logo-pill">GCP</span>
+    <span class="logo-pill">Azure</span>
+    <span class="logo-pill">Oracle Cloud</span>
+    <span class="logo-pill">Linux</span>
+    <span class="logo-pill">Windows Server</span>
+  </div>
+</section>
+
+<!-- ROLLBACK SECTION -->
+<section class="rollback-section" id="rollback">
+  <div class="container">
+    <div class="section-eyebrow">The Rollback Guarantee</div>
+    <h2>Every change ships with<br>its own <em>undo button</em>.</h2>
+    <p class="section-sub">
+      Other platforms execute. Nexplane executes — and knows exactly how to reverse every action it takes.
+      Not a backup restore. Not a manual inverse runbook. A typed, tested, one-click rollback
+      built into the platform for every operation.
+    </p>
+    <div class="rollback-grid">
+      <div class="rollback-card">
+        <div class="rollback-icon">🔒</div>
+        <div class="rollback-action">Lock IAM user</div>
+        <div class="rollback-arrow">↔</div>
+        <div class="rollback-undo">Restore previous policies</div>
+      </div>
+      <div class="rollback-card">
+        <div class="rollback-icon">🔑</div>
+        <div class="rollback-action">Rotate SSH key</div>
+        <div class="rollback-arrow">↔</div>
+        <div class="rollback-undo">Restore prior authorized_keys</div>
+      </div>
+      <div class="rollback-card">
+        <div class="rollback-icon">🛡️</div>
+        <div class="rollback-action">Apply seccomp profile</div>
+        <div class="rollback-arrow">↔</div>
+        <div class="rollback-undo">Remove profile, restore baseline</div>
+      </div>
+      <div class="rollback-card">
+        <div class="rollback-icon">🔐</div>
+        <div class="rollback-action">Rotate DB credentials</div>
+        <div class="rollback-arrow">↔</div>
+        <div class="rollback-undo">Restore previous credentials</div>
+      </div>
+      <div class="rollback-card">
+        <div class="rollback-icon">🧱</div>
+        <div class="rollback-action">Update firewall rule</div>
+        <div class="rollback-arrow">↔</div>
+        <div class="rollback-undo">Delete rule, restore prior state</div>
+      </div>
+      <div class="rollback-card">
+        <div class="rollback-icon">📦</div>
+        <div class="rollback-action">Deploy secgroup change</div>
+        <div class="rollback-arrow">↔</div>
+        <div class="rollback-undo">Restore previous security group</div>
+      </div>
+      <div class="rollback-card">
+        <div class="rollback-icon">⬆️</div>
+        <div class="rollback-action">Kernel / OS upgrade</div>
+        <div class="rollback-arrow">↔</div>
+        <div class="rollback-undo">Restore pre-upgrade AMI snapshot</div>
+      </div>
+      <div class="rollback-card">
+        <div class="rollback-icon">📚</div>
+        <div class="rollback-action">Shared library upgrade (glibc, OpenSSL)</div>
+        <div class="rollback-arrow">↔</div>
+        <div class="rollback-undo">Restore prior packages + restart services</div>
+      </div>
+    </div>
+    <div class="rollback-compare">
+      <h3>No other platform covers this ground</h3>
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Nexplane</th>
+              <th>Terraform</th>
+              <th>Ansible</th>
+              <th>SOAR</th>
+              <th>AWS SSM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Executes security operations</td>
+              <td class="yes">✓</td>
+              <td class="yes">✓ (infra only)</td>
+              <td class="yes">✓</td>
+              <td class="yes">✓</td>
+              <td class="yes">✓</td>
+            </tr>
+            <tr>
+              <td>Typed rollback per operation</td>
+              <td class="yes">✓</td>
+              <td class="no">✗ (destroy/re-apply)</td>
+              <td class="no">✗ (write your own)</td>
+              <td class="no">✗</td>
+              <td class="no">✗</td>
+            </tr>
+            <tr>
+              <td>Pre-change snapshot</td>
+              <td class="yes">✓</td>
+              <td class="partial">state file only</td>
+              <td class="no">✗</td>
+              <td class="no">✗</td>
+              <td class="no">✗</td>
+            </tr>
+            <tr>
+              <td>Post-change verification</td>
+              <td class="yes">✓</td>
+              <td class="no">✗</td>
+              <td class="partial">ad-hoc</td>
+              <td class="partial">ad-hoc</td>
+              <td class="no">✗</td>
+            </tr>
+            <tr>
+              <td>Auto-rollback on failure</td>
+              <td class="yes">✓</td>
+              <td class="no">✗</td>
+              <td class="no">✗</td>
+              <td class="no">✗</td>
+              <td class="no">✗</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SAFETY SECTION -->
+<section class="ai-safety-section" id="ai-safety">
+  <div class="container">
+    <div class="section-eyebrow">AI Agent Safety</div>
+    <h2>AI agents shouldn't<br>have <span class="gradient-text-danger">root access</span>.</h2>
+    <div class="ai-safety-grid">
+      <div class="ai-problem">
+        <div class="ai-problem-header">The problem</div>
+        <p>
+          AI coding agents and automation tools are being given direct infrastructure access — SSH keys, cloud credentials, database connections.
+          When something goes wrong (and it has), the damage is immediate and often unrecoverable.
+          <strong>An LLM with a database connection dropped a production table.</strong>
+          An agent with cloud credentials terminated the wrong instances.
+        </p>
+        <p>
+          These aren't bugs. They're the expected outcome of giving nondeterministic systems unconstrained access.
+        </p>
+      </div>
+      <div class="ai-solution">
+        <div class="ai-solution-header">The Nexplane model</div>
+        <div class="ai-flow">
+          <div class="ai-flow-step">
+            <div class="flow-icon">💬</div>
+            <div class="flow-label">Natural language intent</div>
+            <div class="flow-sub">"Rotate the SSH keys on prod servers"</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="ai-flow-step highlight-step">
+            <div class="flow-icon">🔍</div>
+            <div class="flow-label">Nexplane distills into a typed action</div>
+            <div class="flow-sub">change_type: rotate_ssh_keys · 12 assets</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="ai-flow-step">
+            <div class="flow-icon">⚖️</div>
+            <div class="flow-label">Risk scoring + approval gate</div>
+            <div class="flow-sub">Risk: medium · Approved by: ops-lead</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="ai-flow-step">
+            <div class="flow-icon">✅</div>
+            <div class="flow-label">Constrained execution + verification</div>
+            <div class="flow-sub">12/12 rotated · SSH connectivity verified · rollback ready</div>
+          </div>
+        </div>
+        <p class="ai-solution-note">
+          The AI never touches infrastructure directly. It proposes. The control plane validates, approves, executes, verifies — and can always undo.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORG ALIGNMENT SECTION -->
+<section class="org-section" id="org">
+  <div class="container">
+    <div class="section-eyebrow">Org Alignment</div>
+    <h2>Security teams find issues.<br>They used to <em>stop there</em>.</h2>
+    <p class="section-sub">
+      Security creates findings, issues tickets, and opens Jira stories — then waits for engineering to prioritize, schedule, and execute the fix. Engineering gets paged on security debt they didn't create.
+      Meanwhile, the CVE ages. The window stays open.
+    </p>
+    <div class="org-grid">
+      <div class="org-before">
+        <div class="org-label">Before Nexplane</div>
+        <div class="org-flow-list">
+          <div class="org-flow-item">
+            <span class="org-team security">Security</span>
+            <span class="org-action">Finds vulnerability, opens Jira ticket</span>
+          </div>
+          <div class="org-flow-item">
+            <span class="org-team eng">Engineering</span>
+            <span class="org-action">Receives ticket, puts in backlog</span>
+          </div>
+          <div class="org-flow-item">
+            <span class="org-team eng">Engineering</span>
+            <span class="org-action">Schedules during next sprint</span>
+          </div>
+          <div class="org-flow-item">
+            <span class="org-team eng">Engineering</span>
+            <span class="org-action">SSHes to 40 hosts, patches manually</span>
+          </div>
+          <div class="org-flow-item">
+            <span class="org-team security">Security</span>
+            <span class="org-action">Verifies manually, closes ticket</span>
+          </div>
+          <div class="org-timeline">2–6 weeks</div>
+        </div>
+      </div>
+      <div class="org-after">
+        <div class="org-label">With Nexplane</div>
+        <div class="org-flow-list">
+          <div class="org-flow-item">
+            <span class="org-team security">Security</span>
+            <span class="org-action">Finds vulnerability, creates Change Request</span>
+          </div>
+          <div class="org-flow-item">
+            <span class="org-team security">Security</span>
+            <span class="org-action">Approves and executes — no handoff</span>
+          </div>
+          <div class="org-flow-item">
+            <span class="org-team nexplane">Nexplane</span>
+            <span class="org-action">Patches 40 hosts in parallel, verifies each</span>
+          </div>
+          <div class="org-flow-item">
+            <span class="org-team nexplane">Nexplane</span>
+            <span class="org-action">Finding auto-closed, audit trail written</span>
+          </div>
+          <div class="org-flow-item silent">
+            <span class="org-team eng">Engineering</span>
+            <span class="org-action">Not paged. Sprint intact.</span>
+          </div>
+          <div class="org-timeline fast">Minutes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="platform">
+  <div class="container">
+    <div class="section-eyebrow">The platform</div>
+    <h2>Security teams observe. <br>Nexplane <em>acts</em>.</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">📊</div>
+        <h3>Today</h3>
+        <p>Scanner finds CVE. Ticket opened. Engineer SSHes into 40 hosts manually. Change reviewed in a spreadsheet. No rollback. No verification. Two weeks later.</p>
+      </div>
+      <div class="problem-card highlight">
+        <div class="problem-icon">⚡</div>
+        <h3>With Nexplane</h3>
+        <p>Scanner finding triggers a Change Request. Operator approves. Platform patches 40 hosts in parallel, verifies the service still responds, closes the finding, retains a rollback snapshot — and can undo all of it.</p>
+        <p style="margin-top:12px; font-size:0.88rem; color:#818cf8;">Including the hard ones: kernel upgrades, OS migrations, shared library changes. Not just "install KB."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="use-cases">
+  <div class="container">
+    <div class="section-eyebrow">Capabilities</div>
+    <h2>Every security operation,<br>as a first-class workflow</h2>
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>OS Hardening at Scale</h3>
+        <p>seccomp, AppArmor, SELinux, sysctl, iptables, auditd, FIM, eBPF — enforced across Linux and Windows fleets. Learn baseline → enforce policy → detect drift. Every policy change rolls back cleanly.</p>
+        <div class="feature-tags">
+          <span>seccomp</span><span>AppArmor</span><span>WDAC</span><span>ASR</span><span>Sysmon</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Identity Security</h3>
+        <p>Emergency user lockout across AWS IAM, Azure AD, LDAP, Keycloak, and Linux in &lt;60 seconds. Time-bound access grants that auto-expire. Every lockout rolls back to exact prior state.</p>
+        <div class="feature-tags">
+          <span>IAM lockout</span><span>Scope reduction</span><span>MFA enforce</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔑</div>
+        <h3>Credential Lifecycle</h3>
+        <p>SSH key rotation across your entire fleet. Database credential rotation with consumer discovery. API key and Vault secret rotation. TLS certificate expiry monitoring with auto-renewal. All rollback-capable.</p>
+        <div class="feature-tags">
+          <span>SSH rotation</span><span>DB creds</span><span>TLS expiry</span><span>Vault</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🩹</div>
+        <h3>Vulnerability Remediation — Including the Hard Ones</h3>
+        <p>Not just patch management. Kernel upgrades, OS version migrations, shared library (glibc, OpenSSL) upgrades, container runtime changes — all with pre-change snapshots and rollback. Auto-close findings when CRs complete.</p>
+        <div class="feature-tags">
+          <span>Kernel upgrade</span><span>OS migration</span><span>CVE linking</span><span>Auto-close</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI-Assisted Operations</h3>
+        <p>Describe the outcome you want. Nexplane's AI generates the Change Request — typed, constrained, approval-gated. The AI proposes. Humans approve. The platform executes safely.</p>
+        <div class="feature-tags">
+          <span>Safe AI execution</span><span>Policy generation</span><span>Intent → action</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Full Audit Trail</h3>
+        <p>Every change: planned, approved, executed, verified, and rollback-ready. Pre-change snapshots. CIS Controls v8 compliance dashboard. Cross-asset timeline. Nothing is lost, nothing is permanent.</p>
+        <div class="feature-tags">
+          <span>CIS v8</span><span>Snapshots</span><span>Timeline</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="section-eyebrow">How it works</div>
+    <h2>One control plane.<br>Every security operation.</h2>
+    <p class="section-sub" style="margin-bottom:48px;">Nexplane sits between your team and your infrastructure. Nothing changes without going through the control plane.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Connect your infrastructure</h3>
+        <p>Add cloud credentials (AWS, GCP, Azure, OCI) and deploy the lightweight Nexplane agent to your servers. Discovery runs automatically.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Create a Change Request</h3>
+        <p>Choose from 80+ change types — or let the AI assistant generate a multi-step plan from a natural language description of the outcome you want.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Review and approve</h3>
+        <p>Risk-scored, approver-gated. A pre-change snapshot is taken automatically. Emergency CRs bypass maintenance windows and escalate if approval lags.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Execute, verify — and undo if needed</h3>
+        <p>Platform executes across your fleet in parallel. Post-change checks confirm services are healthy. If anything looks wrong, rollback is one click. Every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EARLY ACCESS FORM -->
+<section class="early-access" id="early-access">
+  <div class="container form-container">
+    <div class="form-copy">
+      <div class="section-eyebrow">Early Access</div>
+      <h2>Join the private beta</h2>
+      <p>We're onboarding security and infrastructure teams who want to move from reactive patching to engineered security operations — where every change is deliberate, verified, and undoable.</p>
+      <ul class="form-benefits">
+        <li>✓ Full platform access during beta</li>
+        <li>✓ Direct line to the founding team</li>
+        <li>✓ Influence the roadmap</li>
+        <li>✓ Preferred pricing at GA</li>
+      </ul>
+    </div>
+    <div class="form-panel">
+      <form id="interest-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label>First name</label>
+            <input type="text" name="first_name" placeholder="Jane" required />
+          </div>
+          <div class="form-field">
+            <label>Last name</label>
+            <input type="text" name="last_name" placeholder="Smith" required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Work email</label>
+          <input type="email" name="email" placeholder="jane@company.com" required />
+        </div>
+        <div class="form-field">
+          <label>Company</label>
+          <input type="text" name="company" placeholder="Acme Corp" required />
+        </div>
+        <div class="form-field">
+          <label>Role</label>
+          <select name="role">
+            <option value="">Select your role…</option>
+            <option>Security Engineer</option>
+            <option>Security Architect</option>
+            <option>DevSecOps</option>
+            <option>Platform / Infrastructure Engineer</option>
+            <option>CISO / Security Leadership</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Fleet size</label>
+          <select name="fleet_size">
+            <option value="">How many servers / cloud VMs?</option>
+            <option>1–50</option>
+            <option>50–500</option>
+            <option>500–5,000</option>
+            <option>5,000+</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>What's your biggest security operations pain point?</label>
+          <textarea name="pain_point" rows="3" placeholder="e.g. We find CVEs but patching 200 hosts takes 3 weeks and we have no rollback…"></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="submit-btn">
+          <span id="btn-text">Request access</span>
+          <span id="btn-spinner" style="display:none">Sending…</span>
+        </button>
+        <div id="form-success" class="form-success" style="display:none">
+          ✓ Got it — we'll be in touch within 48 hours.
+        </div>
+        <div id="form-error" class="form-error" style="display:none">
+          Something went wrong. Email us directly at <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The security control plane. Every change, undoable.</p>
+    <div class="footer-links">
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">© 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="form.js"></script>
+</body>
+</html>
