@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nexplane — The Security Control Plane</title>
-  <meta name="description" content="Nexplane is the security control plane for your infrastructure — the single layer where every change is planned, approved, executed, and can be undone. Patching, hardening, identity, credentials. Nothing changes without going through Nexplane." />
+  <meta name="description" content="Nexplane is the execution layer for security and infrastructure operations — where every change is planned, approved, executed, and can be undone. Security gets a governed path to act directly. Infrastructure gets the rollback guarantee that makes delegation safe." />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,10 +27,10 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">Now in private beta</div>
+    <div class="hero-badge">Now in early access</div>
     <h1>The security control plane<br>where <span class="gradient-text">every change is undoable.</span></h1>
     <p class="hero-sub">
-      Nexplane is the security control plane for your infrastructure — the single layer where every change is planned, approved, executed, and can be undone. Patching, hardening, identity, credentials. Nothing changes without going through Nexplane.
+      Nexplane is the execution layer for security and infrastructure operations — where every change is planned, approved, executed, and can be undone. Security gets a governed path to act directly. Infrastructure gets the rollback guarantee that makes delegation safe.
     </p>
     <div class="hero-cta">
       <a href="#early-access" class="btn-primary">Get early access</a>
@@ -84,6 +84,9 @@
       Other platforms execute. Nexplane executes — and knows exactly how to reverse every action it takes.
       Not a backup restore. Not a manual inverse runbook. A typed, tested, one-click rollback
       built into the platform for every operation.
+      We verify it against live infrastructure before it ships — every change type includes a smoke test
+      that executes the change, confirms the result, triggers the rollback, and confirms the system
+      returned to its prior state. Against real cloud infrastructure, not mocks.
     </p>
     <div class="rollback-grid">
       <div class="rollback-card">
@@ -438,12 +441,12 @@
   <div class="container form-container">
     <div class="form-copy">
       <div class="section-eyebrow">Early Access</div>
-      <h2>Join the private beta</h2>
-      <p>We're onboarding security and infrastructure teams who want to move from reactive patching to engineered security operations — where every change is deliberate, verified, and undoable.</p>
+      <h2>Become a design partner</h2>
+      <p>We're working with a small number of security and infrastructure teams who want to run Nexplane against their real environment and help shape what gets built next. No sales process. Direct access to the founding team.</p>
       <ul class="form-benefits">
-        <li>✓ Full platform access during beta</li>
+        <li>✓ Run Nexplane against your real infrastructure</li>
         <li>✓ Direct line to the founding team</li>
-        <li>✓ Influence the roadmap</li>
+        <li>✓ Shape the roadmap — tell us what's missing</li>
         <li>✓ Preferred pricing at GA</li>
       </ul>
     </div>
