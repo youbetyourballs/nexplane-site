@@ -17,6 +17,7 @@
     <a href="/" class="logo">Nexplane</a>
     <div class="nav-links">
       <a href="#platform">Platform</a>
+      <a href="#use-cases">Use cases</a>
       <a href="#integrations">Integrations</a>
       <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
       <a href="#request-demo" class="btn-nav">Request demo</a>
@@ -204,6 +205,78 @@
         <div class="question-capability">Rollback center</div>
         <div class="question-desc">Every change ships with a typed rollback plan, last-known-good snapshot, and one-click undo. Verified against live infrastructure before it ships.</div>
         <span class="question-tag">rollback-center</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="usecases-section" id="use-cases">
+  <div class="container">
+    <div class="section-eyebrow">Use Cases</div>
+    <h2>The changes you already <em>know</em> you should make.</h2>
+    <p class="section-sub">Not the exotic stuff — the ordinary, high-stakes operations every team puts off because there's no safe way to do them. Here's each one, reviewable and reversible.</p>
+
+    <div class="uc-group-label">Everyday, high-stakes operations</div>
+    <div class="uc-grid">
+      <div class="uc-card">
+        <h3>Offboard a departing employee</h3>
+        <p class="uc-why">Access has to disappear from everywhere — AD, SSH, cloud IAM, SSO, VPN — and "everywhere" is a list nobody has in full.</p>
+        <p class="uc-safe">one reviewed change that revokes across every system, verifies nothing was missed, and can restore access if the wrong person got caught in it.</p>
+        <span class="uc-tag soon">In design — talk to us</span>
+      </div>
+      <div class="uc-card">
+        <h3>Rotate a credential without breaking everything that uses it</h3>
+        <p class="uc-why">You can't safely rotate a shared secret until you know every service that reads it — and that list doesn't exist. Miss one and it fails silently, days later.</p>
+        <p class="uc-safe">find every consumer, update them together, verify connectivity, and roll the whole thing back if anything can't reach the new secret.</p>
+        <span class="uc-tag ok">Available</span>
+      </div>
+      <div class="uc-card">
+        <h3>Patch production without holding your breath</h3>
+        <p class="uc-why">The patch is easy. The fear is the reboot on the box nobody fully understands, with no tested way back if it doesn't come up.</p>
+        <p class="uc-safe">capture the exact state first, patch with pre- and post-checks, and restore the prior state if a host doesn't come back.</p>
+        <span class="uc-tag ok">Available</span>
+      </div>
+      <div class="uc-card">
+        <h3>Tighten (or emergency-block) a firewall rule</h3>
+        <p class="uc-why">The over-broad rule everyone knows is wrong — or an incident where you need to block something now. You can't prove what depends on it, and there's no clean undo.</p>
+        <p class="uc-safe">a reviewed change with a real rollback — and for emergencies, a block that auto-expires so a temporary rule doesn't become permanent.</p>
+        <span class="uc-tag ok">Available</span>
+      </div>
+      <div class="uc-card">
+        <h3>Scope down an over-permissioned role</h3>
+        <p class="uc-why">The role with far more access than it uses, that nobody will touch — because you can't see what it actually uses, and tightening it wrong breaks a job at month-end.</p>
+        <p class="uc-safe">change it through a reviewed, reversible request, so a wrong guess is a quick undo instead of a 2am reconstruction.</p>
+        <span class="uc-tag ok">Available</span>
+      </div>
+      <div class="uc-card">
+        <h3>Rotate an expiring certificate</h3>
+        <p class="uc-why">The cert expiring in three weeks that fourteen services quietly depend on. Rotate it wrong and you take those services down.</p>
+        <p class="uc-safe">rotate with the dependents mapped, verify the chain end to end, and roll back if validation fails.</p>
+        <span class="uc-tag soon">In design — talk to us</span>
+      </div>
+    </div>
+
+    <div class="uc-group-label">Modernization — the changes you don't get to schedule</div>
+    <p class="uc-group-sub">You don't touch these for years — you expect them to keep working — and then an end-of-life date, a CVE, or a vendor forces your hand. The problem was never willingness. It's that there's no safe way back if it goes wrong.</p>
+    <div class="uc-grid">
+      <div class="uc-card">
+        <h3>Upgrade an end-of-life OS</h3>
+        <p class="uc-why">The distro hits end of life — no more security patches — so you're forced to move, on the box nobody wants to reboot, running an app whose engineers are long gone.</p>
+        <p class="uc-safe">capture the exact machine state, upgrade reversibly, verify the app comes back, and restore the prior state in minutes if it doesn't.</p>
+        <span class="uc-tag soon">In design — talk to us</span>
+      </div>
+      <div class="uc-card">
+        <h3>Containerize a legacy application</h3>
+        <p class="uc-why">The 8-year-old app on dying hardware. Containerizing it is never just a Dockerfile — it's the dependencies, secrets, and state nobody documented, and you find out what you missed in production.</p>
+        <p class="uc-safe">capture what the app actually needs, move it as a reviewed change, and keep the old one intact so you can fall back until the new one is proven.</p>
+        <span class="uc-tag soon">In design — talk to us</span>
+      </div>
+      <div class="uc-card">
+        <h3>Modernize the system nobody will touch</h3>
+        <p class="uc-why">The brittle, load-bearing thing everyone routes around — until a dependency goes EOL, a CVE lands, or an auditor asks, and it's suddenly mandatory, on a deadline.</p>
+        <p class="uc-safe">make the change reversible so you can actually start — snapshot, change, verify, roll back — instead of leaving it because touching it feels worse than ignoring it.</p>
+        <span class="uc-tag soon">In design — talk to us</span>
       </div>
     </div>
   </div>
