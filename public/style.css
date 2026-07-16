@@ -194,6 +194,8 @@ h2 em { font-style: normal; color: var(--brand-light); }
 }
 .uc-tag.ok { background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.3); color: #67e8f9; }
 .uc-tag.soon { background: rgba(148,163,184,0.1); border: 1px solid rgba(148,163,184,0.28); color: #94a3b8; }
+.lic-line { background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.2); border-radius: var(--radius); padding: 18px 20px; color: #cbd5e1; font-size: 0.92rem; }
+.subtle-note { color: var(--text-muted); font-size: 0.85rem; margin-top: 14px; }
 
 /* ── Features ── */
 .features-grid {
