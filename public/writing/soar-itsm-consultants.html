@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOAR, ITSM, and Consultants: Nobody Completes the Roadmap</title>
+  <meta name="description" content="Pick any well-run security program and look at the tools it runs on. There&#x27;s a SOAR platform automating the incident response. There&#x27;s a ticketing syste…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/soar-itsm-consultants" />
+  <meta property="og:title" content="SOAR, ITSM, and Consultants: Nobody Completes the Roadmap">
+  <meta property="og:description" content="Pick any well-run security program and look at the tools it runs on. There&#x27;s a SOAR platform automating the incident response. There&#x27;s a ticketing syste…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/soar-itsm-consultants">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">SOAR, ITSM, and Consultants: Nobody Completes the Roadmap</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/soar-itsm-consultants</span></div>
+    <div class="prose">
+      <p>Pick any well-run security program and look at the tools it runs on. There's a SOAR platform automating the incident response. There's a ticketing system tracking the work. There's a consulting engagement — a firm or a fractional CISO — that produced the roadmap everybody's working against. All three are doing real work. None of them is doing the same work.</p>
+      <p>I ran security at four companies before I started building, and in every one, some version of all three was in the stack. What none of them had was the piece in the middle: the part where you actually go into production and make the change. Each tool handed the ball off right before that part.</p>
+      <h3>SOAR automates response, not architecture</h3>
+      <p>SOAR is genuinely good at what it does. An alert fires, a playbook runs, an endpoint gets isolated, an IP gets blocked, an account gets disabled. Fast, automated, no human in the critical path. That's exactly what you want when you're reacting.</p>
+      <p>But look at what those actions have in common: they're all reactive, and they're all fire-and-forget. The playbook assumes the action is correct and moves on. If you isolated the wrong host, the fix is another action — and that action doesn't put the host back the way it was, it builds a new state that resembles the old one. More to the point, SOAR doesn't touch the thing that generated the alert in the first place. It doesn't fix the over-permissioned role, rotate the key that shouldn't exist, or re-segment the network so the next alert never fires. Response is not architecture change. SOAR was never built to be.</p>
+      <h3>ITSM tracks the request, it doesn't do it</h3>
+      <p>The ticketing system is the system of record, and it's good at that. Every request has an owner, an SLA, a status, an audit trail. You can prove work was requested and prove when it closed.</p>
+      <p>What it can't do is close the ticket. A ticket that says "tighten this IAM role" is a description of work, not the work. Somebody still has to open the console, understand what depends on that role, make the change, and be the one holding it if something breaks at 2am. The ticket tracks that this needs to happen. It has no opinion on how to do it safely, and no way back if it goes wrong. So it sits — and I've written about why sitting is the rational move for the person who owns it. The tracking is honest. The completion is somebody else's problem.</p>
+      <h3>Consultants design the roadmap, they don't build it</h3>
+      <p>The consulting deliverable is often the best artifact of the three. A real assessment, a prioritized roadmap, a clear picture of where you are and where you should be. The good ones are genuinely excellent.</p>
+      <p>Then the engagement ends. The roadmap is a document, and the document doesn't touch production. Implementation is scoped out, or it's "phase two," or it's handed back to the internal team that was already too busy to do it — which is why you hired the consultant. The hard part isn't knowing what to change. Most teams already have a decent idea. The hard part is safely executing the change against a live system nobody fully understands. That part gets designed and then handed back.</p>
+      <h3>The handoff is always at the same spot</h3>
+      <p>Line these up and the pattern is hard to miss. SOAR stops at the alert. ITSM stops at the ticket. The consultant stops at the roadmap. Each one owns a real fragment of the job and does it well. And each one hands off at exactly the same place — right before the sentence "now go safely make the change in production."</p>
+      <p>That's not three separate gaps. It's one gap, and every tool in the stack is drawing its boundary along the same edge of it. The reason they all stop there is that it's the hard, risky part: high-stakes changes to systems you don't fully understand, under time pressure, with no clean way back if you're wrong. Reacting is easier. Tracking is easier. Advising is easier. Doing is where you get paged.</p>
+      <p>So the completion gap — the actual safe execution of change, with a way to undo it — is the part nobody in a normal stack owns. It's not a missing feature in any one of these tools. It's the space between them. And it happens to be the whole game.</p>
+      <p>If you're running a security program, count the handoffs. I'd bet they all land in the same spot.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why we built Nexplane</title>
+  <meta name="description" content="I&#x27;ve had a version of the same conversation more times than I can count. It goes like this: a security engineer, usually someone sharp and frustrated, t…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/why-i-built-nexplane" />
+  <meta property="og:title" content="Why we built Nexplane">
+  <meta property="og:description" content="I&#x27;ve had a version of the same conversation more times than I can count. It goes like this: a security engineer, usually someone sharp and frustrated, t…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/why-i-built-nexplane">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Why we built Nexplane</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/why-i-built-nexplane</span></div>
+    <div class="prose">
+      <p>I've had a version of the same conversation more times than I can count. It goes like this: a security engineer, usually someone sharp and frustrated, tells me about a finding that's been open for six weeks. Critical severity. Clear remediation path. The fix takes maybe two hours of engineering time.</p>
+      <p>It's been open for six weeks because it's in an engineering sprint backlog, competing with feature work, technical debt, and twelve other things the team was promised they'd get to this quarter. The security engineer has escalated twice. The relationship with engineering is getting worse. And the finding is still open.</p>
+      <p>That's the problem we built Nexplane to solve.</p>
+      <h3>What we thought the solution was</h3>
+      <p>The first version of our thinking was simple: security teams need execution capability. If they can find problems but can't fix them, give them the ability to fix them. Straightforward.</p>
+      <p>The safety constraint turned out to be the whole problem.</p>
+      <p>"Give security more access" is not a solution that engineering teams accept, and they're not wrong to resist it. Unstructured access to production infrastructure — IAM, networking, databases, cloud resources — is genuinely dangerous. Not because security engineers are untrustworthy, but because infrastructure is complex, changes have non-obvious dependencies, and without a workflow, there's no coordination, no audit trail, and no way to undo something that breaks unexpectedly.</p>
+      <p>We talked to engineering leaders who'd tried it. A security team gets elevated access to fix their own findings. They make a change to an IAM policy that unexpectedly breaks a service integration. Nobody knew the dependency existed. Now engineering is dealing with an outage caused by a change they didn't approve, didn't know about, and can't easily trace.</p>
+      <p>That experience poisons the well. Engineering stops trusting security's judgment. Security stops getting access. The ticket queue gets longer.</p>
+      <p>So unstructured access is dangerous. But no access means nothing gets fixed. We had to find what was between those two options.</p>
+      <h3>The design insight</h3>
+      <p>The answer came from thinking about what made the situation feel unsafe versus safe.</p>
+      <p>The unsafe version: a security engineer with console access making ad hoc changes to resources they found in a scan. No record of what they did before the change. No approval from the resource owner. No way to undo it cleanly if something breaks.</p>
+      <p>The safe version: a security engineer creates a change request that describes exactly what will happen — which resources, what operation, what the expected outcome is. The resource owner reviews and approves it. The change executes. If something breaks, the before-state was captured and the change can be rolled back in seconds.</p>
+      <p>Those two scenarios have the same security engineer making the same change to fix the same finding. The difference is structure. Approval. Rollback.</p>
+      <p>That's what Nexplane is: typed change requests with approval workflow and per-operation rollback.</p>
+      <p>Not a shell script. Not Terraform. Not an LLM that calls AWS APIs directly. A change request that any stakeholder can read, that requires a human decision before anything runs, and that can be undone completely in seconds if something goes wrong.</p>
+      <h3>Why rollback is the key constraint</h3>
+      <p>We made a lot of design decisions building this. The one that mattered most was treating rollback as a hard requirement from the beginning, not something we'd add later.</p>
+      <p>Here's why: rollback is what makes it safe to give security execution capability in the first place. If a change can't be undone, the blast radius of a mistake is unbounded. Engineering is right to resist that. But if every change can be rolled back in seconds — not re-run-the-playbook rolled back, but restore-the-exact-before-state rolled back — the risk calculus changes.</p>
+      <p>The honest version of "we can roll this back" is: we captured the complete before-state at the moment the change executed, we stored it with the change record, and we have a typed undo operation that restores exactly that state. That's not the same as "we have audit logs we can reconstruct from" or "we can re-apply the previous Terraform configuration." Those are forensics. This is undo.</p>
+      <p>Making that real required every connector to implement before-state capture as a first-class concern. It's the thing we've been most disciplined about. If a connector can't capture before-state, it doesn't get a rollback operation, and we're explicit about that limitation.</p>
+      <h3>Why we built the AI piece the way we did</h3>
+      <p>We added an AI assistant relatively early because the alternative — requiring security engineers to manually compose typed change requests — was too slow. When you're looking at a scanner output with 400 findings, you need to be able to say "rotate the keys for all IAM users who haven't rotated in 90 days" and have the system understand that and build the right change requests.</p>
+      <p>But we built the AI piece as a strict interpreter, not a free-form executor. The LLM's job is to translate natural language into a typed action with a fixed schema. It generates <code>rotate_iam_access_keys</code> with specific user names and a reason. It does not call AWS APIs directly. It does not decide what "rotate" means at execution time. The typed action goes through validation, then approval, then a constrained executor that knows exactly what operations to perform.</p>
+      <p>This distinction matters because the failure modes of a free-form LLM executor are bad in the specific ways that security operations can't afford: ambiguous intent, hallucinated parameters, irreversible actions taken with false confidence. We hit all of those failure modes in early testing. The typed action architecture is what fixed them.</p>
+      <h3>Where we are and what we know is missing</h3>
+      <p>We have connectors for the major cloud providers, identity systems, databases, and security tools. The connectors that exist are production-ready — we use the rollback guarantee as the quality bar. If it can't roll back cleanly, it doesn't ship.</p>
+      <p>We're in early access. We're working with security teams who are willing to push on the edges of what the system can do, and we're building the connector coverage they need. Some of the things we know we need — more database connector breadth, better handling of chained changes that touch multiple systems, tighter integration with specific SIEM platforms — are on the near-term roadmap.</p>
+      <p>The finding that's been open for six weeks because it's stuck in an engineering backlog: that's the problem we're solving. Not by taking engineering out of the loop, but by building the workflow that lets security act without creating work for engineering — and that gives everyone involved the audit trail, the approval record, and the rollback capability to trust that the work was done right.</p>
+      <p>That's why we built this.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

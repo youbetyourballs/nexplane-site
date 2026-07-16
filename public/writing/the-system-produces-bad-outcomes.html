@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The System Produces Bad Outcomes, Not Bad People</title>
+  <meta name="description" content="If you&#x27;ve worked in security long enough, you&#x27;ve sat in this meeting. Someone pulls up the open-findings dashboard. The critical count is up. Security s…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/the-system-produces-bad-outcomes" />
+  <meta property="og:title" content="The System Produces Bad Outcomes, Not Bad People">
+  <meta property="og:description" content="If you&#x27;ve worked in security long enough, you&#x27;ve sat in this meeting. Someone pulls up the open-findings dashboard. The critical count is up. Security s…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/the-system-produces-bad-outcomes">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The System Produces Bad Outcomes, Not Bad People</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/the-system-produces-bad-outcomes</span></div>
+    <div class="prose">
+      <p>If you've worked in security long enough, you've sat in this meeting. Someone pulls up the open-findings dashboard. The critical count is up. Security says the same criticals have been open for two months. Engineering says they're heads-down on the release. Everyone agrees to prioritize security work. The meeting ends, nothing changes, and next quarter you have it again.</p>
+      <p>The reflex is to look for who's failing. Security is inflating severity to cover itself. Engineering doesn't take it seriously. Leadership won't put weight behind it.</p>
+      <p>I've been the CISO in that meeting at four companies, and the people were almost never the problem. They were competent and they were acting rationally. The system produced the bad outcome anyway.</p>
+      <p>That's not a small distinction. If the problem is people, you fix it with people — an escalation, an SLA, a new hire, a reorg. I've tried all of them. They hold for a quarter because you're spending your own capital to push against the system. Then you get busy, the pressure comes off, and it snaps back.</p>
+      <h3>What actually happens to a finding</h3>
+      <p>Security opens a ticket for an over-permissioned IAM role. To them it's obvious and urgent. It lands in an engineering backlog next to the release, a migration, on-call, and last month's other security tickets. The engineer who owns that service knows something security doesn't: a couple of things depend on that role in ways nobody wrote down, and if he tightens it wrong he's the one getting paged at 2am. Security knows something he doesn't: that role is one phished laptop away from being a real incident. Neither of them has the whole picture, and nothing in the process puts the two halves together.</p>
+      <p>So the ticket sits. Not because anyone decided it should. Closing it means changing a system nobody fully understands, under time pressure, with no clean way back if it breaks — and nobody wants their name on that downside. Doing nothing is the only choice that's safe for the person making it.</p>
+      <h3>The scoreboards point in opposite directions</h3>
+      <p>Then the metrics make it worse. Security is measured on how fast findings close. Engineering is measured on shipping and uptime. The same ticket that helps one team's number costs the other team's. You've built two scoreboards that reward opposite behavior, and then you're surprised the teams pull against each other. Governance can force it for a while — mandatory priorities, exec escalation — but the incentives are still there underneath, and they win as soon as attention moves on.</p>
+      <h3>Why this is worth getting right</h3>
+      <p>None of this needs a villain. It's competent people, incomplete information, and incentives that quietly reward leaving the dangerous thing alone.</p>
+      <p>I actually find that encouraging. You can't fix people, but a system is something you can change. The question stops being "who dropped this?" and becomes "why does the system make sitting on it the rational move, and what would have to be different for the rational move to be fixing it?" That's a more useful question, and it's the one worth walking into the next meeting with.</p>
+      <p>If this sounds familiar — if you've sat in that meeting — I'd like to hear how your org handles it.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

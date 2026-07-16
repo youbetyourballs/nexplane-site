@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fit Over Correctness: The Security Tool Graveyard</title>
+  <meta name="description" content="Every security team I&#x27;ve run had a graveyard. Not of ideas that were wrong — of controls that were right. Controls we scoped, justified, rolled out, and…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/fit-over-correctness" />
+  <meta property="og:title" content="Fit Over Correctness: The Security Tool Graveyard">
+  <meta property="og:description" content="Every security team I&#x27;ve run had a graveyard. Not of ideas that were wrong — of controls that were right. Controls we scoped, justified, rolled out, and…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/fit-over-correctness">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Fit Over Correctness: The Security Tool Graveyard</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/fit-over-correctness</span></div>
+    <div class="prose">
+      <p>Every security team I've run had a graveyard. Not of ideas that were wrong — of controls that were right. Controls we scoped, justified, rolled out, and then watched die. And the ones that died weren't the sloppy ones. They were often the most technically correct thing we did that year.</p>
+      <p>That took me a while to understand. Early on I thought a rejected control meant we'd gotten the analysis wrong — misjudged the risk, picked the wrong tool, missed something in testing. Sometimes. But more often the analysis was fine. The control did exactly what we said it would. It just didn't fit how the organization actually worked, and correct-but-doesn't-fit loses every time.</p>
+      <h3>Correct is not the same as adopted</h3>
+      <p>A control lives or dies on whether people can do their jobs with it running. That's it. You can be completely right about the threat, right about the fix, right about the residual risk you're buying down — and if the control makes the daily work harder than the people doing that work will tolerate, it's already dead. It just doesn't know it yet.</p>
+      <p>I've watched this happen more than once — a control that was exactly right on paper, a strict egress-filtering rule, say, that in practice broke a deploy pipeline nobody had fully mapped. And here's the thing: the people it broke weren't wrong to be annoyed. Their work mattered too. The control was one input to the org, not the whole point of it.</p>
+      <h3>The slow death sequence</h3>
+      <p>Controls that don't fit almost never get killed in one meeting. It's quieter than that, and it goes in the same order every time.</p>
+      <p>First, <strong>friction</strong>. The control does its job, which means it says no to things. Tickets pile up. People wait.</p>
+      <p>Then, <strong>exceptions</strong>. Someone important gets blocked at a bad moment, and you carve out an exception "just for this team, just for now." That's the tell. Once you're writing exceptions, the org has already decided the control costs more than it's worth — they're just letting you save face.</p>
+      <p>Then, <strong>disabled</strong>. Enough exceptions, and someone flips it to monitor-only "temporarily" to unblock a launch. Nobody meant for temporary to be permanent. It always is.</p>
+      <p>Then, <strong>removed</strong>. Eventually someone cleaning up notices the thing everybody's been routing around and pulls it, because a control that's off is just noise and false alerts.</p>
+      <h3>Why the org rejects a control that's right</h3>
+      <p>The reflex is to blame the people who route around it. Don't. They're doing the same thing your engineers do with a security ticket that risks a 2am page — taking the path that's safe for them. A high-friction control asks the whole org to absorb a real, daily, visible cost in exchange for a benefit that is abstract and only shows up on the days nothing goes wrong. That's a bad trade for almost everyone who isn't you. They're not sabotaging the control. They're responding to it rationally.</p>
+      <h3>The part that should worry you</h3>
+      <p>Here's why a removed control is worse than a control you never deployed: it leaves false confidence behind.</p>
+      <p>When you never had egress filtering, everyone knows you don't have egress filtering. You plan around the gap. When you had it and it got quietly disabled six months ago, the dashboard still shows it. The architecture diagram still shows it. The last auditor checked the box. You are now defending against a threat you believe is covered and isn't. That's strictly worse than the honest gap, because nobody's watching it.</p>
+      <p>A dead control doesn't just stop protecting you. It lies about protecting you.</p>
+      <h3>The lesson I actually took from this</h3>
+      <p>I stopped grading controls on whether they were correct and started grading them on whether they'd survive contact with how the org really works. Before rolling anything out now, I want to know: what's the daily friction, who eats it, and what's the first workflow that's going to demand an exception? If I can't answer that, I'm not deploying a control. I'm scheduling a funeral.</p>
+      <p>Correct gets you a design review. Fit is what's still running a year later.</p>
+      <p>If you've got a control in your graveyard that was right and died anyway, I'd like to hear what killed it.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

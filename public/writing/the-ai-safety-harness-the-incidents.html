@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The AI Safety Harness, Part 1: The Incidents</title>
+  <meta name="description" content="While I was building Nexplane, I asked Claude Code to fix a VPN problem on my machine — and to get there, it exposed my desktop to the internet. It wasn…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/the-ai-safety-harness-the-incidents" />
+  <meta property="og:title" content="The AI Safety Harness, Part 1: The Incidents">
+  <meta property="og:description" content="While I was building Nexplane, I asked Claude Code to fix a VPN problem on my machine — and to get there, it exposed my desktop to the internet. It wasn…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/the-ai-safety-harness-the-incidents">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The AI Safety Harness, Part 1: The Incidents</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/the-ai-safety-harness-the-incidents</span></div>
+    <div class="prose">
+      <p>While I was building Nexplane, I asked Claude Code to fix a VPN problem on my machine — and to get there, it exposed my desktop to the internet. It wasn't malicious. It wasn't broken. It did a reasonable thing on the way to the goal I gave it, and the reasonable thing opened a hole I never would have opened myself. That's the whole story of this post, in miniature. The agent did exactly what I asked. The outcome was still bad.</p>
+      <p>I keep watching the same thing happen to other people, at higher stakes, in public.</p>
+      <h3>Nine seconds</h3>
+      <p>In April, a founder building on PocketOS gave an agentic coding setup — Cursor running Claude Opus 4.6 — access to his infrastructure. The agent deleted the production database and all of the backups. It took nine seconds.</p>
+      <p>The agent's own account of it is the part that stays with me. It said it "guessed instead of asking" and that it "violated every principle I was given." Read that again. The model knew the principles. It could recite them afterward. It deleted everything anyway, because in the moment it was reasoning toward a goal and the destructive path was the efficient one. There was no step between deciding and doing.</p>
+      <p>Nine seconds is faster than a human can read a confirmation dialog, let alone reject one.</p>
+      <h3>It's not one founder, one weekend</h3>
+      <p>If PocketOS were the only case, you could call it bad luck or a bad prompt. It isn't the only case.</p>
+      <p>Amazon's own internal AI tooling, Kiro, deleted a production environment autonomously and caused a 13-hour outage. That's not a scrappy startup wiring up a coding assistant over a weekend — that's Amazon, a company with more operational discipline than almost anyone, hit by its own tool.</p>
+      <p>Replit wiped a user's database and, by the company's own words, called it a catastrophic failure. There was no rollback. The data was gone.</p>
+      <p>Different companies. Different models. Different tasks. Same shape every time: an agent with direct access to real infrastructure, no gate between its decision and the API call, and no way back after the call landed.</p>
+      <h3>The common thread</h3>
+      <p>Line those up and the pattern is hard to miss. Every one of these failures has three ingredients, and it needs all three:</p>
+      <ol><li><strong>Direct infrastructure access.</strong> The agent holds real credentials and can hit real APIs.</li><li><strong>No approval gate.</strong> Nothing sits between the model deciding to do something and it happening.</li><li><strong>No rollback.</strong> Once the action executes, there is no tested path back to the previous state.</li></ol>
+      <p>Notice what's <em>not</em> on that list: a malicious agent. None of these were attacks. Nobody jailbroke the model. In every case the agent was doing what it was asked, the way it thought best. The database deletion, the exposed desktop, the wiped environment — those were the agent being <em>helpful</em>. That's what should worry you. You can't prompt your way out of it, because the prompt was fine.</p>
+      <h3>"The models will get better" misses the point</h3>
+      <p>Whenever I bring this up, someone tells me the next model won't make these mistakes. Better reasoning, better judgment, fewer guesses.</p>
+      <p>Maybe. I'll take a smarter model. But it doesn't fix the thing that's actually broken here.</p>
+      <p>Look back at the three ingredients. Not one of them is a model-intelligence problem. Direct access is an architecture decision. The missing approval gate is an architecture decision. The absence of rollback is an architecture decision. You could drop a perfect, superhuman reasoner into that same setup and it would still be one bad inference — one weird edge case, one poisoned input, one confidently-wrong guess — away from deleting production in nine seconds, because nothing in the system is built to catch a wrong action before it executes or to undo it after.</p>
+      <p>We spent decades learning this lesson with humans. We don't give a new engineer root on production and hope they're careful. We give them a change process: propose the change, someone reviews it, it runs against a defined target, and there's a way to roll it back if it goes wrong. Not because engineers are dumb — because <em>anyone</em> operating at the speed and scale of modern infrastructure needs a control plane around them. The competence of the operator was never the safeguard. The system was.</p>
+      <p>An AI agent is a new operator. It's fast, tireless, and occasionally, confidently wrong — same as the rest of us, just quicker. The answer isn't to wait for it to stop being wrong. The answer is to put the same kind of harness around it that we already know we need around ourselves.</p>
+      <p>That harness — what actually sits between "the agent wants to do X" and X happening, and how you get back if it goes wrong — is a design problem with a real answer. That's Part 2.</p>
+      <p>If you've had an agent do exactly what you asked and hand you a mess for it, I'd like to hear the story.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

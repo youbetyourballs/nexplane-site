@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resilience Is the Right Frame</title>
+  <meta name="description" content="&quot;Security&quot; is a word that quietly tells you what to build. It implies a perimeter — a wall, a boundary, a line between inside and outside. Keep the bad …" />
+  <link rel="canonical" href="https://nexplane.ai/writing/resilience-is-the-right-frame" />
+  <meta property="og:title" content="Resilience Is the Right Frame">
+  <meta property="og:description" content="&quot;Security&quot; is a word that quietly tells you what to build. It implies a perimeter — a wall, a boundary, a line between inside and outside. Keep the bad …">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/resilience-is-the-right-frame">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Resilience Is the Right Frame</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/resilience-is-the-right-frame</span></div>
+    <div class="prose">
+      <p>"Security" is a word that quietly tells you what to build. It implies a perimeter — a wall, a boundary, a line between inside and outside. Keep the bad things out. Most of the security industry's spend follows from that instinct: firewalls, endpoint prevention, email filtering, access controls. All of it is oriented toward the moment before something bad happens, and all of it is trying to make sure that moment never comes.</p>
+      <p>The problem is that the moment comes anyway.</p>
+      <h3>The perimeter was always going to fail</h3>
+      <p>I've been the CISO at four companies, and I never once believed we were going to keep every adversary out. Not because the teams were weak — some of them were very good — but because the math doesn't work in your favor. You have to be right on every host, every credential, every third-party integration, every employee who's tired on a Tuesday. The attacker has to be right once. Phishing works. Credentials leak. A vendor you depend on gets popped and you inherit their breach. This isn't pessimism, it's the base rate.</p>
+      <p>So if you organize your entire program around prevention, you've built something that's optimized for the case that eventually won't hold. And here's the quieter failure: the perimeter frame doesn't just leave a gap, it tells you the recovery work isn't your job. If the plan is "keep them out," then "what happens after they're in" is somebody else's problem, or nobody's, until the day it's everybody's.</p>
+      <h3>A better question</h3>
+      <p>Resilience asks a different question, and it's the right one: when an adversary makes contact with your systems — because eventually one will — can those systems survive it, contain the damage, and recover?</p>
+      <p>Three distinct things, and you need all three:</p>
+      <p><strong>Survive.</strong> The initial compromise doesn't take down the business. One popped host is an incident, not an extinction event.</p>
+      <p><strong>Contain.</strong> The blast radius is bounded. An attacker who lands in one place doesn't get everything. This is what microsegmentation, least privilege, and separated backup planes are actually for — not preventing the breach, but limiting what it costs you.</p>
+      <p><strong>Recover.</strong> You can get back to a known-good state. Not "we think we have backups." Actually recover, on a timeline the business can survive.</p>
+      <p>Notice that "keep them out" doesn't appear in that list. Prevention still matters — it changes the frequency and the cost — but it stops being the whole strategy and becomes one input to it.</p>
+      <h3>The companies that didn't survive first contact</h3>
+      <p>The reason recovery belongs in the frame is that its absence is what actually kills companies. Not the breach — the inability to come back from it.</p>
+      <p>Code Spaces, in 2014, was a code-hosting and project-management company. An attacker got into their AWS control panel and, when Code Spaces tried to fight back, the attacker deleted everything — production and the backups, which lived in the same account, inside the same blast radius. There was no recovery path because the thing that would have done the recovering was gone in the same stroke. The company did not reopen. That's the whole story: they were breached and they could not come back, so they ceased to exist.</p>
+      <p>TravelEx, in 2020, got hit with ransomware that spread across operations in 30 countries. They couldn't recover cleanly, took the business offline over the holidays, and the damage fed directly into a restructuring. A currency-exchange company with a global footprint, and the recovery problem was existential.</p>
+      <p>Neither of these is a story about a clever, unstoppable attacker. They're stories about organizations that had no answer to "and then what?" The prevention layer failed — as it does — and there was nothing behind it.</p>
+      <h3>Resilience is a discipline, not a state</h3>
+      <p>Here's the part that reorganizes what you invest in. Security-as-perimeter treats safety as a <em>state</em> — you harden, you pass the audit, you're "secure." Resilience is not a state you reach. It's an engineering discipline you practice, and like any discipline it degrades the moment you stop exercising it.</p>
+      <p>You don't get to assume the backup restores. You test the restore. You don't get to assume containment holds. You run the exercise where a host is compromised and watch how far the attacker can actually move. You don't get to assume your recovery runbook works because someone wrote it two years ago — the person who wrote it left, three of the systems it references were replaced, and nobody's run it since.</p>
+      <p>This is the same reason we test defenses in the first place. Nobody sane ships a firewall rule and assumes it's correct forever; you verify it. Recovery deserves exactly the same treatment, and it almost never gets it. Most organizations have a recovery capability the way they have a fire escape they've never walked — present on the diagram, unverified in reality.</p>
+      <h3>The practical shift</h3>
+      <p>You don't have to rename your team or rewrite your strategy deck to act on this. The shift is concrete: <strong>test your recovery the way you test your defenses.</strong> Same rigor, same cadence, same skepticism.</p>
+      <p>Pull a real restore from cold storage and time it. Take a service down in a controlled window and prove you can bring it back. Simulate a compromised credential and see whether your segmentation actually contains it or just looks like it does on a diagram. Treat "we can recover" as a claim that has to be demonstrated, not asserted — because the companies that learned it the hard way didn't get to find out until the day it counted.</p>
+      <p>The word change from security to resilience isn't branding. It changes the question you're asking, and the question changes where the money and the attention go. Prevention keeps the bad day from coming as often. Resilience is what determines whether the bad day, when it comes, is a bad day or the last day.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Rollback Guarantee</title>
+  <meta name="description" content="I&#x27;ve watched a lot of good changes not happen because nobody could promise they&#x27;d be reversible." />
+  <link rel="canonical" href="https://nexplane.ai/writing/the-rollback-guarantee" />
+  <meta property="og:title" content="The Rollback Guarantee">
+  <meta property="og:description" content="I&#x27;ve watched a lot of good changes not happen because nobody could promise they&#x27;d be reversible.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/the-rollback-guarantee">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The Rollback Guarantee</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/the-rollback-guarantee</span></div>
+    <div class="prose">
+      <p>I've watched a lot of good changes not happen because nobody could promise they'd be reversible.</p>
+      <p>An over-permissioned role sits open for months. A stale firewall rule nobody will touch. A credential everyone knows should be rotated. The reason is almost never that the change is hard to make. It's that nobody can say, with confidence, what happens if it goes wrong at 2 AM. And when you can't answer that, the safe move — the move that doesn't get your name on an outage — is to leave it alone.</p>
+      <p>That's worth sitting with, because it means the thing blocking most infrastructure and security work isn't fear of change. It's fear of <em>unrecoverable</em> change. Those are different problems, and only one of them is actually about the change itself.</p>
+      <h3>Reversibility changes the math</h3>
+      <p>If you can always get back to the last known-good state, "act" stops being the scary option. The downside of a wrong change shrinks from "we're in an outage and I'm reconstructing what the config used to look like from memory" down to "we undid it, we're back, let's figure out what went sideways." That's a completely different risk calculus, and it's the one that lets people move.</p>
+      <p>This is why I think a real rollback guarantee is the linchpin. Not a feature next to the others — the thing everything else depends on. Delegation is safe when a mistake is reversible. Security teams can execute instead of just filing tickets when the executor can undo itself. And you can let an AI <em>propose</em> a change, because the human approving it knows the floor: worst case, we roll it back. Take reversibility away and every one of those falls apart. You're back to being scared to touch anything.</p>
+      <h3>What a guarantee actually requires</h3>
+      <p>Here's the catch. "Rollback" is one of the most oversold words in this industry. Almost every tool has some notion of it. Very few give you a guarantee, and the gap between the two is where people get hurt.</p>
+      <p>A real guarantee, as far as I can tell, needs three things, and all three are load-bearing:</p>
+      <p><strong>The exact before-state, captured at execution time.</strong> Not what your IaC config said last week. Not what the audit log recorded about the change after the fact. The actual state of the specific resources you're about to touch, captured in the moment right before you touch them. For a credential rotation that's the exact configuration, expiration, and attached permissions. For a firewall change it's the exact rule set. If you didn't capture it then, you don't have it.</p>
+      <p><strong>Bound to the specific change.</strong> That before-state has to live with the change that caused it — not in a separate log you have to go correlate under pressure. Any operator should be able to pull up the change and find exactly what it's the undo for.</p>
+      <p><strong>A tested, typed restore.</strong> Rolling back a credential rotation is not the same operation as re-enabling a disabled account. Each undo has to know how to restore its specific kind of change, and it has to have been run before you needed it. An untested rollback is a hope, not a guarantee.</p>
+      <h3>Why it's harder than people model</h3>
+      <p>The reason so many tools claim rollback without delivering the guarantee is that re-applying config, restoring a backup, or reading the audit trail all <em>look</em> like rollback and aren't. They move you toward a state that resembles the one you had; they don't restore the exact prior state, bound to the change, with a tested undo. I wrote a whole piece on where the common tools break down, so I won't relitigate it here. The short version: reconstructing the before-state after the fact, during an incident, is a forensics exercise, not a rollback. Those are not the same thing, and finding out which one you have at 2 AM is the worst possible time.</p>
+      <h3>The honest bar</h3>
+      <p>So here's the bar I hold us to, and I think it's the right one for anyone building in this space.</p>
+      <p>Rollback should be designed into every change type and enforced at plan time — before a change runs, the system should already know how it comes back. A representative set of high-risk changes should be verified against live infrastructure, and that set should keep expanding.</p>
+      <p>And when a change genuinely can't capture and restore its before-state — some operations are like that — the honest move is to <em>say so</em>, plainly, before it runs. Tell the operator "this one isn't cleanly reversible, here's what recovery would take," and let them decide with their eyes open. That's worth more than the word "rollback" on a slide that quietly means "re-apply the config and pray."</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

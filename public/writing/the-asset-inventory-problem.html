@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Asset Inventory Problem</title>
+  <meta name="description" content="Every security program depends on knowing what you have. And in most organizations, nobody actually owns knowing what you have." />
+  <link rel="canonical" href="https://nexplane.ai/writing/the-asset-inventory-problem" />
+  <meta property="og:title" content="The Asset Inventory Problem">
+  <meta property="og:description" content="Every security program depends on knowing what you have. And in most organizations, nobody actually owns knowing what you have.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/the-asset-inventory-problem">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The Asset Inventory Problem</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/the-asset-inventory-problem</span></div>
+    <div class="prose">
+      <p>Every security program depends on knowing what you have. And in most organizations, nobody actually owns knowing what you have.</p>
+      <p>The asset inventory — the CMDB, the spreadsheet, whatever it's called this year — is the job nobody wants. I've watched it get handed around at four companies. IT doesn't want it. Security doesn't want it. Whoever inherits it inherits the brownfield: the box in the corner running something from two acquisitions ago, the subnet nobody can explain, the VM that half-migrated to the cloud in 2021 and stalled. Owning the inventory means owning every one of those, and every "why is this still here?" that comes with them. It's endless, thankless reconciliation, and the reward for doing it well is that nobody notices. The reward for doing it badly is that everything downstream quietly breaks.</p>
+      <h3>It's load-bearing, and it's invisible</h3>
+      <p>Here's what makes this worse than a housekeeping problem. The inventory isn't a security control. It's the thing every security control stands on.</p>
+      <p>Think about what actually depends on an accurate picture of your environment:</p>
+      <ul><li><strong>Vulnerability management.</strong> You can only patch the hosts you know exist. The ones missing from the inventory don't show up as unpatched — they don't show up at all.</li><li><strong>Least privilege.</strong> You can't scope access to systems you can't enumerate.</li><li><strong>Segmentation.</strong> You can't draw a boundary around assets you haven't mapped. Microsegmentation dies on the vine without clean network metadata.</li><li><strong>Patching and lifecycle.</strong> The unmanaged host is the one that never gets the update.</li><li><strong>Incident response.</strong> During an incident is the worst possible time to discover the inventory is wrong. You're trying to answer "is this thing in scope, and what talks to it?" and the honest answer is "we're not sure."</li></ul>
+      <p>When the inventory is wrong, all of these degrade at the same time. Not one control — all of them, quietly, in the same direction. And nothing flags it, because a missing asset generates no alert. The gap is invisible by construction.</p>
+      <h3>It's always out of date, and that's structural</h3>
+      <p>People treat a stale inventory as a discipline problem — if we'd just keep it current. But you can't. The inventory is a snapshot, and the environment changes faster than anyone updates the snapshot. Someone spins up infrastructure for a project. A team deprecates a service and forgets to tell anyone. An acquisition drops a whole estate in your lap that was documented by people who no longer work there.</p>
+      <p>The snapshot is out of date the moment it's taken. In a cloud environment it's out of date in minutes. You are not maintaining a document. You are trying to photograph a thing that won't hold still.</p>
+      <h3>Inventory isn't a list</h3>
+      <p>This is the part I think most people get wrong. They treat inventory as a list of names. It isn't. A useful inventory is a live understanding of what you have and how it's connected — what depends on what, what talks to what, what breaks if you touch this. That's the thing that makes a change safe.</p>
+      <p>Most organizations don't have that. They have a stale list. And a stale list gives you false confidence, which is worse than knowing you're blind. You make a decision — tighten this rule, rotate that credential, decommission that box — believing you understand the blast radius, and you're reasoning off a picture that's months out of date.</p>
+      <h3>Why this caps your velocity</h3>
+      <p>Here's where it comes home. You cannot safely change what you can't see accurately.</p>
+      <p>Every hesitation I described in earlier posts — the engineer who won't touch the security group, the credential nobody will rotate — traces back here. The reason nobody wants their name on the change isn't laziness. It's that the map is wrong and everyone knows it, so every change is a bet against incomplete information. The rational move is to leave it alone.</p>
+      <p>So the inventory problem isn't really a hygiene problem. It's a ceiling on how fast and how safely your whole security program can move. Fix everything else and this still caps you. The organizations that move quickly aren't the ones with the fanciest tools — they're the ones who actually know what they have. That's rarer than it should be, and it's the least glamorous work in security, which is exactly why it doesn't get done.</p>
+      <p>If you own the CMDB at your org — or you're the one who quietly stopped trusting it — I'd like to hear how you handle it.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

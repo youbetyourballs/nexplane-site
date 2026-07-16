@@ -197,6 +197,30 @@ h2 em { font-style: normal; color: var(--brand-light); }
 .lic-line { background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.2); border-radius: var(--radius); padding: 18px 20px; color: #cbd5e1; font-size: 0.92rem; }
 .subtle-note { color: var(--text-muted); font-size: 0.85rem; margin-top: 14px; }
 
+/* ── Writing (John) ── */
+.article-head { max-width: 780px; }
+.article-title { margin-bottom: 14px; }
+.byline { display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: 0.92rem; margin: 0 0 26px; flex-wrap: wrap; }
+.byline b { color: #fff; } .byline a { color: var(--brand-light); }
+.permalink { font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.8rem; }
+.prose { max-width: 680px; }
+.prose p { color: #cbd5e1; font-size: 1.05rem; line-height: 1.8; margin: 0 0 20px; }
+.prose h3 { color: #fff; font-size: 1.3rem; font-weight: 700; margin: 34px 0 12px; }
+.prose h4 { color: #fff; font-size: 1.1rem; font-weight: 600; margin: 26px 0 10px; }
+.prose ul, .prose ol { color: #cbd5e1; font-size: 1.05rem; line-height: 1.8; padding-left: 22px; margin: 0 0 20px; }
+.prose li { margin: 8px 0; }
+.prose strong { color: #fff; }
+.prose code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; color: #a5f3fc; }
+.prose .cta-line { color: #94a3b8; border-top: 1px solid var(--border); padding-top: 22px; margin-top: 6px; }
+.ref-row { max-width: 680px; margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; gap: 16px; align-items: center; flex-wrap: wrap; color: var(--text-muted); font-size: 0.88rem; }
+.ref-row a { color: var(--brand-light); }
+.post-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); max-width: 840px; margin-top: 8px; }
+.post-item { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 18px 4px; border-bottom: 1px solid var(--border); }
+.post-item:hover { background: rgba(255,255,255,0.02); }
+.post-item .pt { color: #fff; font-weight: 500; font-size: 1.05rem; }
+.post-item .pd { color: var(--text-muted); font-size: 0.85rem; text-align: right; flex: none; }
+@media (max-width: 600px) { .post-item .pd { display: none; } }
+
 /* ── Features ── */
 .features-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;

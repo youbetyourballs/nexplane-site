@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chesterton&#x27;s Fence</title>
+  <meta name="description" content="There&#x27;s an old idea from G.K. Chesterton that I think about more than almost anything else from twenty years in this work. He puts it as two people look…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/chestertons-fence" />
+  <meta property="og:title" content="Chesterton&#x27;s Fence">
+  <meta property="og:description" content="There&#x27;s an old idea from G.K. Chesterton that I think about more than almost anything else from twenty years in this work. He puts it as two people look…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/chestertons-fence">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Chesterton&#x27;s Fence</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/chestertons-fence</span></div>
+    <div class="prose">
+      <p>There's an old idea from G.K. Chesterton that I think about more than almost anything else from twenty years in this work. He puts it as two people looking at a fence across a road. The first says, "I don't see the use of this. Let's clear it away." The second says, "If you don't see the use of it, I certainly won't let you clear it away. Go and find out why it's there. Then come back and tell me, and maybe I'll let you remove it."</p>
+      <p>That's it. Don't tear down a fence until you know why someone built it.</p>
+      <p>Every infrastructure and security team lives inside a version of this, and most of them get it wrong at least a few times a year.</p>
+      <h3>The load-bearing thing nobody understands</h3>
+      <p>You've seen the artifacts. A firewall rule that allows a port to a host nobody can identify. An IAM policy with a grant that looks over-broad and has no ticket attached. A cron job on a box that's been running since before anyone currently on the team was hired. A security group rule that's obviously too permissive and has been that way for years.</p>
+      <p>Someone eventually finds one of these during a cleanup or an audit, doesn't understand it, and concludes it's cruft. So they remove it. And then, sometimes immediately and sometimes three weeks later when a quarterly job runs, they find out what it was for. The fence was load-bearing. It was the one thing holding a dependency nobody had written down.</p>
+      <h3>Why smart people get this wrong</h3>
+      <p>The failure mode isn't stupidity. It's the opposite — it usually comes from competent engineers doing exactly what good engineers are supposed to do: reduce surface area, remove what you can't justify, clean up.</p>
+      <p>Here's the trap. The rule looks dumb <em>precisely because its context is gone</em>. The person who wrote it understood a real constraint — a legacy integration, a vendor's hard-coded source IP, a compliance requirement, a 2am incident that this rule was the fix for. That understanding lived in their head, or in a Slack thread that's been deleted, or in a ticketing system three migrations ago. The rule outlived the reasoning. So what you're left with is the artifact stripped of its <em>why</em>, and an artifact with no visible justification looks exactly like a mistake.</p>
+      <p>There's also a particular kind of security arrogance worth naming, because I've had it myself. You come into an environment, you see an old control, and the reflex is: this is obviously wrong, whoever did this didn't know what they were doing. Sometimes that's true. But "this old rule is obviously dumb" is one of the more expensive sentences in this field, because the person who says it usually hasn't done the thing Chesterton asked for — gone and found out why it's there.</p>
+      <h3>The fix isn't caution</h3>
+      <p>The wrong lesson to take from this is "never touch anything." That's how you end up with an environment nobody can change, where the over-permissive security group stays over-permissive forever because everyone's too scared to be the one who broke it. That paralysis is its own risk, and it's the one that actually kills teams slowly. Fear of removing the fence is not the same as understanding it.</p>
+      <p>The real fix is memory.</p>
+      <p>The reason you can't safely remove the fence is that you inherited the artifact without the reasoning. So the discipline is simple to state and hard to actually do: every time you build a fence, record why. Every change — every rule added, every policy scoped, every job scheduled — should carry its reason forward, attached to the thing itself, so the next person doesn't inherit a bare artifact. They inherit the argument.</p>
+      <p>That's what an audit trail is actually for, when it's done right. Not the compliance version, where you can prove <em>that</em> a change happened for the auditor. The useful version, where the next engineer can see <em>why</em> it happened — who made it, what it was protecting against, what depended on it. Those are the signs on the fence. They're the thing that lets the second person in Chesterton's story eventually say "alright, now that you understand it, take it down."</p>
+      <h3>This is what makes change safe</h3>
+      <p>I care about this because the whole point is to be able to change things. An environment where every control is a black box you're afraid to touch is not secure — it's just frozen, and frozen environments rot.</p>
+      <p>You can remove the fence once you can see why it was built. That's the whole trick, and it's not caution and it's not courage. It's institutional memory that survives the person who had it. If the reasoning travels with the change, the next person isn't guessing. They're deciding — with the same information the original builder had.</p>
+      <p>Most of the bad infrastructure decisions I've watched happen weren't reckless. They were made by people who genuinely couldn't see the fence for what it was, because nobody left them a sign.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
