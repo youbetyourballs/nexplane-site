@@ -9,3 +9,5 @@ Deferred work for the public site (nexplane.ai). Not blocking; pick up as capaci
   pages directly, and for the writing pages via the `page_head()` template in `_build_writing.py`
   (so regenerated posts keep the tag). Decide GA4 property + measurement ID, and whether a
   consent/cookie banner is needed before rollout.
+  - **Blocked on:** setting up the `nexplane.ai` domain with Google Workspace (GSuite) first —
+    needed before GA can be wired up properly (property ownership / domain verification).
