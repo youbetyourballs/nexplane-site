@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Every Production Change Is a Scientific Experiment</title>
+  <meta name="description" content="Most engineering organizations don&#x27;t think of production changes as experiments." />
+  <link rel="canonical" href="https://nexplane.ai/writing/every-production-change-is-an-experiment" />
+  <meta property="og:title" content="Every Production Change Is a Scientific Experiment">
+  <meta property="og:description" content="Most engineering organizations don&#x27;t think of production changes as experiments.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/every-production-change-is-an-experiment">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Every Production Change Is a Scientific Experiment</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/every-production-change-is-an-experiment</span></div>
+    <div class="prose">
+      <p>Most engineering organizations don't think of production changes as experiments.</p>
+      <p>They think of them as deployments.</p>
+      <p>That's a subtle distinction.</p>
+      <p>And I think it's costing us.</p>
+      <h3>Science and Engineering Have More in Common Than We Admit</h3>
+      <p>Before a scientist runs an experiment, they usually write down a hypothesis.</p>
+      <p>Not because they're required to.</p>
+      <p>Because without a prediction, it's difficult to know what was actually learned.</p>
+      <p>A typical experiment asks:</p>
+      <ul><li>What do we believe?</li><li>Why do we believe it?</li><li>What outcome do we expect?</li><li>What evidence would prove us wrong?</li></ul>
+      <p>Now compare that to many production deployments.</p>
+      <p>A change request is opened.</p>
+      <p>Someone reviews the code.</p>
+      <p>CI passes.</p>
+      <p>The deployment succeeds.</p>
+      <p>Then everyone moves on.</p>
+      <p>Notice what's missing.</p>
+      <p>The prediction.</p>
+      <h3>It Worked Isn't Learning</h3>
+      <p>Suppose an engineer says:</p>
+      <p>&gt; This change should improve performance.</p>
+      <p>What does that mean?</p>
+      <p>By how much?</p>
+      <p>For whom?</p>
+      <p>Under what workload?</p>
+      <p>Compared to what baseline?</p>
+      <p>Without explicit predictions, almost any outcome can be interpreted as success.</p>
+      <p>That isn't engineering.</p>
+      <p>That's hindsight.</p>
+      <h3>Every Deployment Already Contains a Hypothesis</h3>
+      <p>Whether it's documented or not.</p>
+      <p>Consider a simple database index.</p>
+      <p>The implicit hypothesis is:</p>
+      <p>&gt; This index will reduce query latency more than it increases write overhead.</p>
+      <p>Or a caching layer:</p>
+      <p>&gt; The reduction in backend load will outweigh the operational complexity.</p>
+      <p>Or introducing a message queue:</p>
+      <p>&gt; The benefits of decoupling exceed the additional failure modes.</p>
+      <p>These aren't implementation details.</p>
+      <p>They're hypotheses about how the system behaves.</p>
+      <h3>Engineering Organizations Rarely Capture Them</h3>
+      <p>Imagine six months after a deployment.</p>
+      <p>Someone asks:</p>
+      <p>Why did we introduce Redis?</p>
+      <p>You find the pull request.</p>
+      <p>You find the Terraform.</p>
+      <p>You find the Helm chart.</p>
+      <p>You find the deployment logs.</p>
+      <p>What you often don't find is:</p>
+      <p>&gt; What did we expect Redis to accomplish?</p>
+      <p>That's the expensive part.</p>
+      <p>The code survived.</p>
+      <p>The hypothesis didn't.</p>
+      <h3>Predictions Create Better Engineers</h3>
+      <p>Imagine every production change included three additional fields:</p>
+      <p class="cta-line"><strong>Prediction</strong></p>
+      <p>Average API latency will decrease by approximately 20%.</p>
+      <p class="cta-line"><strong>Confidence</strong></p>
+      <p>Moderate.</p>
+      <p class="cta-line"><strong>Evidence That Would Change Our Minds</strong></p>
+      <p>If cache hit rates remain below 40%, or write amplification increases database latency beyond acceptable thresholds, we should reconsider this design.</p>
+      <p>Now the deployment has become an experiment.</p>
+      <p>Reality can answer it.</p>
+      <h3>Postmortems Become More Valuable</h3>
+      <p>Most postmortems reconstruct what happened.</p>
+      <p>Good ones reconstruct why the team expected something different.</p>
+      <p>That's impossible without documented predictions.</p>
+      <p>A prediction creates an objective comparison:</p>
+      <p>Expected.</p>
+      <p>Observed.</p>
+      <p>Difference.</p>
+      <p>Learning.</p>
+      <p>Without the prediction, postmortems become stories.</p>
+      <p>With it, they become science.</p>
+      <h3>AI Will Make This Essential</h3>
+      <p>As AI proposes increasingly sophisticated infrastructure changes, organizations will need a way to evaluate more than implementation quality.</p>
+      <p>They'll need to evaluate reasoning.</p>
+      <p>Predictions become one of the most effective ways to do that.</p>
+      <p>If an AI consistently makes accurate predictions, confidence grows.</p>
+      <p>If its predictions repeatedly diverge from reality, the organization knows exactly where improvement is needed.</p>
+      <p>This is a much stronger feedback loop than simply counting successful deployments.</p>
+      <h3>Engineering Should Learn Faster Than It Builds</h3>
+      <p>The best engineering organizations don't win because they avoid mistakes.</p>
+      <p>They win because every deployment leaves behind more understanding than existed before it.</p>
+      <p>That's what experiments do.</p>
+      <p>They don't merely change systems.</p>
+      <p>They change models.</p>
+      <p>Every production change is already a hypothesis about reality.</p>
+      <p>The question is whether your organization is treating it that way.</p>
+      <p>Because if you're not recording predictions, comparing them to outcomes, and updating your understanding, you're not getting the full value of every deployment.</p>
+      <p>You're changing software.</p>
+      <p>But you're leaving knowledge on the table.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

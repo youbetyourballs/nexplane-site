@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Someone Told Me They Had Rollbacks. They Didn&#x27;t.</title>
+  <meta name="description" content="I&#x27;ve heard that sentence a lot. For a while I took it at face value. Then I started asking a follow-up question, and the follow-up is where it falls apa…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/someone-told-me-they-had-rollbacks" />
+  <meta property="og:title" content="Someone Told Me They Had Rollbacks. They Didn&#x27;t.">
+  <meta property="og:description" content="I&#x27;ve heard that sentence a lot. For a while I took it at face value. Then I started asking a follow-up question, and the follow-up is where it falls apa…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/someone-told-me-they-had-rollbacks">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Someone Told Me They Had Rollbacks. They Didn&#x27;t.</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/someone-told-me-they-had-rollbacks</span></div>
+    <div class="prose">
+      <p>I've heard that sentence a lot. For a while I took it at face value. Then I started asking a follow-up question, and the follow-up is where it falls apart: when's the last time you actually did it? Not planned to. Not wrote the runbook for. Actually restored a system to the state it was in before a change, and confirmed it came back the way you expected.</p>
+      <p>Most of the time, the honest answer is never. They have a button. They've never pushed it. They're going to find out whether it works at the exact moment they need it to work, which is the worst possible time to learn something new about your own infrastructure.</p>
+      <p>That's the thing I want to be clear about: a rollback you haven't exercised is not a rollback. It's a hope with a UI.</p>
+      <h3>"We can roll it back" usually means something weaker</h3>
+      <p>When you press on it, "we have rollbacks" almost always turns out to mean one of a few things, and none of them are what the words imply.</p>
+      <p>Sometimes it means "we have backups." Backups are not rollback. A backup restores the whole system to a point in time, which is a blunt instrument — you lose everything that happened after the snapshot, and you're betting the backup is intact, current, and in a different blast radius than the thing that just broke. Ask the people who ran Code Spaces. In 2014 an attacker got into their AWS control panel and deleted everything, including the backups. Production and backups lived in the same blast radius. The company didn't recover from it. It shut down.</p>
+      <p>Sometimes "we can roll it back" means "we can re-run the playbook" or "we can re-apply the old config." That sounds like undo, but it isn't. Re-running an Ansible playbook applies a desired state forward — if something else touched that config file since your last run, the playbook overwrites it with the playbook's version, not the version that was actually there before you made your change. Re-applying a previous Terraform config re-provisions toward a target; it doesn't reconstruct what existed. The before-state is gone. You're building something new that resembles the old thing and calling it a restore.</p>
+      <p>Sometimes it means "we have CloudTrail." Audit logs tell you what happened. They don't undo it. Reconstructing a rollback from logs means reading the API calls, inferring the before-state, and hand-building the corrective calls — a multi-hour forensics exercise you're now running during an outage. Forensics and rollback are not the same tool. People reach for one when they needed the other.</p>
+      <h3>Why this is the pattern that keeps burning people</h3>
+      <p>The failure looks the same across incidents that otherwise have nothing in common.  In April 2026 an AI coding agent wired into PocketOS's environment deleted the production database and the backups in nine seconds. The recovery plan assumed the backups would be there. They weren't in a separate enough place, and nobody had tested the assumption that they would survive an event that also took out production.</p>
+      <p>That's the common thread. The rollback path existed on paper. It had never been exercised against the specific failure it was supposed to cover. So when the moment came, the button did nothing.</p>
+      <h3>Rollback has to be designed in, not bolted on</h3>
+      <p>Here's the part I care about most, because it changed how I think about building this stuff.</p>
+      <p>Real rollback isn't a feature you add at the end. It's a constraint you accept at the beginning, and it costs you something up front. To actually undo a change, you have to capture the exact before-state at the moment the change executes — not what the config said last week, not what the logs imply — and store it bound to the specific change that caused it, with a typed operation that knows how to put it back. Rotating a credential back is a different operation than re-enabling a disabled account. If you didn't capture the before-state when you made the change, you don't have a rollback later. You have a reconstruction project.</p>
+      <p>That's why I treat it as a design requirement rather than a claim. If a change can't capture its before-state and restore it, then it doesn't get to say it's reversible — and you should be explicit about that limit instead of papering over it. The honest version of "we can roll this back" is narrow and specific: we captured the state, we stored it with the change, and we have a tested operation that restores it. Everything else is a hope with a UI.</p>
+      <p>So the next time someone tells you they have rollbacks, ask them the follow-up. When did you last run it? Against what? Did the system come back the way you expected? If the answer is a shrug, they don't have rollbacks. They have a story they're telling themselves about the worst day they haven't had yet.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

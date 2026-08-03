@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Architecture Is a Record of Your Assumptions</title>
+  <meta name="description" content="Ask an engineer why a system looks the way it does and you&#x27;ll often hear an explanation about technology." />
+  <link rel="canonical" href="https://nexplane.ai/writing/architecture-is-a-record-of-assumptions" />
+  <meta property="og:title" content="Your Architecture Is a Record of Your Assumptions">
+  <meta property="og:description" content="Ask an engineer why a system looks the way it does and you&#x27;ll often hear an explanation about technology.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/architecture-is-a-record-of-assumptions">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Your Architecture Is a Record of Your Assumptions</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/architecture-is-a-record-of-assumptions</span></div>
+    <div class="prose">
+      <p>Ask an engineer why a system looks the way it does and you'll often hear an explanation about technology.</p>
+      <p>We chose Kafka.</p>
+      <p>We run Kubernetes.</p>
+      <p>We built a microservices architecture.</p>
+      <p>We use eventual consistency.</p>
+      <p>Those are descriptions of the implementation.</p>
+      <p>They're not explanations.</p>
+      <p>The real explanation almost always starts somewhere else.</p>
+      <p>With assumptions.</p>
+      <h3>Every Architecture Is Frozen Reasoning</h3>
+      <p>Architecture doesn't emerge randomly.</p>
+      <p>It's the physical manifestation of a set of beliefs about the world.</p>
+      <p>A microservices architecture assumes that independent deployment and team autonomy are more valuable than the simplicity of a monolith.</p>
+      <p>A read replica assumes read traffic will significantly outweigh write traffic.</p>
+      <p>A global CDN assumes users are geographically distributed.</p>
+      <p>A cache assumes repeated computation or retrieval is more expensive than temporary inconsistency.</p>
+      <p>None of these are technology decisions.</p>
+      <p>They're assumptions about reality.</p>
+      <p>Technology is simply how those assumptions become concrete.</p>
+      <h3>Assumptions Expire. Architecture Usually Doesn't.</h3>
+      <p>Here's where organizations get into trouble.</p>
+      <p>The assumptions that justified an architecture quietly change.</p>
+      <p>The architecture remains.</p>
+      <p>Imagine a startup that expected explosive growth.</p>
+      <p>They invested heavily in distributed systems, event buses, service meshes, and complex deployment pipelines.</p>
+      <p>Five years later the company has stabilized.</p>
+      <p>Growth is modest.</p>
+      <p>The engineering team has shrunk.</p>
+      <p>Operational complexity has become one of the company's biggest costs.</p>
+      <p>Nothing is technically wrong with the architecture.</p>
+      <p>It's just optimized for assumptions that no longer exist.</p>
+      <p>This is why so many organizations inherit systems that feel overengineered.</p>
+      <p>They're not necessarily overengineered.</p>
+      <p>They're engineered for yesterday.</p>
+      <h3>We Preserve Code Better Than We Preserve Assumptions</h3>
+      <p>If you clone a repository today, you'll get every line of code.</p>
+      <p>You'll get commit history.</p>
+      <p>You'll get tests.</p>
+      <p>You'll probably get CI/CD pipelines.</p>
+      <p>What you often won't get is the reasoning behind the architecture.</p>
+      <p>Questions like:</p>
+      <ul><li>What growth assumptions drove this decision?</li><li>What alternatives were rejected?</li><li>Which constraints mattered at the time?</li><li>What evidence supported this design?</li><li>Under what conditions should we revisit it?</li></ul>
+      <p>Those answers disappear surprisingly quickly.</p>
+      <p>Future engineers are left reconstructing the logic from the implementation itself.</p>
+      <p>That's like trying to reconstruct a legal argument from the judge's final ruling without ever seeing the case.</p>
+      <h3>Architecture Reviews Should Start Differently</h3>
+      <p>Most architecture reviews begin with diagrams.</p>
+      <p>Boxes.</p>
+      <p>Arrows.</p>
+      <p>Technologies.</p>
+      <p>I think they should begin with assumptions.</p>
+      <p>Imagine opening an Architecture Decision Record and seeing:</p>
+      <p class="cta-line"><strong>Assumptions</strong></p>
+      <ul><li>Traffic will grow 10x within two years.</li><li>Teams will deploy independently.</li><li>Multi-region resilience is required.</li><li>Vendor lock-in is unacceptable.</li></ul>
+      <p>Only after those assumptions do you encounter the architecture.</p>
+      <p>Now every future engineer understands not just what was built, but why it was reasonable.</p>
+      <p>Even better, they know exactly what to question when reality changes.</p>
+      <h3>AI Will Make This More Important</h3>
+      <p>As AI becomes capable of generating architectures, it will have no trouble producing diagrams.</p>
+      <p>The hard part won't be creating systems.</p>
+      <p>It will be selecting the right assumptions.</p>
+      <p>If the assumptions are wrong, the architecture will almost certainly be wrong.</p>
+      <p>That suggests something interesting.</p>
+      <p>The future of architecture may depend less on generating better diagrams and more on making assumptions explicit, versioned, and continuously validated.</p>
+      <h3>Architecture Is Living Reasoning</h3>
+      <p>We often think of architecture as a technical artifact.</p>
+      <p>It's better understood as a historical record.</p>
+      <p>Every service.</p>
+      <p>Every queue.</p>
+      <p>Every cache.</p>
+      <p>Every database.</p>
+      <p>Every boundary.</p>
+      <p>Represents a decision made under a particular set of assumptions.</p>
+      <p>Those assumptions deserve the same care we give the implementation itself.</p>
+      <p>Because code can always be rewritten.</p>
+      <p>The difficult part is remembering why it was written that way in the first place.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Incentive Mismatch — They&#x27;re Not Your Enemy</title>
+  <meta name="description" content="Every security leader eventually decides the infrastructure team is the obstacle. The findings are clear, the fixes are known, and the tickets sit open …" />
+  <link rel="canonical" href="https://nexplane.ai/writing/the-incentive-mismatch" />
+  <meta property="og:title" content="The Incentive Mismatch — They&#x27;re Not Your Enemy">
+  <meta property="og:description" content="Every security leader eventually decides the infrastructure team is the obstacle. The findings are clear, the fixes are known, and the tickets sit open …">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/the-incentive-mismatch">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The Incentive Mismatch — They&#x27;re Not Your Enemy</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/the-incentive-mismatch</span></div>
+    <div class="prose">
+      <p>Every security leader eventually decides the infrastructure team is the obstacle. The findings are clear, the fixes are known, and the tickets sit open for weeks. So you conclude the people on the other side are dragging their feet — that they don't take security seriously, that they're lazy, that they need to be pushed.</p>
+      <p>I've been the CISO who thought that. I was wrong, and being wrong cost me time and relationships I didn't get back.</p>
+      <p>The infra team isn't sitting on your findings because they don't care. They're sitting on them because you're asking them to do something that, on their scoreboard, is all downside.</p>
+      <h3>Look at what they actually get measured on</h3>
+      <p>Pull up the metrics an infrastructure engineer is reviewed on. Uptime. Latency. Successful deploys. Time-to-recovery when something breaks. Nowhere on that list is "closed a security finding." Nowhere on that list is "tightened an IAM policy."</p>
+      <p>What <em>is</em> on the list, implicitly, is "didn't cause an outage." That one isn't written down, but everybody who owns production knows it's the real one. Cause a Sev1 that takes down checkout during business hours and you'll be explaining it in a review for months. Nobody remembers the twelve security tickets you cleared. Everybody remembers the outage.</p>
+      <p>So when a security ticket lands asking an engineer to change a live system, they're being asked to take on personal risk in exchange for zero personal reward. Deferring it isn't negligence. It's the rational read of the incentives you handed them.</p>
+      <h3>"Just do the fix" is not a small ask</h3>
+      <p>From the security side, the fix looks trivial. Rotate the key. Tighten the role. Close the port. Two hours of work.</p>
+      <p>From the side of the person who owns that system, it looks different. That over-permissioned role — something depends on it in a way nobody wrote down, and if they get it wrong, they're the one getting paged at 2am. That key rotation — there might be a hard-coded credential in a service nobody's touched in three years, and it'll break silently. They don't <em>know</em> it will break. They know they can't prove it won't. And they're the name on the change.</p>
+      <p>Manual change to production, under time pressure, with no clean way back if it breaks — that's the exact shape of the thing that ends careers. Asking someone to do it casually, and then being annoyed when they don't, tells them you don't understand their job.</p>
+      <h3>Fighting them fails; understanding them works</h3>
+      <p>I spent a stretch trying to win this by force. Escalations. Mandatory-priority tickets. SLAs with the engineering VP's name on them. It works for a quarter, because you're spending your own capital to push against the incentives. Then you get busy, the pressure comes off, and it snaps right back — because the underlying scoreboard never changed.</p>
+      <p>What actually moved things was the opposite. When I stopped treating the infra team as adversaries and started treating their caution as information, the conversations changed. They weren't blocking me. They were telling me where the real risk in the change lived — the dependencies, the blast radius, the thing that would break. That's the person you want in the room, not the person you're routing around.</p>
+      <h3>Treat it as a system problem, not an enemy</h3>
+      <p>The version of this that works starts from a different question. Not "why won't engineering do their job?" but "why does the system I've built make sitting on this the safe move for them — and what would have to change for fixing it to be the safe move instead?"</p>
+      <p>That reframe matters because you can't fix people, but you can change a system. As long as the security scoreboard and the uptime scoreboard reward opposite behavior, the two teams will pull against each other, and no amount of goodwill or escalation will hold. Change what's safe for the engineer to say yes to, and the finding closes on its own.</p>
+      <p>The infra team was never your enemy. They were doing exactly what you'd do if you were measured the way they are.</p>
+      <p>If you've been on either side of this — the CISO pushing, or the engineer who knew the "simple" change wasn't — I'd like to hear how it went.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

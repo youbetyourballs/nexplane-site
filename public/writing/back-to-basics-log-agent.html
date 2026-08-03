@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Back to Basics: Observability — The Log Agent That Never Got Deployed</title>
+  <meta name="description" content="Nobody argues about this one. You cannot detect what you cannot see, and you cannot investigate what you didn&#x27;t log. Ask any security team whether they …" />
+  <link rel="canonical" href="https://nexplane.ai/writing/back-to-basics-log-agent" />
+  <meta property="og:title" content="Back to Basics: Observability — The Log Agent That Never Got Deployed">
+  <meta property="og:description" content="Nobody argues about this one. You cannot detect what you cannot see, and you cannot investigate what you didn&#x27;t log. Ask any security team whether they …">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/back-to-basics-log-agent">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Back to Basics: Observability — The Log Agent That Never Got Deployed</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/back-to-basics-log-agent</span></div>
+    <div class="prose">
+      <p>Nobody argues about this one. You cannot detect what you cannot see, and you cannot investigate what you didn't log. Ask any security team whether they want telemetry on every host and the answer is yes, obviously, every time. The right answer has never been in dispute.</p>
+      <p>And yet I have never worked at a place with full coverage. Not one. Every environment I've been responsible for had a number on the dashboard that said something like 87% of hosts reporting, and that number sat there for years. Not because anyone was lazy. Because the last stretch is genuinely hard, and the way we've built things gives nobody a safe way to finish it.</p>
+      <h3>The wall is the same as it always is</h3>
+      <p>Getting a log agent or EDR sensor onto a host means making a change on that host. One host, one small change, low risk. Fine. Now do it on every machine you own, including the ones you'd rather not touch.</p>
+      <p>That's where it stops being easy. Coverage isn't a detection problem or a tooling problem. It's a change-management problem wearing a detection problem's clothes. To get to full coverage you have to push a change across the entire fleet, and a fleet is not a uniform thing. It's a well-behaved majority and a long, ugly tail.</p>
+      <h3>Why it stalls at 85%</h3>
+      <p>The first 85% goes fine because those hosts are the managed ones. They're in the config-management system, they're in the inventory, they look like each other, and pushing an agent to them is a routine job.</p>
+      <p>The tail is where it dies. The tail is the ten-year-old box running the thing finance depends on that no one will let you reboot. It's the appliance the vendor told you not to install anything on. It's the host that isn't in the inventory because someone stood it up in 2019 and never told anyone. It's the fragile one, the unmanaged one, the unknown one. Each of these is a small risk and a small effort on its own, and each one needs a human to stop, figure out what it is, decide whether the agent will break it, and own the outcome if it does.</p>
+      <p>There's no safe, reversible way to make that change and back it out cleanly if the box falls over. So the rational move — the same rational move I wrote about with unresolved findings — is to leave it alone. Multiply "leave it alone" across a few hundred hosts and you get a project that is permanently 85% done. It never gets to 100 because the last 15% is the part nobody has a safe path through.</p>
+      <h3>The part that should bother you</h3>
+      <p>Here's the cruel version. The hosts you couldn't cover are not a random 15%. They're the old, weird, poorly understood, off-inventory machines. That is the exact profile of the host an attacker wants, and the exact host an incident lands on.</p>
+      <p>So the blind spot in your telemetry is highly correlated with where the trouble actually is. When you're mid-incident, pulling logs, building a timeline, trying to answer "did they touch this," the gap in your visibility is not spread evenly across boring servers. It's sitting right on top of the machine you most need to see.</p>
+      <h3>What would actually change it</h3>
+      <p>The thing that's missing isn't a better agent or a smarter dashboard. Those are fine. What's missing is a safe, reversible way to make a change across a whole fleet — including the fragile tail — where you can see exactly what will happen before it runs, and undo it cleanly if a host doesn't like it.</p>
+      <p>If pushing an agent to that scary 2019 box were a bounded change you could reverse in a hurry, the calculus flips. The reason the tail stays uncovered is that the downside of touching it is unbounded and the person touching it eats that downside personally. Take the unbounded downside off the table and the tail stops being a place people avoid. Then, and only then, does "get telemetry everywhere" stop being a slide and start being a thing you can actually finish.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

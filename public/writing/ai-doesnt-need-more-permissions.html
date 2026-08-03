@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Doesn&#x27;t Need More Permissions. It Needs a Better Change Process.</title>
+  <meta name="description" content="Every week there&#x27;s a new discussion about giving AI more access to production systems." />
+  <link rel="canonical" href="https://nexplane.ai/writing/ai-doesnt-need-more-permissions" />
+  <meta property="og:title" content="AI Doesn&#x27;t Need More Permissions. It Needs a Better Change Process.">
+  <meta property="og:description" content="Every week there&#x27;s a new discussion about giving AI more access to production systems.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/ai-doesnt-need-more-permissions">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">AI Doesn&#x27;t Need More Permissions. It Needs a Better Change Process.</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/ai-doesnt-need-more-permissions</span></div>
+    <div class="prose">
+      <p>Every week there's a new discussion about giving AI more access to production systems.</p>
+      <p>The debate usually sounds something like this:</p>
+      <p>&gt; How do we safely let AI administer infrastructure?</p>
+      <p>It's an interesting question.</p>
+      <p>I just don't think it's the right one.</p>
+      <p>The assumption behind almost every proposal is that AI will eventually become trusted enough to receive direct production access. From there, the discussion becomes one of permissions, guardrails, ACLs, approval policies, and sandboxing.</p>
+      <p>Those are all useful.</p>
+      <p>But they optimize around an assumption that may be backwards.</p>
+      <h3>We Already Know How Humans Should Make Production Changes</h3>
+      <p>Imagine a senior engineer wants to modify production networking.</p>
+      <p>In a mature engineering organization they shouldn't simply SSH into a router and start making changes.</p>
+      <p>Instead, there is usually a process.</p>
+      <p>Someone documents:</p>
+      <ul><li>what is changing,</li><li>why it needs to change,</li><li>the expected outcome,</li><li>the systems that could be affected,</li><li>the implementation plan,</li><li>the rollback plan,</li><li>the validation steps.</li></ul>
+      <p>Other engineers review the proposal.</p>
+      <p>Operations prepares for deployment.</p>
+      <p>Monitoring is configured.</p>
+      <p>Rollback procedures are verified.</p>
+      <p>Only then does the change reach production.</p>
+      <p>Notice something important.</p>
+      <p>None of this exists because we distrust engineers.</p>
+      <p>It exists because complex systems deserve disciplined change management.</p>
+      <h3>Why Should AI Be Different?</h3>
+      <p>Many current discussions start from the idea that AI needs to become trustworthy enough to receive root privileges.</p>
+      <p>I think that's solving the wrong problem.</p>
+      <p>Instead of asking:</p>
+      <p>&gt; How do we make AI safe enough for production?</p>
+      <p>Perhaps we should ask:</p>
+      <p>&gt; Why should AI be exempt from the engineering process we've already learned humans should follow?</p>
+      <p>That framing changes everything.</p>
+      <p>AI shouldn't bypass engineering governance.</p>
+      <p>It should participate in it.</p>
+      <h3>AI Is Another Engineer</h3>
+      <p>Viewed this way, AI becomes another engineering participant.</p>
+      <p>It can:</p>
+      <ul><li>propose changes,</li><li>analyze dependencies,</li><li>identify risks,</li><li>generate implementation plans,</li><li>estimate blast radius,</li><li>recommend rollback strategies,</li><li>review previous incidents.</li></ul>
+      <p>But the change itself still moves through the same structured workflow as every other consequential engineering decision.</p>
+      <p>The process doesn't become AI-specific.</p>
+      <p>It becomes engineering-specific.</p>
+      <h3>The Real Opportunity</h3>
+      <p>Ironically, AI may improve human engineering more than human engineering improves AI.</p>
+      <p>To make AI effective, organizations will have to make engineering reasoning explicit.</p>
+      <p>Questions that previously lived inside senior engineers' heads suddenly become artifacts:</p>
+      <ul><li>Why is this safe?</li><li>What assumptions are we making?</li><li>Which dependencies matter?</li><li>What evidence supports this approach?</li><li>What would convince us not to deploy?</li><li>What does success look like?</li></ul>
+      <p>Those questions benefit everyone.</p>
+      <p>Future engineers.</p>
+      <p>New hires.</p>
+      <p>Incident responders.</p>
+      <p>Auditors.</p>
+      <p>And AI.</p>
+      <h3>A Better Future</h3>
+      <p>I don't think the future belongs to AI systems with unrestricted production access.</p>
+      <p>I think it belongs to organizations with disciplined engineering processes that both humans and AI participate in.</p>
+      <p>The interesting innovation isn't autonomous infrastructure.</p>
+      <p>It's making engineering reasoning durable enough that no participant—human or machine—has to rely on invisible tribal knowledge.</p>
+      <p>That future is both safer and more scalable.</p>
+      <p>And unlike simply adding more permissions, it makes the entire engineering organization better in the process.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

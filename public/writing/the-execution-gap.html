@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Execution Gap</title>
+  <meta name="description" content="Somewhere in your organization there&#x27;s a list. It might be a Jira board, a spreadsheet, a section of a slide deck that gets updated before the quarterly…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/the-execution-gap" />
+  <meta property="og:title" content="The Execution Gap">
+  <meta property="og:description" content="Somewhere in your organization there&#x27;s a list. It might be a Jira board, a spreadsheet, a section of a slide deck that gets updated before the quarterly…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/the-execution-gap">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The Execution Gap</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/the-execution-gap</span></div>
+    <div class="prose">
+      <p>Somewhere in your organization there's a list. It might be a Jira board, a spreadsheet, a section of a slide deck that gets updated before the quarterly review. On it are the changes everyone already agrees should happen. The over-permissioned role that should be scoped down. The keys that should have been rotated last quarter. The public bucket. The stale admin account belonging to someone who left in . Nobody on that list is controversial. If you read the items out loud in a room, every person in it would nod.</p>
+      <p>The list doesn't move.</p>
+      <p>I spent  years as a CISO across , and I want to be precise about what the list is and isn't. It is not a knowledge problem. We knew what to do. We had the finding, the severity, the remediation path, sometimes down to the exact CLI command. What we didn't have was a person who could safely run that command inside a process anyone trusted.</p>
+      <p>That's the gap. Not knowing what to do — knowing who can do it without either breaking something or being blamed for breaking something.</p>
+      <h3>Visibility is the part we already solved</h3>
+      <p>The security industry spent fifteen years getting good at seeing. Scanners, CSPM, CNAPP, agents, graph tools — point one at your environment and you'll get a beautifully prioritized inventory of everything wrong. That work is real and it's mostly done. I can find every misconfigured resource, every stale credential, every unpatched host in an afternoon.</p>
+      <p>And then I have a list.</p>
+      <p>Here's the thing nobody says out loud in the vendor briefings: the second scanner doesn't help. The finding was never open because we couldn't see it. It was open because seeing it and fixing it are two completely different capabilities, and every dollar the industry spent went to the first one. Buying more visibility to solve an execution problem is like .</p>
+      <h3>Why the list becomes a graveyard</h3>
+      <p>Walk one item through the org and you'll see exactly where it dies.</p>
+      <p>Security opens a ticket to scope down an IAM role. Obvious, urgent, clearly correct. That ticket lands in an engineering backlog next to the release, a migration, on-call, and last month's security tickets. The engineer who owns that service knows something security doesn't: a couple of things depend on that role in ways nobody wrote down, and if she tightens it wrong she's the one getting paged at 2am. Security knows something she doesn't: that role is one phished laptop away from being a real incident. Neither of them has the whole picture, and nothing in the process is designed to put the two halves together.</p>
+      <p>So the ticket sits. Not because anyone decided it should. Closing it means changing a system nobody fully understands, under time pressure, with no clean way back if it breaks — and nobody wants their name on that downside. Doing nothing is the only choice that's safe for the person being asked to act.</p>
+      <p>Multiply that by every item on the list. The list isn't a to-do list. It's a graveyard of changes everyone agreed on and no one had a safe path to make.</p>
+      <h3>Every path around it is worse</h3>
+      <p>Once you see the gap, you start reaching for the obvious fixes, and you find out why they don't hold.</p>
+      <p><em>Route it all through infra.</em> This is the default, and it's why the list exists. The people who can safely execute — the ones with the access and the context — are the smallest, most overloaded team you have, and they're measured on uptime, not your finding-aging metric. Every security item you hand them is an interruption to the work they're actually evaluated on. Governance can force priority for a quarter. Then attention moves and it snaps back.</p>
+      <p><em>Give security the access to do it themselves.</em> Now you've traded a slow problem for a dangerous one. A security engineer making ad hoc changes in the console — no change record, no approval from the resource owner, no way to undo it cleanly when a change to IAM or networking breaks something in a non-obvious way. Engineering's objection to that isn't unreasonable. I've watched exactly this poison the well: one unexpected outage from an unapproved change and security never gets access again. The queue gets longer.</p>
+      <p>So you're stuck between a path that's too slow and a path that's too dangerous, and the list keeps growing.</p>
+      <h3>The bottleneck was never the finding</h3>
+      <p>The reason I think this matters is that most of the money, attention, and roadmap in security is still pointed at the wrong half of the problem. We keep buying better ways to know what's wrong, and the thing standing between us and a safer environment is a governed, reversible, trustworthy way to actually do something about it.</p>
+      <p>I'm not going to pretend I have this fully worked out. But I'm convinced the question worth walking into the next meeting with isn't "what did we miss?" It's "we already know what to do — why doesn't anyone have a safe path to do it, and what would have to be different for that path to exist?"</p>
+      <p>That's the gap. Everything I care about right now lives inside it.</p>
+      <p>If you've got a version of that list — the changes everyone agrees on that never move — I'd genuinely like to hear where yours dies in the pipeline.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

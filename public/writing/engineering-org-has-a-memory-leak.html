@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Engineering Organization Has a Memory Leak</title>
+  <meta name="description" content="If I told you one of your production services had a memory leak, you&#x27;d probably stop everything to investigate." />
+  <link rel="canonical" href="https://nexplane.ai/writing/engineering-org-has-a-memory-leak" />
+  <meta property="og:title" content="Your Engineering Organization Has a Memory Leak">
+  <meta property="og:description" content="If I told you one of your production services had a memory leak, you&#x27;d probably stop everything to investigate.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/engineering-org-has-a-memory-leak">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Your Engineering Organization Has a Memory Leak</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/engineering-org-has-a-memory-leak</span></div>
+    <div class="prose">
+      <p>If I told you one of your production services had a memory leak, you'd probably stop everything to investigate.</p>
+      <p>Memory leaks are dangerous.</p>
+      <p>Performance slowly degrades.</p>
+      <p>Systems become unpredictable.</p>
+      <p>Eventually something crashes.</p>
+      <p>Now consider a different kind of memory leak.</p>
+      <p>One that affects engineering organizations instead of software.</p>
+      <p>I think nearly every company has one.</p>
+      <p>Most just don't recognize it.</p>
+      <h3>Engineering Memory Isn't Documentation</h3>
+      <p>Ask a new engineer a simple question.</p>
+      <p>&gt; Why did we build the authentication system this way?</p>
+      <p>If the answer is:</p>
+      <p>&gt; You'll have to ask Sarah.</p>
+      <p>You don't have documentation.</p>
+      <p>You have a dependency.</p>
+      <p>Organizations often mistake information storage for organizational memory.</p>
+      <p>A Confluence page isn't memory.</p>
+      <p>Neither is Slack.</p>
+      <p>Neither is a Git repository.</p>
+      <p>Memory is the organization's ability to reconstruct understanding without depending on a specific individual.</p>
+      <p>That's a much higher bar.</p>
+      <h3>Every Departure Is a Garbage Collection Event</h3>
+      <p>Engineers leave companies.</p>
+      <p>People change teams.</p>
+      <p>Architects retire.</p>
+      <p>Consultants finish projects.</p>
+      <p>None of that is unusual.</p>
+      <p>What's unusual is how much understanding disappears each time.</p>
+      <p>Not because anyone failed to write documentation.</p>
+      <p>Because documentation usually captures conclusions.</p>
+      <p>It rarely captures reasoning.</p>
+      <p>Future engineers inherit:</p>
+      <ul><li>the code,</li><li>the infrastructure,</li><li>the dashboards,</li><li>the deployment pipelines.</li></ul>
+      <p>What they don't inherit is the chain of thinking that connected all those pieces together.</p>
+      <p>That disappears surprisingly fast.</p>
+      <h3>The Symptoms Are Easy to Recognize</h3>
+      <p>Organizations with memory leaks tend to ask the same questions over and over.</p>
+      <ul><li>Why are we using this technology?</li><li>Has anyone evaluated replacing it?</li><li>Didn't we already solve this problem?</li><li>Why is this service isolated?</li><li>Why can't we remove this dependency?</li></ul>
+      <p>Sometimes the answers exist.</p>
+      <p>More often, the people who knew the answers have moved on.</p>
+      <p>The organization starts paying interest on forgotten decisions.</p>
+      <h3>Technical Debt Isn't the Whole Story</h3>
+      <p>We talk constantly about technical debt.</p>
+      <p>We almost never talk about reasoning debt.</p>
+      <p>Reasoning debt accumulates whenever the implementation survives but the explanation disappears.</p>
+      <p>Unlike technical debt, reasoning debt doesn't immediately slow down software.</p>
+      <p>It slows down engineers.</p>
+      <p>Every change begins with archaeology.</p>
+      <p>Engineers read old pull requests.</p>
+      <p>Search Slack.</p>
+      <p>Message former employees.</p>
+      <p>Reverse engineer architecture.</p>
+      <p>They aren't building.</p>
+      <p>They're reconstructing.</p>
+      <h3>AI Won't Fix This Automatically</h3>
+      <p>Many people assume AI will simply answer these questions.</p>
+      <p>But AI can only synthesize information that exists.</p>
+      <p>If the reasoning behind a decision was never captured, AI has to infer it from the implementation.</p>
+      <p>Sometimes it'll infer correctly.</p>
+      <p>Sometimes it won't.</p>
+      <p>That's a risky foundation for production engineering.</p>
+      <p>The better solution isn't smarter AI.</p>
+      <p>It's richer engineering memory.</p>
+      <h3>What Healthy Organizational Memory Looks Like</h3>
+      <p>Imagine clicking on a service and immediately seeing:</p>
+      <p class="cta-line"><strong>Original Intent</strong></p>
+      <p>Why it exists.</p>
+      <p class="cta-line"><strong>Assumptions</strong></p>
+      <p>What had to be true for this design to make sense.</p>
+      <p class="cta-line"><strong>Alternatives</strong></p>
+      <p>What was considered and rejected.</p>
+      <p class="cta-line"><strong>Predictions</strong></p>
+      <p>What the team expected to happen.</p>
+      <p class="cta-line"><strong>Evidence</strong></p>
+      <p>What actually happened after deployment.</p>
+      <p>Now imagine every engineer contributing to that body of knowledge over time.</p>
+      <p>The organization no longer depends on perfect recollection.</p>
+      <p>It develops institutional memory.</p>
+      <h3>Engineering Organizations Should Learn Like Software Evolves</h3>
+      <p>Software doesn't remain static.</p>
+      <p>Neither should organizational understanding.</p>
+      <p>Every incident.</p>
+      <p>Every migration.</p>
+      <p>Every architecture review.</p>
+      <p>Every production deployment.</p>
+      <p>Should leave behind more understanding than existed before.</p>
+      <p>That's how organizations compound knowledge instead of repeatedly recreating it.</p>
+      <h3>Fix the Leak</h3>
+      <p>If your engineering organization keeps asking the same questions every few years, you probably don't have a hiring problem.</p>
+      <p>Or a documentation problem.</p>
+      <p>Or an AI problem.</p>
+      <p>You have a memory leak.</p>
+      <p>The solution isn't writing more documents.</p>
+      <p>It's preserving the reasoning that future engineers will otherwise be forced to reconstruct.</p>
+      <p>Software engineering solved memory leaks in programs decades ago.</p>
+      <p>The next challenge is solving them in organizations.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

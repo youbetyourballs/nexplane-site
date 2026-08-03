@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The AI Safety Harness, Part 2: The Mechanism</title>
+  <meta name="description" content="In Part 1 I argued that you can&#x27;t prompt your way to a safe infrastructure agent. This is the part where I show you why, and what we did instead." />
+  <link rel="canonical" href="https://nexplane.ai/writing/the-ai-safety-harness-the-mechanism" />
+  <meta property="og:title" content="The AI Safety Harness, Part 2: The Mechanism">
+  <meta property="og:description" content="In Part 1 I argued that you can&#x27;t prompt your way to a safe infrastructure agent. This is the part where I show you why, and what we did instead.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/the-ai-safety-harness-the-mechanism">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The AI Safety Harness, Part 2: The Mechanism</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/the-ai-safety-harness-the-mechanism</span></div>
+    <div class="prose">
+      <p>In Part 1 I argued that you can't prompt your way to a safe infrastructure agent. This is the part where I show you why, and what we did instead.</p>
+      <p>The pitch you hear for AI safety usually goes: give the model a well-typed set of tools, write a careful system prompt, add some guardrails, and you're fine. The tools are typed, so the model can only do typed things. That sounds like a type system doing its job.</p>
+      <p>It isn't. The prompt is a side channel around the type system.</p>
+      <h3>The prompt bypasses the types</h3>
+      <p>A tool schema constrains the <em>shape</em> of a call — this field is a string, that one's an enum, this integer has a max. It says nothing about whether the call is the <em>right</em> call. The thing that decides which tool to invoke and what to put in the fields is the model, and the model is driven by natural language: your request, the retrieved context, whatever ended up in the window. That's the part with no type system on it.</p>
+      <p>So the guarantee you actually have is "the model will emit a structurally valid call." Not "the model will emit the call you meant." Those are very different promises, and the gap between them is where the damage lives. Typed interfaces make the <em>call</em> well-formed. They do nothing about the <em>intent</em> behind it, and intent is the thing that hurts you.</p>
+      <h3>What broke when we built the naive version</h3>
+      <p>We built the simple version first, because everyone does. User types a request, LLM interprets it, API call executes, done. "Disable the AWS account for john.doe, he's been offboarded." The model parses it, constructs the AWS call, runs it. No YAML, no playbook. Fast.</p>
+      <p>Three things broke.</p>
+      <p><strong>Ambiguous intent.</strong> "Disable john.doe's account" can mean deactivate the IAM user, delete the access keys, revoke console access, or some mix. The model picks one — confidently — and proceeds. Sometimes right, sometimes the wrong resource, and never a moment where the interpretation became visible before it ran.</p>
+      <p><strong>Hallucinated parameters.</strong> For common calls it was accurate. For anything it hadn't seen much — a specific WAF rule set, a CloudTrail tweak — it generated plausible values that were just wrong. Not obviously wrong. Wrong in the way that silently fails, or worse, silently succeeds with effects you didn't ask for.</p>
+      <p><strong>Irreversibility.</strong> IAM changes are fast and consequential. A deleted policy, a disabled account, an SCP change — seconds to execute, much longer to diagnose and undo. A model with direct API access can generate and run an irreversible action inside a single loop.</p>
+      <p>The one that convinced me was database credential rotation. The model had never seen that action. It generated a confident new password that was syntactically valid but violated the database's password policy in a way we hadn't put in the prompt. The action ran, the rotation failed at the database, but not before the old credentials had been partially invalidated. We had an outage. Recoverable, but avoidable — the executor should never have reached the database with parameters nobody had validated.</p>
+      <p>And notice: a "are you sure?" confirmation wouldn't have saved us. By the time you confirm, the interpretation already happened. You're rubber-stamping the wrong action, and the UX is pushing you to say yes because the system already did the work.</p>
+      <h3>The fix is architectural, not verbal</h3>
+      <p>The answer wasn't a better prompt. It was to separate interpretation from execution and put a validation boundary between them.</p>
+      <p>The model's job shrinks to one thing: turn natural language into a <strong>typed action</strong> drawn from a fixed schema. Not call APIs. Not choose parameters freely. Emit a named action:</p>
+      <p>``` # what the model is allowed to produce disable_iam_user(username="john.doe", reason="offboarding")</p>
+      <p># what it used to do iam.delete_login_profile(UserName="john.doe") iam.delete_access_key(...)   # ...and whatever else it decided to run ```</p>
+      <p>Then that typed action goes through three gates before anything touches infrastructure:</p>
+      <ol><li><strong>Schema validation.</strong> The action exists in our connector catalog, or it's rejected — before it reaches the execution layer. This catch is real for catalog action types: the model can't invent an action, and it can't smuggle in a parameter the schema doesn't define. (I'll be honest about scope — this is validated for catalog-bound actions; it's not a universal proof across every path.)</li></ol>
+      <ol><li><strong>Human approval, in plain language.</strong> Not "are you sure?" A structured review a non-technical approver can actually read: <em>Disable IAM user john.doe. Reason: offboarding.</em> You don't need to know what <code>iam:DeleteLoginProfile</code> does to approve or reject that.</li></ol>
+      <ol><li><strong>A constrained executor.</strong> The executor knows exactly what <code>disable_iam_user</code> means — the right call sequence, the before-state to capture, the record to write. It doesn't interpret. It doesn't improvise. It runs a defined operation against a defined target.</li></ol>
+      <p>The agent proposes. It never holds raw cloud credentials, and it never touches infrastructure directly. It hands a typed proposal to a system that decides whether to run it. All of this runs through an MCP server exposing the typed tools — the model sees the catalog, not the keys.</p>
+      <h3>Why this makes the agent's mistakes survivable</h3>
+      <p>The point isn't that the model stops being wrong. It doesn't. It hallucinates, it misreads intent, same as before.</p>
+      <p>The point is where the wrongness lands. Schema validation catches the structural errors — the invented action, the bad parameter — before execution. Human approval catches the semantic ones — right action, wrong resource — because the proposal is legible enough for a person to catch it. And the executor is deterministic, so an approved action does exactly one known thing.</p>
+      <p>The naive version put all three failure modes on the same code path, at API speed, with no gap to catch them. This version spreads them across three layers where each is cheap to catch and none can do the others' job. That's the whole trick. Not a smarter model. A structure where a dumb mistake by a smart model doesn't reach production.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

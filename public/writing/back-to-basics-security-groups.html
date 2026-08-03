@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Back to Basics: Cloud — The Security Group Nobody Will Tighten</title>
+  <meta name="description" content="Every cloud environment I&#x27;ve ever worked in has one. A security group with a rule that&#x27;s too open. A 0.0.0.0/0 on a port that has no business being reac…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/back-to-basics-security-groups" />
+  <meta property="og:title" content="Back to Basics: Cloud — The Security Group Nobody Will Tighten">
+  <meta property="og:description" content="Every cloud environment I&#x27;ve ever worked in has one. A security group with a rule that&#x27;s too open. A 0.0.0.0/0 on a port that has no business being reac…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/back-to-basics-security-groups">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Back to Basics: Cloud — The Security Group Nobody Will Tighten</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/back-to-basics-security-groups</span></div>
+    <div class="prose">
+      <p>Every cloud environment I've ever worked in has one. A security group with a rule that's too open. A <code>0.0.0.0/0</code> on a port that has no business being reachable from the whole internet. An "allow all" that got added during a migration three years ago and was going to be temporary. A legacy rule nobody remembers writing.</p>
+      <p>And here's the part that makes it interesting: everybody already knows about it. It's not hiding. Security has flagged it. The team that owns the account agrees it should be tightened. There's no argument about whether it's wrong. It's wrong, everyone says so, and it's still there.</p>
+      <p>That last part is what I want to talk about, because it's not laziness and it's not incompetence. It's the most honest example I know of the thing this whole series is about.</p>
+      <h3>Why it doesn't get tightened</h3>
+      <p>Put yourself in the seat of the person who'd actually make the change. You go to narrow that rule. First question: what's actually using it? And nobody can answer that with certainty. Maybe it's a batch job that runs quarterly. Maybe it's a monitoring probe from a vendor. Maybe it's nothing and it's been dead for years. Maybe it's the thing that pages you at 2am if it stops working. You don't know, because there's no reliable inventory of what depends on that rule — and the rule has been there long enough that the people who'd remember are gone.</p>
+      <p>So now you're being asked to change something, you can't fully see what it holds up, and if you tighten it and you're wrong, something breaks. Not in a clean, obvious way — in the way cloud networking breaks, where a connection just silently starts timing out and it takes three people two hours to trace it back to your change. And there's no button that puts it back the way it was. You revert by hand, under pressure, hoping you remembered the old CIDR exactly.</p>
+      <p>Then stack the incentives on top. The person best positioned to tighten that rule is measured on uptime. Tightening it is all downside for them: if nothing breaks, nobody notices; if something breaks, it's their name on the change that caused the outage. Doing nothing is the only move that's safe for the person making it.</p>
+      <h3>"Just fix it" ignores the real risk</h3>
+      <p>When security says "just tighten it," what the owner hears is "take a personal risk you can't size, for a reward you won't get credit for, with no clean way back if you're wrong." And they're not being difficult. That's an accurate reading of the situation. The reason a known, agreed-upon exposure sits there for years isn't that people don't care. It's that the rational move for every individual is to leave it alone.</p>
+      <p>This one rule has all three problems in it at once. You can't prove what depends on it — that's the inventory problem. You can't undo it cleanly if it breaks — that's the missing rollback. And the person who'd make the change is punished for the downside and unrewarded for the upside — that's the incentive mismatch. It's the same story from the rest of this series, compressed into a single line in a single security group.</p>
+      <h3>What would make it a two-minute change</h3>
+      <p>Imagine the person tightening that rule could see, before they touched anything, what actually talks through it — the live dependencies, not a guess. And imagine that if they narrowed it and something did break, putting it back was one deliberate action, not an hour of manual reconstruction under pressure.</p>
+      <p>Now the whole calculation flips. The change is knowable and it's reversible. You're not betting your on-call reputation on a guess anymore. You tighten the rule, you watch, and if you were wrong you're back where you started in the time it takes to notice.</p>
+      <p>The rule everyone knows is wrong doesn't stay wrong because it's hard to type the new CIDR. It stays wrong because of everything around the change — what you can't see, and what you can't take back. Fix those two things and the standoff that's lasted three years becomes a two-minute change.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

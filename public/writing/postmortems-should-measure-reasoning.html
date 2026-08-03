@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Postmortems Should Measure the Quality of the Reasoning, Not the Outcome</title>
+  <meta name="description" content="Most engineering postmortems begin with the same question:" />
+  <link rel="canonical" href="https://nexplane.ai/writing/postmortems-should-measure-reasoning" />
+  <meta property="og:title" content="Postmortems Should Measure the Quality of the Reasoning, Not the Outcome">
+  <meta property="og:description" content="Most engineering postmortems begin with the same question:">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/postmortems-should-measure-reasoning">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Postmortems Should Measure the Quality of the Reasoning, Not the Outcome</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/postmortems-should-measure-reasoning</span></div>
+    <div class="prose">
+      <p>Most engineering postmortems begin with the same question:</p>
+      <p>&gt; What caused the outage?</p>
+      <p>It's an important question.</p>
+      <p>I just don't think it's the most important one.</p>
+      <p>There's another question that often determines whether an engineering organization actually improves:</p>
+      <p>&gt; Given what we knew at the time, was our reasoning sound?</p>
+      <p>Those are not the same thing.</p>
+      <h3>We Judge Decisions With Information That Didn't Exist</h3>
+      <p>Imagine two production deployments.</p>
+      <p>In the first, the engineering team carefully reviews the change.</p>
+      <p>They identify assumptions.</p>
+      <p>They evaluate alternatives.</p>
+      <p>They create a rollback plan.</p>
+      <p>They monitor the deployment.</p>
+      <p>Despite all of that, an unexpected interaction with a third-party service causes an outage.</p>
+      <p>Now imagine a second deployment.</p>
+      <p>No review.</p>
+      <p>No rollback plan.</p>
+      <p>No discussion.</p>
+      <p>One engineer pushes directly to production on a Friday afternoon.</p>
+      <p>Nothing breaks.</p>
+      <p>If we judge engineering solely by outcomes, the second team appears more successful.</p>
+      <p>That should make us uncomfortable.</p>
+      <h3>Outcome Bias Is Everywhere</h3>
+      <p>Psychologists call this outcome bias.</p>
+      <p>We evaluate the quality of a decision based on what happened rather than on the quality of the decision-making process itself.</p>
+      <p>In engineering, this creates dangerous incentives.</p>
+      <p>Successful shortcuts become accepted practice.</p>
+      <p>Careful decisions that encounter bad luck become viewed as failures.</p>
+      <p>Over time, organizations optimize for luck instead of discipline.</p>
+      <h3>Engineering Is Decision-Making Under Uncertainty</h3>
+      <p>Every consequential engineering decision is made with incomplete information.</p>
+      <p>No team knows every dependency.</p>
+      <p>No architect predicts every edge case.</p>
+      <p>No incident commander sees the entire system.</p>
+      <p>The goal isn't perfect prediction.</p>
+      <p>The goal is making the best decision possible with the information available.</p>
+      <p>That means a postmortem should ask:</p>
+      <ul><li>What evidence did we have?</li><li>What evidence was missing?</li><li>Which assumptions proved incorrect?</li><li>Which risks were identified?</li><li>Which risks surprised us?</li><li>What prediction did we make?</li><li>What would we do differently next time?</li></ul>
+      <p>Notice that only one of those questions is about the outcome.</p>
+      <p>The rest are about the reasoning.</p>
+      <h3>The Best Postmortems Teach Better Thinking</h3>
+      <p>The most valuable postmortems I've participated in weren't memorable because of the outage itself.</p>
+      <p>They were memorable because they permanently changed how engineers approached future decisions.</p>
+      <p>Afterward, teams started asking questions they had never considered before.</p>
+      <p>They improved runbooks.</p>
+      <p>They added observability.</p>
+      <p>They documented assumptions.</p>
+      <p>They redesigned deployment procedures.</p>
+      <p>The incident became valuable because it improved judgment, not because it identified a single bug.</p>
+      <h3>AI Will Amplify This Problem</h3>
+      <p>As AI generates larger portions of implementation, engineering organizations will face an uncomfortable reality.</p>
+      <p>AI can propose many plausible solutions.</p>
+      <p>Some will work.</p>
+      <p>Some won't.</p>
+      <p>If we evaluate AI-generated changes solely by whether they happened to succeed, we'll teach AI—and ourselves—the wrong lessons.</p>
+      <p>Instead, we should evaluate:</p>
+      <ul><li>Was the reasoning complete?</li><li>Were assumptions explicit?</li><li>Were alternatives considered?</li><li>Was uncertainty acknowledged?</li><li>Was there a safe recovery path?</li></ul>
+      <p>Those questions remain valuable regardless of whether the change ultimately succeeds.</p>
+      <h3>A Better Postmortem Template</h3>
+      <p>Imagine replacing sections like:</p>
+      <p class="cta-line"><strong>Root Cause</strong></p>
+      <p>with something broader:</p>
+      <p class="cta-line"><strong>Reasoning Review</strong></p>
+      <ul><li>What did we know?</li><li>What did we believe?</li><li>Why did those beliefs seem reasonable?</li><li>Which assumptions failed?</li><li>Which assumptions were never identified?</li><li>Which observations should influence future decisions?</li></ul>
+      <p>Now the postmortem becomes more than an incident report.</p>
+      <p>It becomes an investment in organizational judgment.</p>
+      <h3>The Goal Isn't Fewer Mistakes</h3>
+      <p>This is the counterintuitive part.</p>
+      <p>Organizations that optimize reasoning won't necessarily make fewer mistakes immediately.</p>
+      <p>They'll make better mistakes.</p>
+      <p>Mistakes that produce new understanding.</p>
+      <p>Mistakes that improve future decisions.</p>
+      <p>Mistakes that don't need to be repeated.</p>
+      <p>That's how engineering organizations become more capable over time.</p>
+      <p>Not by avoiding every failure.</p>
+      <p>But by continuously improving the quality of the thinking that precedes every consequential decision.</p>
+      <p>In the long run, that's the only advantage that compounds.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

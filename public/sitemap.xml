@@ -5,7 +5,10 @@
   <url><loc>https://nexplane.ai/licensing</loc></url>
   <url><loc>https://nexplane.ai/writing</loc></url>
   <url><loc>https://nexplane.ai/writing/the-system-produces-bad-outcomes</loc></url>
-  <url><loc>https://nexplane.ai/writing/why-security-creates-work-for-engineering</loc></url>
+  <url><loc>https://nexplane.ai/writing/the-incentive-mismatch</loc></url>
+  <url><loc>https://nexplane.ai/writing/the-execution-gap</loc></url>
+  <url><loc>https://nexplane.ai/writing/the-same-bet-twice</loc></url>
+  <url><loc>https://nexplane.ai/writing/someone-told-me-they-had-rollbacks</loc></url>
   <url><loc>https://nexplane.ai/writing/soar-itsm-consultants</loc></url>
   <url><loc>https://nexplane.ai/writing/fit-over-correctness</loc></url>
   <url><loc>https://nexplane.ai/writing/resilience-is-the-right-frame</loc></url>
@@ -14,7 +17,63 @@
   <url><loc>https://nexplane.ai/writing/chestertons-fence</loc></url>
   <url><loc>https://nexplane.ai/writing/the-asset-inventory-problem</loc></url>
   <url><loc>https://nexplane.ai/writing/the-ai-safety-harness-the-incidents</loc></url>
+  <url><loc>https://nexplane.ai/writing/the-ai-safety-harness-the-mechanism</loc></url>
+  <url><loc>https://nexplane.ai/writing/back-to-basics-microsegmentation</loc></url>
+  <url><loc>https://nexplane.ai/writing/back-to-basics-kernel-upgrades</loc></url>
+  <url><loc>https://nexplane.ai/writing/back-to-basics-seccomp</loc></url>
+  <url><loc>https://nexplane.ai/writing/back-to-basics-least-privilege</loc></url>
+  <url><loc>https://nexplane.ai/writing/back-to-basics-secrets-rotation</loc></url>
+  <url><loc>https://nexplane.ai/writing/back-to-basics-log-agent</loc></url>
+  <url><loc>https://nexplane.ai/writing/back-to-basics-security-groups</loc></url>
+  <url><loc>https://nexplane.ai/writing/why-security-creates-work-for-engineering</loc></url>
   <url><loc>https://nexplane.ai/writing/we-gave-an-ai-agent-infrastructure-access</loc></url>
   <url><loc>https://nexplane.ai/writing/why-i-built-nexplane</loc></url>
   <url><loc>https://nexplane.ai/writing/recovering-an-ad-forest-after-ransomware</loc></url>
+  <url><loc>https://nexplane.ai/writing/ai-shouldnt-have-root</loc></url>
+  <url><loc>https://nexplane.ai/writing/reasoning-is-the-new-source-code</loc></url>
+  <url><loc>https://nexplane.ai/writing/ai-doesnt-need-more-permissions</loc></url>
+  <url><loc>https://nexplane.ai/writing/architecture-is-a-record-of-assumptions</loc></url>
+  <url><loc>https://nexplane.ai/writing/stop-measuring-lines-of-code</loc></url>
+  <url><loc>https://nexplane.ai/writing/postmortems-should-measure-reasoning</loc></url>
+  <url><loc>https://nexplane.ai/writing/adrs-missing-the-most-important-section</loc></url>
+  <url><loc>https://nexplane.ai/writing/every-production-change-is-an-experiment</loc></url>
+  <url><loc>https://nexplane.ai/writing/the-most-important-engineering-metric</loc></url>
+  <url><loc>https://nexplane.ai/writing/engineering-org-has-a-memory-leak</loc></url>
+  <url><loc>https://nexplane.ai/writing/best-engineers-arent-bottlenecks</loc></url>
+  <url><loc>https://nexplane.ai/writing/production-changes-should-begin-with-prediction</loc></url>
+  <url><loc>https://nexplane.ai/writing/real-productivity-killer-is-decision-reconstruction</loc></url>
+  <url><loc>https://nexplane.ai/writing/best-architecture-review-starts-with-one-question</loc></url>
+  <url><loc>https://nexplane.ai/writing/ai-needs-chain-of-evidence</loc></url>
+  <url><loc>https://nexplane.ai/writing/engineering-org-chart-missing-a-role</loc></url>
+  <url><loc>https://nexplane.ai/writing/future-of-devops-is-decisionops</loc></url>
+  <url><loc>https://nexplane.ai/writing/stop-treating-ai-as-an-operator</loc></url>
+  <url><loc>https://nexplane.ai/writing/most-dangerous-words-in-engineering</loc></url>
+  <url><loc>https://nexplane.ai/writing/engineering-teams-build-time-machines</loc></url>
+  <url><loc>https://nexplane.ai/writing/complexity-is-interest-on-decisions</loc></url>
+  <url><loc>https://nexplane.ai/writing/highest-leverage-engineering-work</loc></url>
+  <url><loc>https://nexplane.ai/writing/change-management-optimizing-wrong-thing</loc></url>
+  <url><loc>https://nexplane.ai/writing/infrastructure-teams-reinvent-a-control-plane</loc></url>
+  <url><loc>https://nexplane.ai/writing/every-outage-is-a-broken-mental-model</loc></url>
+  <url><loc>https://nexplane.ai/writing/documentation-is-dead</loc></url>
+  <url><loc>https://nexplane.ai/writing/engineering-organizations-have-a-context-budget</loc></url>
+  <url><loc>https://nexplane.ai/writing/last-known-good-state</loc></url>
+  <url><loc>https://nexplane.ai/writing/infrastructure-should-remember-more</loc></url>
+  <url><loc>https://nexplane.ai/writing/engineering-organizations-optimize-for-regret</loc></url>
+  <url><loc>https://nexplane.ai/writing/platform-teams-become-product-companies</loc></url>
+  <url><loc>https://nexplane.ai/writing/engineering-debt-is-cognitive</loc></url>
+  <url><loc>https://nexplane.ai/writing/ai-needs-better-organizations</loc></url>
+  <url><loc>https://nexplane.ai/writing/next-competitive-advantage-is-organizational-intelligence</loc></url>
+  <url><loc>https://nexplane.ai/writing/architecture-diagrams-missing-time</loc></url>
+  <url><loc>https://nexplane.ai/writing/engineering-is-becoming-information-science</loc></url>
+  <url><loc>https://nexplane.ai/writing/future-cto-will-manage-organizational-intelligence</loc></url>
+  <url><loc>https://nexplane.ai/writing/what-is-an-engineering-control-plane</loc></url>
+  <url><loc>https://nexplane.ai/writing/infrastructure-needs-version-control-for-decisions</loc></url>
+  <url><loc>https://nexplane.ai/writing/future-infrastructure-stack</loc></url>
+  <url><loc>https://nexplane.ai/writing/ai-should-review-infrastructure</loc></url>
+  <url><loc>https://nexplane.ai/writing/missing-feedback-loop-in-infrastructure</loc></url>
+  <url><loc>https://nexplane.ai/writing/infrastructure-should-explain-itself</loc></url>
+  <url><loc>https://nexplane.ai/writing/engineering-needs-a-memory-layer</loc></url>
+  <url><loc>https://nexplane.ai/writing/reversibility-is-the-ultimate-safety-feature</loc></url>
+  <url><loc>https://nexplane.ai/writing/building-an-ai-native-organization</loc></url>
+  <url><loc>https://nexplane.ai/writing/next-decade-of-engineering</loc></url>
 </urlset>

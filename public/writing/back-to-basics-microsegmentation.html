@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Back to Basics: Network — Microsegmentation</title>
+  <meta name="description" content="Ask any security team whether they should microsegment the network and the answer is instant. Of course. Flat networks are how one compromised laptop be…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/back-to-basics-microsegmentation" />
+  <meta property="og:title" content="Back to Basics: Network — Microsegmentation">
+  <meta property="og:description" content="Ask any security team whether they should microsegment the network and the answer is instant. Of course. Flat networks are how one compromised laptop be…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/back-to-basics-microsegmentation">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Back to Basics: Network — Microsegmentation</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/back-to-basics-microsegmentation</span></div>
+    <div class="prose">
+      <p>Ask any security team whether they should microsegment the network and the answer is instant. Of course. Flat networks are how one compromised laptop becomes forty compromised hosts. You segment so that when — not if — something gets popped, the attacker can't walk sideways to the domain controller and the database and the backup server. Contain the blast radius. Stop lateral movement. Nobody argues the other side of this. It's been the right answer for twenty years.</p>
+      <p>And almost nobody does it well. Not because they don't understand it. Because to write a single segmentation rule you honestly believe in, you need to know what actually talks to what — and no one has that.</p>
+      <h3>The wall</h3>
+      <p>A segmentation rule is a claim about reality. "This app tier talks to that database on 5432 and nothing else needs to reach it." To write that and mean it, you need an accurate map of real traffic and real dependencies: which services depend on which hosts, on which ports, in which direction, including the ugly stuff nobody documented — the batch job that reaches across three subnets at 2am, the monitoring agent that touches everything, the one legacy box half the company quietly depends on.</p>
+      <p>That map is the whole ballgame. And you don't have it. You have a diagram someone drew during a compliance push in 2021, a spreadsheet that's wrong, and a lot of tribal knowledge in the heads of people who've since left.</p>
+      <h3>Why the map is so hard</h3>
+      <p>The map is hard for the same reason the asset inventory is hard, which is to say it's the same problem wearing a different coat. It changes constantly. Deployments shift dependencies. Someone stands up a new service and wires it to three others without telling anybody. Ports open and close. And nobody owns keeping it current — it's everyone's job, which means it's no one's.</p>
+      <p>So the honest options are bad. Watch traffic long enough to build the map from real flows, and you're staring at weeks of noisy data trying to tell a real dependency from a one-off. Or ask the teams, and you get answers that are optimistic, incomplete, and confidently wrong about the exact edge cases that break things.</p>
+      <h3>Even a good ruleset is scary to enforce</h3>
+      <p>Now suppose you get lucky and the map is genuinely good. You've still got the second wall, and it's taller.</p>
+      <p>Enforcing new segmentation means changing a live network. The moment you move from "monitor" to "enforce," every rule you got slightly wrong becomes an outage — and you find out which ones by watching production break. Worse, there's no clean way back. Pulling a firewall policy or a security-group change back out of a running environment isn't a button; it's another change, made under pressure, while something's already down and people are yelling.</p>
+      <p>So the rational move — the same one I wrote about with the IAM ticket that never closes — is to not touch it. Doing nothing is the only choice that's safe for the person making it. The segmentation design gets built, reviewed, agreed to, and then it lives on a slide. Everybody knows it's right. Nobody can make it real without betting production on a map they don't trust and a change they can't easily undo.</p>
+      <h3>The gap, plainly</h3>
+      <p>Microsegmentation isn't a knowledge problem. It's the two things underneath it: you can't write the rules without a current map of what actually talks to what, and you can't enforce the rules on a live network without a safe way back when you get one wrong. Fix those two, and segmentation stops being a slide and starts being a control. Leave them, and it stays exactly where it's been for two decades — obviously correct, and mostly undone.</p>
+      <p>If you've run a segmentation project that stalled — or one that shipped — I'd like to hear where it got stuck.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

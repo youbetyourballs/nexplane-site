@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Same Bet, Twice</title>
+  <meta name="description" content="A while back I helped build a company called Drawbridge Networks. The idea was network microsegmentation — not just carving up the data center, but push…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/the-same-bet-twice" />
+  <meta property="og:title" content="The Same Bet, Twice">
+  <meta property="og:description" content="A while back I helped build a company called Drawbridge Networks. The idea was network microsegmentation — not just carving up the data center, but push…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/the-same-bet-twice">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The Same Bet, Twice</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/the-same-bet-twice</span></div>
+    <div class="prose">
+      <p>A while back I helped build a company called Drawbridge Networks. The idea was network microsegmentation — not just carving up the data center, but pushing it all the way down to individual desktops and servers. The premise was simple: an attacker who gets one foothold shouldn't be able to walk sideways to everything else. Contain the blast radius at the machine level, not just the perimeter.</p>
+      <p>The industry was mostly looking at the server side. Segment east-west traffic in the data center, wall off the crown-jewel workloads, and call it done. We thought that was half the picture. The desktop is where the phish lands, where the credential gets stolen, where the attacker actually starts. If you're not segmenting there too, you've fortified the vault and left the front door open.</p>
+      <p>I still think that was right. It may also have been about a decade early.</p>
+      <p>Here's what I mean by early. The technology worked. The problem was real. But the buyers weren't feeling the pain sharply enough yet to reorganize how they did things around it. Segmenting desktops meant touching every machine, coordinating with teams who didn't report to security, and accepting operational friction for a threat that hadn't yet hit them personally. Most organizations weren't ready to make infrastructure that changeable, at that granularity, on that scale. The conviction was sound. The market wasn't there.</p>
+      <p>I went on to be a CISO four times, across financial services, media, and enterprise. Different industries, different stacks, same meeting every quarter. Security knew exactly what needed to change. And there was no safe path to actually change it. The person who owned the system was measured on uptime, not posture, and every change was a chance to break something with no clean way back. So the dangerous thing sat there, quarter after quarter, and nobody was wrong to leave it alone.</p>
+      <p>I've said this a few different ways over the years, but it comes down to one line: security teams need to be empowered to solve their own problems and not constantly create work for other people.</p>
+      <p>That's the same bet as Drawbridge, one layer up. Both are about making infrastructure safely changeable. Drawbridge was about changing the network topology safely, at the machine level. Nexplane is about changing anything — an IAM role, a firewall rule, a key, a config — safely, with approval and a way back. The underlying conviction hasn't moved: the reason dangerous things don't get fixed is that fixing them isn't safe, and if you make it safe, people fix them.</p>
+      <p>What's different this time is the timing.</p>
+      <p>Two things changed. First, the pattern I saw as a CISO is now everyone's pattern — findings pile up, backlogs grow, and the gap between knowing and doing is wider than ever. Second, and this is the part that moved the timing for me: AI is now being pointed at infrastructure. Teams are handing agents the ability to make changes directly, and an agent with raw credentials and no way back is the desktop-segmentation problem all over again, except faster and at a scale no human is watching. The stakes went up. The tolerance for "we'll fix it manually" went down.</p>
+      <p>At Drawbridge I was early to a real problem. I don't think I'm early this time. The pain is sharp, the incidents are public, and the thing that was optional before — making infrastructure safely changeable — is starting to look mandatory.</p>
+      <p>Same bet. Better timing.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

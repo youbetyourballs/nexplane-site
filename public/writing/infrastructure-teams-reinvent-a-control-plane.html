@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Every Infrastructure Team Eventually Reinvents a Control Plane</title>
+  <meta name="description" content="Every sufficiently large infrastructure organization eventually builds software whose purpose is coordinating other software." />
+  <link rel="canonical" href="https://nexplane.ai/writing/infrastructure-teams-reinvent-a-control-plane" />
+  <meta property="og:title" content="Why Every Infrastructure Team Eventually Reinvents a Control Plane">
+  <meta property="og:description" content="Every sufficiently large infrastructure organization eventually builds software whose purpose is coordinating other software.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/infrastructure-teams-reinvent-a-control-plane">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Why Every Infrastructure Team Eventually Reinvents a Control Plane</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/infrastructure-teams-reinvent-a-control-plane</span></div>
+    <div class="prose">
+      <p>Every sufficiently large infrastructure organization eventually builds software whose purpose is coordinating other software.</p>
+      <p>That is a control plane.</p>
+      <p>The interesting question is not whether you will build one. It is whether you will build it intentionally.</p>
+      <h3>Accidental Control Planes</h3>
+      <p>Jenkins was often supposed to be CI. Then it became the place where deployments, approvals, secrets, scripts, and operational rituals accumulated.</p>
+      <p>ServiceNow was supposed to manage tickets. Then it became the de facto gate for production change.</p>
+      <p>Terraform began as infrastructure as code. Then state, policy, automation, and workflow accumulated around it.</p>
+      <p>Organizations repeatedly create control planes accidentally because coordination has to live somewhere.</p>
+      <h3>Control Planes Encode Judgment</h3>
+      <p>A control plane is not merely automation. It encodes decisions about what is allowed, who can act, how change happens, and how failure is handled.</p>
+      <p>When those decisions are implicit, the control plane becomes fragile.</p>
+      <h3>AI Accelerates the Need</h3>
+      <p>AI can propose more changes than humans can review manually.</p>
+      <p>That requires a structured layer where proposals become inspectable, comparable, reversible, and learnable.</p>
+      <p>Nexplane's thesis is that engineering organizations need a control plane for engineering judgment, not merely infrastructure execution.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

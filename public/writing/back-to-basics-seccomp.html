@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Back to Basics: Application — Seccomp and the Syscall You Don&#x27;t Know About</title>
+  <meta name="description" content="Seccomp is one of the better controls Linux gives you, and almost nobody I&#x27;ve worked with runs it." />
+  <link rel="canonical" href="https://nexplane.ai/writing/back-to-basics-seccomp" />
+  <meta property="og:title" content="Back to Basics: Application — Seccomp and the Syscall You Don&#x27;t Know About">
+  <meta property="og:description" content="Seccomp is one of the better controls Linux gives you, and almost nobody I&#x27;ve worked with runs it.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/back-to-basics-seccomp">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Back to Basics: Application — Seccomp and the Syscall You Don&#x27;t Know About</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/back-to-basics-seccomp</span></div>
+    <div class="prose">
+      <p>Seccomp is one of the better controls Linux gives you, and almost nobody I've worked with runs it.</p>
+      <p>Here's what it does. A process talks to the kernel through system calls — <code>open</code>, <code>read</code>, <code>connect</code>, and a few hundred others. That syscall interface is the doorway between your application and everything the kernel can do: the filesystem, the network, other processes, the machine itself. Seccomp lets you hang a list on that doorway. These syscalls are allowed, everything else gets killed or errors out. If an attacker gets code execution inside your process, the blast radius is now bounded by that list instead of by the whole kernel. A web app that never needs to load a kernel module or reach into <code>ptrace</code> shouldn't be able to, even when it's compromised. That's a real reduction in what a foothold can turn into.</p>
+      <p>So it's a strong control that's cheap to run. Why is it sitting on the shelf?</p>
+      <h3>The wall</h3>
+      <p>To write a seccomp profile, you have to know exactly which syscalls your application makes. All of them. Not the ones in the happy path — the whole set, across every code path the app can take in production.</p>
+      <p>And that knowledge basically doesn't exist. Your app makes syscalls you've never thought about. Your language runtime makes them. The libraries you pulled in make them, and the libraries <em>those</em> pulled in. The garbage collector makes them. A DNS lookup on a cold cache goes down a different path than a warm one. An error handler you hit once a month reaches for something the normal path never touches. Nobody sat down and wrote a manifest of this. It's emergent behavior of a stack you assembled but didn't author line by line.</p>
+      <h3>Why profiling is genuinely hard</h3>
+      <p>You can try to build the list by watching the app run — capture the syscalls it actually makes and turn that into a profile. That gets you the common paths. It does not get you the rare ones. The retry logic, the failover, the code that only runs when a disk fills up or a connection drops mid-write — those are exactly the paths your observation window didn't happen to cover, and exactly the ones you can't afford to guess wrong on.</p>
+      <p>Then the app changes. You upgrade a dependency, add a feature, bump the runtime a minor version, and the syscall footprint moves out from under the profile you wrote. A profile is a snapshot of behavior that keeps drifting.</p>
+      <h3>The two ways it fails</h3>
+      <p>Get the profile too tight and you've built a landmine. The app runs fine in test, ships, and then three weeks later hits the one edge case that needs the one syscall you left out — and seccomp does exactly what you told it to and kills the process. In production. On a path you didn't test, because if you'd tested it you'd have caught it. And now you're debugging a <code>SIGSYS</code> under incident pressure with no obvious way back to the state you were in an hour ago.</p>
+      <p>Get the profile too loose to be safe from that, and you've allowed everything that matters anyway. The control is on paper. It passes the audit. It stops nothing.</p>
+      <p>That's the bind. The safe-feeling version is theater, and the version that actually helps is the one that can take down prod on an edge case nobody enumerated.</p>
+      <h3>What would make it approachable</h3>
+      <p>The reason seccomp stays on the shelf isn't that people don't understand it. Plenty of engineers understand it fine. It's that the two things standing in the way are a knowledge problem and a reversibility problem, and neither gets solved by trying harder.</p>
+      <p>The knowledge problem wants you to stop guessing what your app does and observe what it actually does — over enough real behavior that the rare paths show up, not just the demo. The reversibility problem wants a way to tighten the profile without betting production on it: roll it out in a mode that reports what <em>would</em> have been blocked before it blocks anything, and be able to back it off the instant it bites.</p>
+      <p>Neither of those is exotic. But until the tightening step stops feeling like a one-way door, a control this good is going to keep losing to the risk of turning it on. That's the actual reason it's unused — not ignorance. Fear of the edge case you can't see, with nothing to catch you if you're wrong.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

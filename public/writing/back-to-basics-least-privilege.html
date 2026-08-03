@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Back to Basics: Identity — Least Privilege Requires a Map Nobody Has</title>
+  <meta name="description" content="Ask a room full of security people what good identity hygiene looks like and you&#x27;ll get the same answer every time: least privilege. Give each role, eac…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/back-to-basics-least-privilege" />
+  <meta property="og:title" content="Back to Basics: Identity — Least Privilege Requires a Map Nobody Has">
+  <meta property="og:description" content="Ask a room full of security people what good identity hygiene looks like and you&#x27;ll get the same answer every time: least privilege. Give each role, eac…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/back-to-basics-least-privilege">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Back to Basics: Identity — Least Privilege Requires a Map Nobody Has</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/back-to-basics-least-privilege</span></div>
+    <div class="prose">
+      <p>Ask a room full of security people what good identity hygiene looks like and you'll get the same answer every time: least privilege. Give each role, each service account, each user exactly the access it needs and nothing more. Nobody argues with it. It's on every framework, every audit checklist, every architecture diagram.</p>
+      <p>It's also one of the things almost nobody actually achieves. And the reason isn't laziness or bad engineering. It's that least privilege asks you to do something the tooling doesn't set you up to do.</p>
+      <h3>Granted access you can see. Used access you can't.</h3>
+      <p>Here's the wall you hit the first time you try to tighten a real role.</p>
+      <p>To scope a role down, you need to know what it actually uses. Not what it's granted — what it <em>uses</em>. Those are two very different lists. The grant is written down: it's in the policy, the group membership, the IAM document. You can pull it up in thirty seconds. The used list is the one that matters, and almost nobody collects it.</p>
+      <p>So you're left staring at a role with forty permissions attached, and the honest answer to "which of these does it need?" is: I don't know. Maybe eight. Maybe thirty-five. You can't tell by looking, because the thing that would tell you — a record of what this identity has actually called, across every code path, over a long enough window — was never turned on.</p>
+      <h3>Why used-access is so hard to know</h3>
+      <p>It's not just that the data isn't collected. Even when you go looking, the answer hides.</p>
+      <p>The dangerous paths are the rare ones. A service runs a monthly reconciliation job, or a quarterly export, or a failover routine that only fires when something upstream breaks. Watch the role for two weeks and it looks like it needs almost nothing. The permission it touches once a quarter looks like dead weight — right up until the quarter turns.</p>
+      <p>Service accounts are worse. They accumulate access over years, handed down between owners, and the person who granted permission number thirty-one left the company in 2021. There's drift on top of drift, and no one left who can tell you what's load-bearing.</p>
+      <h3>The failure mode</h3>
+      <p>So you make your best guess and you tighten. You pull the permissions that look unused. Things run fine for three weeks.</p>
+      <p>Then it's month-end, the batch job wakes up, reaches for the permission you pulled, and fails. Now you've got a broken job, an owner who's paged, and a scramble to figure out which of your changes did it — and there's no clean button to put it back. You're reconstructing a policy from memory under pressure, which is exactly how you turn one broken job into two.</p>
+      <h3>The rational outcome is the wrong one</h3>
+      <p>Put those two things together — you can't see what's actually used, and getting it wrong breaks production with no easy undo — and the rational move for any individual engineer is obvious. Leave the broad grant alone. Doing nothing is safe for the person deciding. Tightening is where the risk lives, and none of the reward.</p>
+      <p>Which is how the most over-permissioned role in your environment stays over-permissioned. And that role is usually the one an attacker wants most: broad access, low scrutiny, nobody watching it closely because nobody wants to touch it. The path of least resistance for your team is the same foothold that's most useful to someone who breaks in.</p>
+      <h3>What would actually change it</h3>
+      <p>Two things have to be true before least privilege stops being aspirational.</p>
+      <p>You have to measure what a role actually uses — real usage over a real window, long enough to catch the rare paths, not the grant list. And you have to be able to tighten reversibly: make the change knowing that if the month-end job breaks, you can put the access back cleanly instead of reconstructing it from memory at 2am.</p>
+      <p>Get those two, and the calculation flips. Scoping a role stops being a bet against production and becomes a normal, undoable change. Until then, everyone will keep agreeing least privilege is right, and keep leaving the broad grants exactly where they are.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

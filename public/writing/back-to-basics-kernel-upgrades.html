@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Back to Basics: OS — Kernel Upgrades and the App Nobody Will Touch</title>
+  <meta name="description" content="Nobody argues about whether you should patch the kernel. Keep the OS current, take the CVE fixes, reboot into the new kernel. Every security person know…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/back-to-basics-kernel-upgrades" />
+  <meta property="og:title" content="Back to Basics: OS — Kernel Upgrades and the App Nobody Will Touch">
+  <meta property="og:description" content="Nobody argues about whether you should patch the kernel. Keep the OS current, take the CVE fixes, reboot into the new kernel. Every security person know…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/back-to-basics-kernel-upgrades">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Back to Basics: OS — Kernel Upgrades and the App Nobody Will Touch</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/back-to-basics-kernel-upgrades</span></div>
+    <div class="prose">
+      <p>Nobody argues about whether you should patch the kernel. Keep the OS current, take the CVE fixes, reboot into the new kernel. Every security person knows it, every sysadmin knows it, and it's been the advice for thirty years. This isn't a knowledge problem. If patching stalled because people didn't know they were supposed to patch, we'd have fixed it a long time ago.</p>
+      <p>The stuck cases aren't the boxes where someone forgot. They're the boxes where someone looked at the upgrade, understood exactly what it was for, and decided not to do it. And those tend to be the boxes that matter most.</p>
+      <h3>The one everybody steps around</h3>
+      <p>Every environment I've worked in had at least one. An application that's been running for eight years. It does something the business actually depends on — billing, provisioning, a data feed three other systems pull from. The engineers who built it are gone. The runbook, if there ever was one, describes a version of the system that stopped being true five years ago. It sits on an OS release that's a couple of majors behind, and everyone has quietly agreed not to look too hard at it.</p>
+      <h3>Why the upgrade is the scary part</h3>
+      <p>Walk through what a kernel upgrade on that box actually asks of you. You're going to change something underneath an application, and then you're going to reboot to pick up the new kernel. That reboot is the moment of truth. Either the app comes back or it doesn't.</p>
+      <p>And you don't know which. Nobody knows what that application depends on anymore — a kernel module, a specific glibc behavior, a driver, some init ordering that only works by accident. It isn't written down. The people who could have told you left. So the reboot is a coin flip, and if it comes up wrong, you're standing over a system nobody alive fully understands, with the business waiting, and no tested way back to the state it was in ten minutes ago.</p>
+      <p>Reinstalling from a build doc that's half fiction isn't a way back. "We'll restore from backup" is a plan you find out the truth about at the worst possible moment. So the honest answer to "can we undo this if it breaks?" is usually "probably, eventually, if a few things go right."</p>
+      <h3>The rational bad outcome</h3>
+      <p>Put yourself in the shoes of whoever owns that box. The vulnerability is a maybe — it needs an attacker, a path, a reason to come for you specifically. The broken reboot is a definite: you touched it, it's down, and it's your name on the change. One risk is abstract and shared. The other is concrete and yours.</p>
+      <p>So the upgrade doesn't happen. Not out of laziness. It's the sane call for the person making it. The result is the outcome nobody would pick on purpose: the highest-value system in the building — old, load-bearing, poorly understood — is the least patched thing you own. Exactly the box an attacker would want, kept in exactly the state they'd want it in, because the risk of fixing it feels worse than the risk of leaving it.</p>
+      <p>This is the same pattern I keep coming back to. Competent people, incomplete information, and a downside that lands on one person's desk. Doing nothing is the only move that's safe for whoever has to sign off.</p>
+      <h3>What would actually change it</h3>
+      <p>The instinct is to attack the fear with process — a change window, a review board, a signed approval. That lowers the paperwork risk. It does nothing about the real one: you still don't know if the box comes back, and you still don't have a way home if it doesn't.</p>
+      <p>What changes the math is being able to capture the exact state of that system before you touch it, and put it back — the real before-state, not a build doc's idea of it. If the reboot goes wrong, you're not debugging a mystery under fire; you return the box to where it was and buy yourself daylight to figure out why. When the way back is real and tested, the upgrade stops being a coin flip. The maybe-vulnerability is still worth fixing. The definite catastrophe is off the table. And the most important box in the building can finally get patched like everything else.</p>
+      <p>If you've got a box like this — the one everybody steps around — I'd like to hear how you've handled it.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

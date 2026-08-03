@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stop Treating AI as an Operator</title>
+  <meta name="description" content="The easiest way to misunderstand AI in infrastructure is to imagine it as a better operator." />
+  <link rel="canonical" href="https://nexplane.ai/writing/stop-treating-ai-as-an-operator" />
+  <meta property="og:title" content="Stop Treating AI as an Operator">
+  <meta property="og:description" content="The easiest way to misunderstand AI in infrastructure is to imagine it as a better operator.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/stop-treating-ai-as-an-operator">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Stop Treating AI as an Operator</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/stop-treating-ai-as-an-operator</span></div>
+    <div class="prose">
+      <p>The easiest way to misunderstand AI in infrastructure is to imagine it as a better operator.</p>
+      <p>Give it credentials.</p>
+      <p>Give it logs.</p>
+      <p>Give it access to production.</p>
+      <p>Let it make changes faster than a human.</p>
+      <p>That framing is tempting because it maps AI onto an existing role.</p>
+      <p>But I think it is the wrong starting point.</p>
+      <p>AI should not primarily be treated as an operator.</p>
+      <p>It should be treated as a participant in the engineering change process.</p>
+      <h3>Operators Execute Known Procedures</h3>
+      <p>Operators are essential.</p>
+      <p>They run playbooks.</p>
+      <p>They respond to incidents.</p>
+      <p>They apply changes.</p>
+      <p>They maintain systems.</p>
+      <p>Some of that work can and should be automated.</p>
+      <p>But consequential infrastructure change is not merely operation.</p>
+      <p>It involves judgment.</p>
+      <p>Before changing production, someone must answer questions like:</p>
+      <ul><li>What is the intent?</li><li>What assumptions are we making?</li><li>What constraints matter?</li><li>What evidence supports the change?</li><li>What is the blast radius?</li><li>What would success look like?</li><li>What happens if we are wrong?</li></ul>
+      <p>Those questions are not operational details.</p>
+      <p>They are the reasoning that makes operation safe.</p>
+      <h3>AI Should Strengthen Reasoning Before Execution</h3>
+      <p>If an AI proposes a firewall change, the interesting question is not whether it can generate the command.</p>
+      <p>It probably can.</p>
+      <p>The interesting question is whether it can help the organization understand the change well enough to approve it.</p>
+      <p>That means surfacing:</p>
+      <ul><li>affected systems</li><li>dependent services</li><li>historical incidents</li><li>similar prior changes</li><li>rollback strategy</li><li>validation steps</li><li>confidence level</li><li>evidence gaps</li></ul>
+      <p>This is where AI can become incredibly useful.</p>
+      <p>Not by bypassing the process.</p>
+      <p>By improving the process.</p>
+      <h3>The Operator Model Encourages Too Much Trust</h3>
+      <p>When we treat AI as an operator, the main safety question becomes:</p>
+      <p>&gt; How much access should it have?</p>
+      <p>That pushes the discussion toward permissions, ACLs, and guardrails.</p>
+      <p>Those matter.</p>
+      <p>But they are not enough.</p>
+      <p>A human with excessive access can still make a bad change.</p>
+      <p>An AI with limited access can still recommend a bad change.</p>
+      <p>The deeper issue is not access.</p>
+      <p>It is whether the proposed action is embedded in a disciplined reasoning workflow.</p>
+      <h3>The Better Model Is Structured Change</h3>
+      <p>A better model looks like this:</p>
+      <p>AI can propose.</p>
+      <p>AI can analyze.</p>
+      <p>AI can compare alternatives.</p>
+      <p>AI can identify missing assumptions.</p>
+      <p>AI can generate rollback plans.</p>
+      <p>AI can summarize evidence.</p>
+      <p>But consequential changes still move through structured review.</p>
+      <p>The system preserves:</p>
+      <ul><li>what was proposed</li><li>why it was proposed</li><li>what evidence supported it</li><li>what risks were identified</li><li>who approved it</li><li>what happened afterward</li></ul>
+      <p>That turns AI from an opaque operator into an auditable engineering participant.</p>
+      <h3>This Helps Humans Too</h3>
+      <p>The most interesting part is that this is not an AI-specific standard.</p>
+      <p>Human engineers should also propose changes this way.</p>
+      <p>If an engineer cannot explain why a production change is safe, the organization should not accept the change merely because the engineer is human.</p>
+      <p>AI exposes a discipline that should have existed already.</p>
+      <p>The future of safe infrastructure is not special rules for AI.</p>
+      <p>It is better engineering rules for everyone.</p>
+      <h3>The Real Shift</h3>
+      <p>We should stop asking only:</p>
+      <p>&gt; Can AI perform the task?</p>
+      <p>We should ask:</p>
+      <p>&gt; Can AI improve the quality of the reasoning around the task?</p>
+      <p>That is a different standard.</p>
+      <p>It makes AI valuable before it ever touches production.</p>
+      <p>It also keeps humans in the right role.</p>
+      <p>Not as rubber-stamp approvers.</p>
+      <p>As accountable participants in a reasoning process that becomes stronger because AI is involved.</p>
+      <h3>The Point</h3>
+      <p>The safest AI infrastructure systems will not be the ones that simply give AI root access with better guardrails.</p>
+      <p>They will be the ones that make every proposed change understandable, reviewable, observable, and reversible.</p>
+      <p>AI does not need to become the operator of record.</p>
+      <p>It needs to become a better participant in engineering judgment.</p>
+      <p>That is a much higher bar.</p>
+      <p>And it is the one worth building toward.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

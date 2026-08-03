@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Infrastructure Needs Version Control for Decisions</title>
+  <meta name="description" content="Git versions code. Terraform versions infrastructure. Kubernetes records desired state." />
+  <link rel="canonical" href="https://nexplane.ai/writing/infrastructure-needs-version-control-for-decisions" />
+  <meta property="og:title" content="Why Infrastructure Needs Version Control for Decisions">
+  <meta property="og:description" content="Git versions code. Terraform versions infrastructure. Kubernetes records desired state.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/infrastructure-needs-version-control-for-decisions">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Why Infrastructure Needs Version Control for Decisions</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/infrastructure-needs-version-control-for-decisions</span></div>
+    <div class="prose">
+      <p>Git versions code. Terraform versions infrastructure. Kubernetes records desired state.</p>
+      <p>What versions engineering decisions?</p>
+      <h3>State Without Reasoning</h3>
+      <p>A repository can tell you what changed. It may not tell you why the change was reasonable, which assumptions supported it, or what would cause it to be reversed.</p>
+      <p>Infrastructure needs version control for decisions, not just configuration.</p>
+      <h3>Decision History</h3>
+      <p>Every consequential decision should preserve:</p>
+      <ul><li>context</li><li>alternatives</li><li>assumptions</li><li>evidence</li><li>predicted outcome</li><li>owner</li><li>reversal criteria</li><li>later observations</li></ul>
+      <h3>Time Travel for Engineering Judgment</h3>
+      <p>Future engineers should be able to inspect what the organization believed at the time of a change.</p>
+      <p>That prevents hindsight bias and reduces decision reconstruction.</p>
+      <h3>The Point</h3>
+      <p>Infrastructure remembers state.</p>
+      <p>It should remember why that state exists.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

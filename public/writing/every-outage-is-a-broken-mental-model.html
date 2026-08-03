@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Every Outage Is a Broken Mental Model</title>
+  <meta name="description" content="Incidents are usually described as failures of software." />
+  <link rel="canonical" href="https://nexplane.ai/writing/every-outage-is-a-broken-mental-model" />
+  <meta property="og:title" content="Every Outage Is a Broken Mental Model">
+  <meta property="og:description" content="Incidents are usually described as failures of software.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/every-outage-is-a-broken-mental-model">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Every Outage Is a Broken Mental Model</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/every-outage-is-a-broken-mental-model</span></div>
+    <div class="prose">
+      <p>Incidents are usually described as failures of software.</p>
+      <p>Often they are failures of understanding.</p>
+      <p>Every outage exposes a mismatch between how someone believed the system worked and how it actually behaved.</p>
+      <h3>The System Did What It Could Do</h3>
+      <p>Production systems rarely violate physics. They follow dependency paths, failure modes, capacity limits, and configuration states.</p>
+      <p>The surprise comes from our model being incomplete.</p>
+      <p>A dependency was hidden. A retry amplified load. A cache masked an assumption. A region failed differently than expected.</p>
+      <h3>Postmortems Should Update Models</h3>
+      <p>A good postmortem does more than identify root cause.</p>
+      <p>It asks which mental model failed. What did we believe? Why did that belief seem reasonable? What evidence contradicted it? Where else might the same assumption exist?</p>
+      <h3>AI as Model Checker</h3>
+      <p>AI can help compare documented architecture, telemetry, incidents, and change history to surface contradictions.</p>
+      <p>But it can only help if the organization preserves enough reasoning for comparison.</p>
+      <h3>The Goal</h3>
+      <p>The point of incident response is not merely restoring service.</p>
+      <p>It is improving the organization's understanding so the same surprise becomes less likely next time.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

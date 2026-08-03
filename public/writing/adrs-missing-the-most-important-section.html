@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Architecture Decision Records Are Missing the Most Important Section</title>
+  <meta name="description" content="Architecture Decision Records have become a staple of modern software engineering." />
+  <link rel="canonical" href="https://nexplane.ai/writing/adrs-missing-the-most-important-section" />
+  <meta property="og:title" content="Architecture Decision Records Are Missing the Most Important Section">
+  <meta property="og:description" content="Architecture Decision Records have become a staple of modern software engineering.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/adrs-missing-the-most-important-section">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Architecture Decision Records Are Missing the Most Important Section</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/adrs-missing-the-most-important-section</span></div>
+    <div class="prose">
+      <p>Architecture Decision Records have become a staple of modern software engineering.</p>
+      <p>They answer useful questions:</p>
+      <ul><li>What decision was made?</li><li>When was it made?</li><li>Who approved it?</li><li>What alternatives were considered?</li></ul>
+      <p>They're a significant improvement over tribal knowledge.</p>
+      <p>I think they're still missing the most valuable piece of information.</p>
+      <h3>The Missing Section</h3>
+      <p>Open almost any ADR and you'll find something like this:</p>
+      <p class="cta-line"><strong>Decision</strong></p>
+      <p>Use PostgreSQL.</p>
+      <p>Use Kafka.</p>
+      <p>Split the monolith.</p>
+      <p>Adopt Kubernetes.</p>
+      <p>What you rarely find is this:</p>
+      <p>&gt; What would cause us to reverse this decision?</p>
+      <p>That's a surprisingly important omission.</p>
+      <h3>Every Architecture Decision Has an Expiration Date</h3>
+      <p>Engineering organizations often behave as though architecture decisions are permanent.</p>
+      <p>Reality disagrees.</p>
+      <p>The assumptions that justified yesterday's architecture are constantly changing.</p>
+      <p>Traffic changes.</p>
+      <p>Teams grow.</p>
+      <p>Companies shrink.</p>
+      <p>Cloud pricing evolves.</p>
+      <p>Compliance requirements appear.</p>
+      <p>New technologies mature.</p>
+      <p>An architecture that was exactly right three years ago may now be introducing unnecessary complexity.</p>
+      <p>The problem isn't that the original decision was wrong.</p>
+      <p>The problem is that nobody recorded what conditions would make it wrong in the future.</p>
+      <h3>Decisions Without Exit Criteria Become Dogma</h3>
+      <p>Imagine reading an ADR that says:</p>
+      <p>&gt; We are adopting Kubernetes.</p>
+      <p>Useful.</p>
+      <p>Now imagine reading this instead:</p>
+      <p class="cta-line"><strong>Decision</strong></p>
+      <p>Adopt Kubernetes.</p>
+      <p class="cta-line"><strong>Assumptions</strong></p>
+      <ul><li>Engineering organization will exceed 40 engineers.</li><li>Multiple independent deployment teams are expected.</li><li>Multi-region scheduling is anticipated within two years.</li></ul>
+      <p class="cta-line"><strong>Revisit this decision if:</strong></p>
+      <ul><li>Platform team remains under five engineers.</li><li>Deployment frequency stays below once per week.</li><li>Operational overhead consistently exceeds feature delivery gains.</li></ul>
+      <p>Suddenly the document isn't just explaining today's decision.</p>
+      <p>It's telling future engineers how to know when it's time to rethink it.</p>
+      <h3>We Version Code Better Than Decisions</h3>
+      <p>Git captures every code change.</p>
+      <p>Yet architecture decisions often remain frozen.</p>
+      <p>Years later engineers ask:</p>
+      <ul><li>Why are we still doing this?</li><li>Does anyone remember why we chose this technology?</li><li>Is this still solving the problem it was meant to solve?</li></ul>
+      <p>Those questions aren't signs of poor engineers.</p>
+      <p>They're signs of incomplete architecture records.</p>
+      <h3>Every ADR Should Contain Predictions</h3>
+      <p>One simple addition could dramatically improve the usefulness of Architecture Decision Records.</p>
+      <p>Every ADR should include explicit predictions.</p>
+      <p>For example:</p>
+      <p>We expect deployment frequency to double.</p>
+      <p>We expect incident recovery time to decrease.</p>
+      <p>We expect operational effort to remain constant despite customer growth.</p>
+      <p>Now reality has something to evaluate.</p>
+      <p>Instead of debating opinions years later, the organization can compare predictions with actual outcomes.</p>
+      <h3>Every ADR Should Include a What Would Change Our Mind Section</h3>
+      <p>This may be the single highest-leverage addition.</p>
+      <p>Every decision should answer:</p>
+      <ul><li>What evidence would invalidate this decision?</li><li>What assumptions deserve monitoring?</li><li>Which future events should trigger a review?</li><li>What metrics should improve if this architecture is correct?</li></ul>
+      <p>Those questions transform architecture from documentation into a living engineering hypothesis.</p>
+      <h3>AI Makes This More Important</h3>
+      <p>AI can generate architecture proposals remarkably well.</p>
+      <p>What it cannot do without context is determine whether the assumptions behind those proposals remain valid.</p>
+      <p>If future engineering systems are going to assist with architecture, they won't just need previous decisions.</p>
+      <p>They'll need the reasoning that explains when those decisions should evolve.</p>
+      <h3>Living Architecture</h3>
+      <p>Architecture shouldn't be treated as a collection of permanent truths.</p>
+      <p>It should be treated as the current best explanation of how to solve today's problem given today's understanding.</p>
+      <p>Tomorrow's evidence may demand something different.</p>
+      <p>Good architecture isn't architecture that never changes.</p>
+      <p>It's architecture that records enough context to make future change intelligent instead of accidental.</p>
+      <p>That's what Architecture Decision Records should ultimately preserve.</p>
+      <p>Not just what we decided.</p>
+      <p>But how we'll know when it's time to decide differently.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
