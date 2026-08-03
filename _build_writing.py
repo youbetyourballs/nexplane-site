@@ -177,6 +177,7 @@ NAV = '''<nav>
       <a href="/enterprise">Enterprise</a>
       <a href="/#integrations">Integrations</a>
       <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
       <a href="/#request-demo" class="btn-nav">Request demo</a>
     </div>
   </div>
@@ -234,6 +235,12 @@ for slug, src in POSTS:
     <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/{slug}</span></div>
     <div class="prose">
       {body_html}
+    </div>
+    <div class="github-cta">
+      <div class="github-cta-text">
+        <strong>Nexplane is open source.</strong> If this resonated, star the repo — it helps others find it.
+      </div>
+      <a href="https://github.com/youbetyourballs/nexplane" target="_blank" rel="noopener" class="btn-github">⭐ Star on GitHub</a>
     </div>
     <div class="ref-row">
       <span>Reference:</span>

@@ -26,6 +26,7 @@
       <a href="/enterprise">Enterprise</a>
       <a href="/#integrations">Integrations</a>
       <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
       <a href="/#request-demo" class="btn-nav">Request demo</a>
     </div>
   </div>
@@ -65,6 +66,12 @@
       <p>The point isn't that the model stops being wrong. It doesn't. It hallucinates, it misreads intent, same as before.</p>
       <p>The point is where the wrongness lands. Schema validation catches the structural errors — the invented action, the bad parameter — before execution. Human approval catches the semantic ones — right action, wrong resource — because the proposal is legible enough for a person to catch it. And the executor is deterministic, so an approved action does exactly one known thing.</p>
       <p>The naive version put all three failure modes on the same code path, at API speed, with no gap to catch them. This version spreads them across three layers where each is cheap to catch and none can do the others' job. That's the whole trick. Not a smarter model. A structure where a dumb mistake by a smart model doesn't reach production.</p>
+    </div>
+    <div class="github-cta">
+      <div class="github-cta-text">
+        <strong>Nexplane is open source.</strong> If this resonated, star the repo — it helps others find it.
+      </div>
+      <a href="https://github.com/youbetyourballs/nexplane" target="_blank" rel="noopener" class="btn-github">⭐ Star on GitHub</a>
     </div>
     <div class="ref-row">
       <span>Reference:</span>

@@ -26,6 +26,7 @@
       <a href="/enterprise">Enterprise</a>
       <a href="/#integrations">Integrations</a>
       <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
       <a href="/#request-demo" class="btn-nav">Request demo</a>
     </div>
   </div>
@@ -65,6 +66,12 @@
       <ol><li>Deploy clean DC image from pre-incident snapshot</li><li>Restore AD data (ntds.dit, SYSVOL) with integrity checks</li><li>Audit privileged accounts and GPOs before enabling replication</li><li>Rotate KRBTGT twice with the prescribed delay between rotations</li><li>Verify DNS resolution and replication across all DCs</li><li>DNS cutover for the environment</li><li>Begin Tier 1 rejoin with monitoring for authentication failures</li><li>Tier 2 rejoin after Tier 1 is stable</li></ol>
       <p>That's the skeleton. Each step has sub-steps, and each sub-step has a verification gate before the next one starts. The organizations that recover fastest from AD-level ransomware aren't the ones with the most compute — they're the ones who've practiced this sequence and have the runbook written down before they need it.</p>
       <p>The WannaCry aftermath showed what happens when you don't. Some NHS trusts took months to fully restore operations. The encryption was reversible with backups. The trust problem wasn't.</p>
+    </div>
+    <div class="github-cta">
+      <div class="github-cta-text">
+        <strong>Nexplane is open source.</strong> If this resonated, star the repo — it helps others find it.
+      </div>
+      <a href="https://github.com/youbetyourballs/nexplane" target="_blank" rel="noopener" class="btn-github">⭐ Star on GitHub</a>
     </div>
     <div class="ref-row">
       <span>Reference:</span>

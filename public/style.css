@@ -214,6 +214,11 @@ h2 em { font-style: normal; color: var(--brand-light); }
 .prose .cta-line { color: #94a3b8; border-top: 1px solid var(--border); padding-top: 22px; margin-top: 6px; }
 .ref-row { max-width: 680px; margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; gap: 16px; align-items: center; flex-wrap: wrap; color: var(--text-muted); font-size: 0.88rem; }
 .ref-row a { color: var(--brand-light); }
+.github-cta { max-width: 680px; margin-top: 48px; padding: 24px 28px; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.github-cta-text { color: #cbd5e1; font-size: 1rem; line-height: 1.5; }
+.github-cta-text strong { color: #fff; }
+.btn-github { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #0f172a; font-weight: 600; font-size: 0.95rem; padding: 10px 20px; border-radius: 8px; text-decoration: none; white-space: nowrap; transition: opacity 0.15s; }
+.btn-github:hover { opacity: 0.88; }
 .post-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); max-width: 840px; margin-top: 8px; }
 .post-item { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 18px 4px; border-bottom: 1px solid var(--border); }
 .post-item:hover { background: rgba(255,255,255,0.02); }

@@ -26,6 +26,7 @@
       <a href="/enterprise">Enterprise</a>
       <a href="/#integrations">Integrations</a>
       <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
       <a href="/#request-demo" class="btn-nav">Request demo</a>
     </div>
   </div>
@@ -53,6 +54,12 @@
       <p>Real rollback isn't a feature you add at the end. It's a constraint you accept at the beginning, and it costs you something up front. To actually undo a change, you have to capture the exact before-state at the moment the change executes — not what the config said last week, not what the logs imply — and store it bound to the specific change that caused it, with a typed operation that knows how to put it back. Rotating a credential back is a different operation than re-enabling a disabled account. If you didn't capture the before-state when you made the change, you don't have a rollback later. You have a reconstruction project.</p>
       <p>That's why I treat it as a design requirement rather than a claim. If a change can't capture its before-state and restore it, then it doesn't get to say it's reversible — and you should be explicit about that limit instead of papering over it. The honest version of "we can roll this back" is narrow and specific: we captured the state, we stored it with the change, and we have a tested operation that restores it. Everything else is a hope with a UI.</p>
       <p>So the next time someone tells you they have rollbacks, ask them the follow-up. When did you last run it? Against what? Did the system come back the way you expected? If the answer is a shrug, they don't have rollbacks. They have a story they're telling themselves about the worst day they haven't had yet.</p>
+    </div>
+    <div class="github-cta">
+      <div class="github-cta-text">
+        <strong>Nexplane is open source.</strong> If this resonated, star the repo — it helps others find it.
+      </div>
+      <a href="https://github.com/youbetyourballs/nexplane" target="_blank" rel="noopener" class="btn-github">⭐ Star on GitHub</a>
     </div>
     <div class="ref-row">
       <span>Reference:</span>

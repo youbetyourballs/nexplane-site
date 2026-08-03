@@ -26,6 +26,7 @@
       <a href="/enterprise">Enterprise</a>
       <a href="/#integrations">Integrations</a>
       <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
       <a href="/#request-demo" class="btn-nav">Request demo</a>
     </div>
   </div>
@@ -65,6 +66,12 @@
       <p>The action executed, the rotation failed at the database level, but not before the old credentials had been partially invalidated. We had an outage. It was recoverable, but it was avoidable. The executor should never have reached the database with parameters it hadn't validated.</p>
       <p>After that, we added schema-level validation on every parameter — length, character set, format — before anything leaves the execution layer. The LLM generates the intent. The schema enforces the constraints. The executor does the work. None of those layers should be doing the others' job.</p>
       <p>The lesson isn't that LLMs are dangerous for infrastructure work. It's that the architecture has to treat interpretation and execution as separate concerns with a validation boundary between them.</p>
+    </div>
+    <div class="github-cta">
+      <div class="github-cta-text">
+        <strong>Nexplane is open source.</strong> If this resonated, star the repo — it helps others find it.
+      </div>
+      <a href="https://github.com/youbetyourballs/nexplane" target="_blank" rel="noopener" class="btn-github">⭐ Star on GitHub</a>
     </div>
     <div class="ref-row">
       <span>Reference:</span>
