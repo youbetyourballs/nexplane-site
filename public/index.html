@@ -582,58 +582,37 @@
       </div>
     </div>
     <div class="rollback-compare">
-      <h3>No other platform covers this ground</h3>
+      <h3>The gap between your tools</h3>
       <div class="compare-table-wrap">
         <table class="compare-table">
           <thead>
             <tr>
               <th></th>
               <th>Nexplane</th>
-              <th>Terraform</th>
-              <th>Ansible</th>
-              <th>ServiceNow</th>
-              <th>AWS SSM</th>
+              <th>SOAR (XSOAR, Tines)</th>
+              <th>ITSM (ServiceNow)</th>
+              <th>Runbooks (Confluence)</th>
+              <th>Terraform / Ansible</th>
+              <th>Cloud consoles (SSM)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>End-to-end change workflow</td>
+              <td>Full change lifecycle &mdash; plan, approve, execute, roll back</td>
               <td class="yes">&#10003;</td>
-              <td class="no">&#10007; (infra only)</td>
-              <td class="partial">partial</td>
+              <td class="no">&#10007; (react only)</td>
               <td class="partial">tickets only</td>
-              <td class="no">&#10007;</td>
+              <td class="no">&#10007; (docs only)</td>
+              <td class="no">&#10007; (provision only)</td>
+              <td class="no">&#10007; (execute only)</td>
             </tr>
             <tr>
               <td>Typed rollback per operation</td>
               <td class="yes">&#10003;</td>
-              <td class="no">&#10007; (destroy/re-apply)</td>
-              <td class="no">&#10007; (write your own)</td>
-              <td class="no">&#10007;</td>
-              <td class="no">&#10007;</td>
-            </tr>
-            <tr>
-              <td>Impact simulation</td>
-              <td class="yes">&#10003;</td>
               <td class="no">&#10007;</td>
               <td class="no">&#10007;</td>
               <td class="no">&#10007;</td>
-              <td class="no">&#10007;</td>
-            </tr>
-            <tr>
-              <td>Infrastructure memory</td>
-              <td class="yes">&#10003;</td>
-              <td class="partial">state file only</td>
-              <td class="no">&#10007;</td>
-              <td class="partial">tickets only</td>
-              <td class="no">&#10007;</td>
-            </tr>
-            <tr>
-              <td>Live rollback verification</td>
-              <td class="yes">&#10003;</td>
-              <td class="no">&#10007;</td>
-              <td class="no">&#10007;</td>
-              <td class="no">&#10007;</td>
+              <td class="partial">partial (state / idempotent)</td>
               <td class="no">&#10007;</td>
             </tr>
             <tr>
@@ -643,10 +622,39 @@
               <td class="no">&#10007;</td>
               <td class="no">&#10007;</td>
               <td class="no">&#10007;</td>
+              <td class="no">&#10007;</td>
             </tr>
             <tr>
-              <td>MCP server for AI agents</td>
+              <td>Rollback verified against live infrastructure</td>
               <td class="yes">&#10003;</td>
+              <td class="no">&#10007;</td>
+              <td class="no">&#10007;</td>
+              <td class="no">&#10007;</td>
+              <td class="no">&#10007;</td>
+              <td class="no">&#10007;</td>
+            </tr>
+            <tr>
+              <td>Covers security ops, upgrades, and credential lifecycle</td>
+              <td class="yes">&#10003;</td>
+              <td class="partial">partial</td>
+              <td class="no">&#10007;</td>
+              <td class="no">&#10007;</td>
+              <td class="no">&#10007;</td>
+              <td class="partial">partial</td>
+            </tr>
+            <tr>
+              <td>Proactive hardening + reactive response in one workflow</td>
+              <td class="yes">&#10003;</td>
+              <td class="no">&#10007;</td>
+              <td class="no">&#10007;</td>
+              <td class="no">&#10007;</td>
+              <td class="no">&#10007;</td>
+              <td class="no">&#10007;</td>
+            </tr>
+            <tr>
+              <td>AI agent interface (MCP)</td>
+              <td class="yes">&#10003;</td>
+              <td class="no">&#10007;</td>
               <td class="no">&#10007;</td>
               <td class="no">&#10007;</td>
               <td class="no">&#10007;</td>
@@ -655,7 +663,7 @@
           </tbody>
         </table>
       </div>
-      <p class="rollback-note">Enforced rollback order: if you applied change A then change B, Nexplane unwinds B before A. Rolling back individual changes out of sequence corrupts state — so the platform prevents it.</p>
+      <p class="rollback-note">Terraform and Ansible are provisioning and automation tools &mdash; Nexplane doesn't replace them. SOAR tools react to incidents. ITSM tools track approvals. Runbooks document steps. None of them own the full change lifecycle, and none guarantee rollback in the right order.</p>
     </div>
   </div>
 </section>
