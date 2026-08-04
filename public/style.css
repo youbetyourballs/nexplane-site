@@ -220,11 +220,18 @@ h2 em { font-style: normal; color: var(--brand-light); }
 .btn-github { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #0f172a; font-weight: 600; font-size: 0.95rem; padding: 10px 20px; border-radius: 8px; text-decoration: none; white-space: nowrap; transition: opacity 0.15s; }
 .btn-github:hover { opacity: 0.88; }
 .post-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); max-width: 840px; margin-top: 8px; }
-.post-item { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 18px 4px; border-bottom: 1px solid var(--border); }
+.post-item { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 18px 4px; border-bottom: 1px solid var(--border); text-decoration: none; }
 .post-item:hover { background: rgba(255,255,255,0.02); }
 .post-item .pt { color: #fff; font-weight: 500; font-size: 1.05rem; }
 .post-item .pd { color: var(--text-muted); font-size: 0.85rem; text-align: right; flex: none; }
 @media (max-width: 600px) { .post-item .pd { display: none; } }
+.anchor-essays { display: flex; flex-direction: column; gap: 10px; max-width: 840px; margin: 32px 0 48px; padding: 24px 28px; border: 1px solid rgba(99,102,241,0.35); border-radius: 12px; background: rgba(99,102,241,0.06); }
+.anchor-essays-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-light); margin-bottom: 4px; }
+.anchor-link { color: #fff; font-weight: 600; font-size: 1.05rem; text-decoration: none; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.anchor-link:last-child { border-bottom: none; }
+.anchor-link:hover { color: var(--brand-light); }
+.post-group { max-width: 840px; margin-top: 40px; }
+.post-group-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
 
 /* ── Features ── */
 .features-grid {
