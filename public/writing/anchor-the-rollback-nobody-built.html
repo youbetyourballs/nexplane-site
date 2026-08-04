@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Rollback Nobody Built</title>
+  <meta name="description" content="I&#x27;ve been asking a follow-up question in every architecture conversation I have for about three years now. The setup is always some version of: &quot;we have…" />
+  <link rel="canonical" href="https://nexplane.ai/writing/anchor-the-rollback-nobody-built" />
+  <meta property="og:title" content="The Rollback Nobody Built">
+  <meta property="og:description" content="I&#x27;ve been asking a follow-up question in every architecture conversation I have for about three years now. The setup is always some version of: &quot;we have…">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/anchor-the-rollback-nobody-built">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The Rollback Nobody Built</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/anchor-the-rollback-nobody-built</span></div>
+    <div class="prose">
+      <p>I've been asking a follow-up question in every architecture conversation I have for about three years now. The setup is always some version of: "we have rollback." And the follow-up is always the same: when did you last run it? Not planned to. Not wrote the procedure for. Actually executed it, end to end, against a real system, and confirmed the before-state came back the way you expected.</p>
+      <p>The answer is almost always never.</p>
+      <p>That's the problem I want to be precise about, because "we have rollbacks" turns out to mean a lot of different things, almost none of which are what the words imply. And the gap between what people believe and what they actually have shows up at the worst possible time — when they need it.</p>
+      <h3>What "we can roll it back" usually means</h3>
+      <p>There are four versions of this I've heard, and they all fail in different ways.</p>
+      <p><strong>Backups.</strong> The most common. Backups restore a point-in-time snapshot of the whole system. That's a blunt instrument — you lose everything that happened after the snapshot, you're betting the backup is current, and you're betting it's in a different blast radius than the thing that just broke. In 2014, Code Spaces got attacked via their AWS control panel. The attacker deleted production and backups from the same place. The company shut down. Production and backups lived in the same blast radius, which nobody had tested. That's not an edge case — it's what happens when "we have backups" and "we can roll it back" get used as synonyms.</p>
+      <p><strong>Re-running the playbook.</strong> Ansible, Chef, Terraform. You apply the previous config and call it a restore. But re-running a playbook applies a desired state forward — if something else touched that file or resource since your last run, the playbook overwrites it with the playbook's version, not the version that was actually there before your change. Re-applying a previous Terraform state re-provisions toward a target; it doesn't reconstruct what existed. You're building something new that resembles the old thing and calling it a restore. These are not the same operation.</p>
+      <p><strong>Audit logs.</strong> "We have CloudTrail." CloudTrail tells you what API calls were made and when. It does not undo them. Reconstructing a rollback from logs means reading the call sequence, inferring the before-state, and hand-building the corrective calls — a multi-hour forensics exercise you're now running during an outage, under pressure, at 2am. Forensics and rollback are not the same tool. People reach for one when they needed the other.</p>
+      <p><strong>A button nobody's pushed.</strong> This is the most dangerous version because it looks the most like the real thing. There is a rollback button, or a runbook, or a procedure. It has never been tested against the specific failure mode it's supposed to cover. The team believes it will work because it has never failed — which is the same as saying it has never been tried.</p>
+      <h3>Why this keeps being the pattern</h3>
+      <p>The failure mode is consistent across incidents that look different on the surface. Something breaks. The team reaches for the rollback. The rollback either doesn't exist in the form they thought it did, or it fails in a way they didn't anticipate, or it restores the wrong thing.</p>
+      <p>The common thread: the rollback path existed on paper. It had never been exercised against the specific failure it was supposed to cover. So when the moment came, the mechanism did nothing.</p>
+      <p>This isn't negligence. Most of the teams I've worked with are smart and they care. The problem is structural. Testing rollback takes time, requires a realistic test environment, and produces no visible outcome when it succeeds. Shipping features is visible. Passing audit is measurable. Testing the rollback mechanism for the credential rotation you ran last Tuesday is neither. So it doesn't happen, because no incentive makes it happen.</p>
+      <h3>The design requirement you're skipping</h3>
+      <p>Here's the thing that changed how I think about this: real rollback isn't a feature you add at the end. It's a constraint you accept at the beginning, and it costs you something upfront.</p>
+      <p>To actually undo a change, you have to capture the exact before-state at the moment the change executes — not what the config said last week, not what the logs imply — and store it bound to the specific change that caused it, with a typed operation that knows how to put it back. Rotating a credential back is a different operation than re-enabling a disabled account. Restoring a firewall rule is a different operation than reverting a DNS change. If you didn't capture the before-state when you made the change, you don't have a rollback later. You have a reconstruction project.</p>
+      <p>This also means rollback has to be scoped to the operation. A credential rotation doesn't need a full system snapshot. It needs the old credential value, a mechanism to re-enable it, and a test that confirms the service can authenticate with it. That's specific. It can be verified. It either works or it doesn't, and you can find that out before you need it.</p>
+      <p>The honest version of "we can roll this back" is narrow: we captured the state, we stored it bound to this change, and we have a tested operation that restores it. Everything else is a hope with a UI.</p>
+      <h3>The ordering problem nobody talks about</h3>
+      <p>There's a second failure mode that doesn't come up in rollback conversations, and it's worse than not having rollback at all: rolling back out of sequence.</p>
+      <p>Imagine you ran three changes in a maintenance window. You rotated the database credentials, deployed a new app version that uses those credentials, and updated a firewall rule to allow the new app tier to reach the database. Now something is wrong and you need to roll back.</p>
+      <p>If you restore the firewall rule first, the old app tier can no longer reach the database — you've broken production in a different way. If you restore the old app version before rotating the credentials back, the old app tries to authenticate with new credentials it doesn't know — same result. The changes have to unwind in reverse order. Last in, first out.</p>
+      <p>This sounds obvious when you describe it slowly. It is almost never enforced by the tools people use. Most rollback mechanisms operate on individual changes in isolation. The ordering across changes is left to the operator — which means it's left to the 3am decision-making of someone under pressure who is looking at a status board and trying to remember the sequence from two hours ago.</p>
+      <p>This is what "rollback as a first-class design constraint" actually requires. Not just a mechanism per change. A stack. The platform has to know the sequence, enforce the reverse order, and refuse to let you roll back change B before change A if A depends on B still being in effect. Otherwise you're not preventing state corruption — you're just doing it in a more controlled way.</p>
+      <h3>What changes when you treat it as a constraint</h3>
+      <p>When rollback is a design constraint rather than a feature, a few things become visible that were invisible before.</p>
+      <p>First, some changes can't be cleanly rolled back, and you should know that before you make them. Deleting a database record is different from rotating a credential. Revoking a certificate is different from changing a firewall rule. Some operations are genuinely one-way, and the honest thing is to label them as such — capture the best possible reconstitution state, note what can be recovered and what can't, and require explicit approval before executing. Calling an irreversible operation reversible is not optimism. It's a liability.</p>
+      <p>Second, the state you capture before a change is a first-class artifact. It's not a log entry. It's not an API response you can re-derive. It's the specific before-state, stored with the specific change, retrievable when you need it. Treating it as an artifact means it can be audited, it can be tested, and it can be used to answer questions that aren't about rollback — like "what did this system look like before we started this project" or "which changes would I need to undo to get back to the state we were in last Tuesday."</p>
+      <p>Third, testing rollback is no longer optional. If the rollback mechanism is part of the change design, then the change isn't complete until rollback has been verified. Not in theory. Against the actual system.</p>
+      <h3>The question to ask</h3>
+      <p>The next time someone tells you they have rollback, ask them the follow-up. When did you last run it? What specifically does it restore? Does it handle the sequence correctly if you ran multiple changes in the same window?</p>
+      <p>If the answer is a shrug, they don't have rollback. They have a story they're telling themselves about the worst day they haven't had yet.</p>
+      <p>That's not an accusation. Most organizations I've seen are in exactly this position, because the incentives don't reward building the real thing. Rollback that works costs more to build than rollback that sounds like it should work. The difference only becomes visible when you need it — which is also when the cost of having skipped it is highest.</p>
+      <p>I'm curious how other teams handle this. If you've actually built a rollback mechanism that gets tested regularly, I'd like to hear what you had to change to make that happen.</p>
+    </div>
+    <div class="github-cta">
+      <div class="github-cta-text">
+        <strong>Nexplane is open source.</strong> If this resonated, star the repo — it helps others find it.
+      </div>
+      <a href="https://github.com/youbetyourballs/nexplane" target="_blank" rel="noopener" class="btn-github">⭐ Star on GitHub</a>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

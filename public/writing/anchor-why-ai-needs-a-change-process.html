@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why AI Needs a Change Process, Not More Permissions</title>
+  <meta name="description" content="The conversation about AI in infrastructure has settled into two camps. One camp thinks the model isn&#x27;t capable enough yet — give it more context, more …" />
+  <link rel="canonical" href="https://nexplane.ai/writing/anchor-why-ai-needs-a-change-process" />
+  <meta property="og:title" content="Why AI Needs a Change Process, Not More Permissions">
+  <meta property="og:description" content="The conversation about AI in infrastructure has settled into two camps. One camp thinks the model isn&#x27;t capable enough yet — give it more context, more …">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/anchor-why-ai-needs-a-change-process">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Why AI Needs a Change Process, Not More Permissions</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/anchor-why-ai-needs-a-change-process</span></div>
+    <div class="prose">
+      <p>The conversation about AI in infrastructure has settled into two camps. One camp thinks the model isn't capable enough yet — give it more context, more reasoning steps, a better base model, and it'll be trustworthy. The other camp thinks the risk is the model itself — that language models are fundamentally unpredictable and shouldn't be touching production systems at all.</p>
+      <p>Both camps are arguing about the wrong thing.</p>
+      <p>The question is not whether the AI is capable enough, and it's not whether the model is safe enough. The question is whether the process the AI operates within is safe enough — and almost universally, it isn't. Not because anyone built it badly, but because there isn't one.</p>
+      <h3>What "giving AI infrastructure access" actually means</h3>
+      <p>When an organization gives an AI agent access to infrastructure today, what they typically mean is: they give it an API token, an IAM role, or a set of credentials, and they let it make calls. The agent can read, write, create, delete — whatever the credentials allow. The scope is usually governed by the principle of least privilege in theory, and by "we needed it to work" in practice.</p>
+      <p>We ran this experiment internally — giving an agent access to real infrastructure and watching what happened. The observations weren't dramatic. The agent did reasonable things, mostly. The problem wasn't any single action. It was the absence of a review point before actions executed. The agent would decide to do something, and the thing would happen. There was no moment where the proposed action was surfaced for human review before it was live. That gap — between intent and execution — is where the risk lives.</p>
+      <p>This is not fundamentally different from giving a new engineer a set of credentials and telling them to go figure it out. We don't do that. We give new engineers access through a change process — pull requests that get reviewed, change requests that get approved, deploys that go through a pipeline. The review isn't primarily about catching bad intent. It's about catching the gap between what the engineer thought would happen and what would actually happen. It brings a second perspective to bear before the change is live.</p>
+      <p>That review process is what's missing from most AI infrastructure setups. The model generates an action and the action executes directly. There's no before-state captured. There's no rollback.</p>
+      <h3>The mistake is treating autonomy as the goal</h3>
+      <p>A lot of the enthusiasm around AI in infrastructure is really enthusiasm about autonomy — the AI does the thing without a human in the loop, which means it's fast and it scales. The autonomous case is the demo case: watch it respond to this alert and remediate it in thirty seconds.</p>
+      <p>That's genuinely useful for the right class of operations. Restarting a failed container, scaling up a node group, clearing a cache — high-frequency, low-blast-radius, well-understood operations where the cost of a mistake is low and the cost of latency is high. For those, full autonomy makes sense.</p>
+      <p>But infrastructure operations are not all that shape. Credential rotation, certificate management, firewall rule changes, OS upgrades, database migrations — these are low-frequency, high-blast-radius operations where the cost of a mistake is significant and the cost of latency is low. Getting them right matters more than getting them done in thirty seconds. And for these operations, the value of AI isn't autonomy. It's judgment applied at a moment when a human would otherwise have to be dragged into a task they didn't have context on.</p>
+      <p>The error is applying the fast-feedback loop mental model to the high-stakes operation category. When the AI drafts a change — here is the credential rotation plan, here are the systems it touches, here is the rollback if it fails — and a human reviews that plan and approves it before it executes, you get the leverage of the AI without giving up the safety of human review at the moment it matters. The AI does the work that's hard to scale. The human makes the call on whether to proceed. That's not a limitation on the AI. That's the point.</p>
+      <h3>What happens when there's no process</h3>
+      <p>In April 2026, an AI coding agent wired into a production environment deleted a database and its backups in under ten seconds. The agent had credentials. It had a goal. The API calls it made were technically valid — it was authorized to make them. The sequence of correct operations, executed without a human review point, produced an outcome nobody intended.</p>
+      <p>This is the pattern. The failure is not the model being malicious or broken. It's the model doing exactly what it was configured to do, in a context where nobody had built the gate that would have caught the problem before it was live. No before-state was captured. No rollback existed. The recovery plan assumed the backups would survive, and the backups were in the same blast radius as production.</p>
+      <p>The lesson is not that the model was too capable or not capable enough. It's that the change process was missing. There was no moment where the proposed sequence of operations was presented to a human for review. The AI was operating the way a person operates when they have root access and no change management process — with nothing between intent and consequence.</p>
+      <h3>The harness question</h3>
+      <p>The harness I'm describing is not a leash. It's a change process — the same thing we built for human operators because we learned, the hard way, that direct access to production without review produces predictable classes of problems.</p>
+      <p>A change process for AI operations has the same components as one for human operations: the proposed change is expressed explicitly before it executes, it's reviewed by someone who can evaluate whether it matches the intent, it captures the before-state so rollback is possible, and it records what happened and why. The difference is that the AI is better at some of these steps than a human — it can identify all the systems a credential rotation touches, enumerate the dependencies, draft the rollback plan — and worse at others, specifically at evaluating whether the proposed change matches what a human actually wants in a context with business or operational constraints the model doesn't fully understand.</p>
+      <p>This is the right division of labor. The AI does the work that's hard to scale — understanding the system state, identifying the blast radius, drafting the change plan. The human makes the approval decision with that information in front of them. The platform captures the execution and the before-state so rollback is available.</p>
+      <p>The review point doesn't slow things down in any meaningful way for high-stakes operations. A credential rotation that takes ten minutes to execute and thirty seconds to review is not meaningfully slower for having a human in the loop. What you lose is thirty seconds. What you gain is a human who looked at what was about to happen before it happened.</p>
+      <h3>The permission model is not the safety model</h3>
+      <p>There's a tendency to reach for the permission model when the real need is a process model. IAM roles, RBAC, least privilege — these are the right tools for limiting the blast radius of a mistake, but they don't prevent the mistake. They determine how much damage is possible if something goes wrong; they don't create a review gate before something executes.</p>
+      <p>An AI agent with a minimally-scoped IAM role and no change process is not a safe AI agent. It's an unsafe agent with a smaller blast radius. That's better, but it's not the same as a process that surfaces the proposed operation for review before it's live.</p>
+      <p>The permission model is necessary. It's not sufficient. What's sufficient is: the AI proposes, a human approves, the platform executes and captures the before-state, rollback is available if the outcome isn't what was intended. That sequence is what turns AI from a liability into leverage.</p>
+      <h3>What I think changes</h3>
+      <p>The organizations that get this right are going to look different from the ones that either avoid AI in infrastructure entirely or give it unconstrained access. They'll use AI to do the analytical work that makes human review faster and better informed — here are the fourteen systems that would be affected by rotating this credential, here are the three you should pay close attention to, here is the rollback plan. And they'll keep humans in the approval loop for the operations where the cost of being wrong is high.</p>
+      <p>What I'm less certain about is where the line is. The high-frequency/low-blast-radius vs. low-frequency/high-blast-radius split is a useful heuristic but it's not a clean boundary in practice. Some operations that look routine accumulate blast radius through sequencing. Some operations that look high-stakes are actually well-bounded and reversible. The tooling to reason about that dynamically — to surface the right operations for human review and let the rest run — is still being figured out.</p>
+      <p>That's the question I'm sitting with. Not whether AI should be in infrastructure, but how to build the process layer that makes the answer clearly yes.</p>
+    </div>
+    <div class="github-cta">
+      <div class="github-cta-text">
+        <strong>Nexplane is open source.</strong> If this resonated, star the repo — it helps others find it.
+      </div>
+      <a href="https://github.com/youbetyourballs/nexplane" target="_blank" rel="noopener" class="btn-github">⭐ Star on GitHub</a>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

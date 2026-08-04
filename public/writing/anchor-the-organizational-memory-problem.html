@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Organizational Memory Problem</title>
+  <meta name="description" content="Every organization I&#x27;ve worked in has had a version of this conversation. Something breaks, or a change is proposed, or a migration goes sideways — and …" />
+  <link rel="canonical" href="https://nexplane.ai/writing/anchor-the-organizational-memory-problem" />
+  <meta property="og:title" content="The Organizational Memory Problem">
+  <meta property="og:description" content="Every organization I&#x27;ve worked in has had a version of this conversation. Something breaks, or a change is proposed, or a migration goes sideways — and …">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/anchor-the-organizational-memory-problem">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The Organizational Memory Problem</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/anchor-the-organizational-memory-problem</span></div>
+    <div class="prose">
+      <p>Every organization I've worked in has had a version of this conversation. Something breaks, or a change is proposed, or a migration goes sideways — and somewhere in the postmortem or the design review, someone says "didn't we already decide this?" And then the next fifteen minutes are spent trying to locate the decision: was it in Confluence, was it in Slack, was it in the Jira ticket, was it in someone's head who left six months ago?</p>
+      <p>The answer is usually: it was made, it worked, someone documented it imperfectly, and now the documentation is stale and nobody knows which parts still apply.</p>
+      <p>This is the organizational memory problem. It's not that organizations don't document things. Most document too much — they generate enormous volumes of content that doesn't stay synchronized with the decisions it was supposed to capture. What they don't do well is connect documentation to the things it governs, at the moment the decision is made.</p>
+      <h3>What gets lost and why</h3>
+      <p>The standard explanation for why this happens is cultural: teams don't prioritize documentation, people are too busy, nobody goes back and updates the wiki. That's true but it's the wrong frame. It implies the fix is discipline — write more, update more, maintain more. That's not a fix. That's an overhead tax applied to the team that generates it and rarely paid by the people who need it later.</p>
+      <p>The real problem is structural. Documentation is written at a different time and place than the thing it's supposed to describe. A decision gets made in a meeting or a Slack thread, someone writes it up afterward, the write-up gets put somewhere that made sense at the time, and then the code or the infrastructure or the configuration it was describing continues to evolve. The documentation doesn't. Six months later the document exists, but it describes a system that no longer exists in quite the same form, and there's no mechanism that would tell you which parts are still true.</p>
+      <p>The more subtle problem is that what gets documented is almost never the reasoning. It's the outcome — "we chose PostgreSQL," "we went with the blue-green approach," "we decided not to enforce MFA on service accounts for now." The why is in someone's head, sometimes in a Slack thread, occasionally in a ticket comment. When the people who were in the room leave, the why goes with them. What's left is a decision with no context, which is only marginally better than no decision at all, because the team applying it doesn't know when it was made under assumptions that no longer hold.</p>
+      <p>I've seen this play out with something as mundane as a security group rule. A <code>0.0.0.0/0</code> inbound rule on port 443, labeled "temp - remove after migration." Nobody knows which migration. Nobody knows when it was added. The person who added it is gone. The rule stays because removing it requires understanding why it exists, and nobody has that context. The documentation that would have answered the question was never written, or was written and lost, or was written and became stale. So the rule stays. This is how years pass.</p>
+      <h3>The reconstruction tax</h3>
+      <p>When context doesn't survive, organizations pay to recreate it on demand. This is what I mean by the reconstruction tax — the time spent in meetings, postmortems, and design reviews not making new decisions but recovering old ones.</p>
+      <p>The tax is hard to see because it doesn't show up on a line item anywhere. It shows up as: a three-hour architecture review that's mostly backstory. A postmortem that spends half its time on "what was the state of the system before this happened." A migration that stalls because nobody can confirm whether the thing being migrated is safe to change, because the people who would know are gone. An incident that takes four hours to resolve in part because the responder is reconstructing the system's behavior from first principles instead of retrieving a description of it.</p>
+      <p>This is also why senior engineers become bottlenecks in ways that have nothing to do with their actual technical capacity. They hold context that doesn't exist anywhere else. Other people have to go through them not because only they can make the decision, but because only they remember the reasoning that the decision depends on. That's not a people problem. It's a systems problem — the organization routed critical context through a person instead of capturing it in a way that could be retrieved without them.</p>
+      <p>When that person leaves — or is just on vacation, or in a different meeting — the organization pays the reconstruction tax in full.</p>
+      <h3>What "better documentation" misses</h3>
+      <p>The common fix is better documentation practices: more templates, more required fields, more process around ADRs and RFCs and postmortem write-ups. These help at the margins. They don't solve the underlying problem.</p>
+      <p>The issue with documentation as a category is that it's a separate artifact from the thing it describes. An ADR describes a decision. The decision governs a codebase, or an infrastructure component, or a configuration. These things live in different places and have different lifecycles. The documentation gets out of sync because there's no mechanism that keeps them connected.</p>
+      <p>Architecture Decision Records are a good example. The idea is right: capture the decision, the alternatives considered, the reasoning, and the consequences. The problem is that an ADR is a file in a docs folder with a date on it. The code it was written to describe is in a repo, evolving continuously. Nothing links them. When someone reads the ADR six months later, they have no way of knowing which parts of the codebase it still governs and which have drifted past it.</p>
+      <p>The section that's almost always missing from ADRs is the one that would make them useful over time: what does this decision govern, and what would have to change about the situation for this decision to be worth revisiting? Without that, an ADR is a timestamp on an opinion, not a living document about a system.</p>
+      <h3>Where the context actually lives</h3>
+      <p>There's a different model that works better, and it's less about documentation and more about capture at the point of action.</p>
+      <p>The highest-density context in any engineering organization is not in the docs. It's in the change itself — the pull request, the change request, the deploy record, the runbook execution. That's where the reasoning is closest to the surface: why this change was made, what state the system was in before it, who approved it and why, what was expected to happen. That's the moment when the person making the change has the most context about the decision. It's also the moment when nobody is writing it down in a form that survives.</p>
+      <p>If you capture context at that moment — attached to the change, stored with the before-state, retrievable by the things the change touched — you end up with something that has different properties than documentation. It doesn't go stale in the same way, because it's indexed to a specific system state at a specific time. You can ask "what changed about this system in the last six months and why" and get a real answer, not a guess based on whatever made it into the wiki.</p>
+      <p>This is a different ask than "write better docs." It requires the tooling that records changes to also record context. It requires that the approval and execution workflow is also the capture mechanism. It requires that the thing you're already doing — making a change — produces the artifact you'll need later, as a side effect.</p>
+      <p>The teams that get this right aren't necessarily more disciplined. They've built the capture into the workflow so that producing the artifact is the path of least resistance, not an additional step that competes with shipping.</p>
+      <h3>The property you're actually trying to build</h3>
+      <p>Organizational memory isn't a database of facts. It's a property of the system — the ability to answer "why is this the way it is" without reconstructing the answer from scratch every time.</p>
+      <p>Teams that have it can onboard engineers faster, because new people can read context instead of absorbing it through months of conversation. They can run better postmortems, because the before-state is retrievable rather than reconstructed. They can make better decisions about what to change, because they can see what was decided before and why, not just what exists now.</p>
+      <p>Teams that don't have it spend an enormous amount of time and senior-engineer attention on reconstruction — which looks like decision-making but is mostly archaeology. And because the reconstruction is invisible, the cost never shows up clearly enough to be addressed.</p>
+      <p>If this is a pattern your team is dealing with — especially the reconstruction tax or the senior-engineer bottleneck — I'm curious what you've tried. The documentation-practice approaches have well-known limits. I'm more interested in what capture-at-the-point-of-action looks like in organizations that have made it work.</p>
+    </div>
+    <div class="github-cta">
+      <div class="github-cta-text">
+        <strong>Nexplane is open source.</strong> If this resonated, star the repo — it helps others find it.
+      </div>
+      <a href="https://github.com/youbetyourballs/nexplane" target="_blank" rel="noopener" class="btn-github">⭐ Star on GitHub</a>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

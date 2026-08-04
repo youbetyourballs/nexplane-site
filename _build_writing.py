@@ -89,6 +89,11 @@ POSTS = [
  ("reversibility-is-the-ultimate-safety-feature", CANON+"content/blog/048-reversibility-is-the-ultimate-safety-feature.md"),
  ("building-an-ai-native-organization",          CANON+"content/blog/049-building-an-ai-native-engineering-organization.md"),
  ("next-decade-of-engineering",                  CANON+"content/blog/050-the-next-decade-of-engineering.md"),
+
+ # --- Anchor essays ---
+ ("anchor-the-rollback-nobody-built",            CANON+"content/posts/A1-the-rollback-nobody-built.md"),
+ ("anchor-the-organizational-memory-problem",    CANON+"content/posts/A2-the-organizational-memory-problem.md"),
+ ("anchor-why-ai-needs-a-change-process",        CANON+"content/posts/A3-why-ai-needs-a-change-process.md"),
 ]
 
 def parse(path):
