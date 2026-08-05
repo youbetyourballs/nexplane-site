@@ -279,7 +279,7 @@ anchor_links = "\n".join(
 
 # Grouped sections (skip Essays group — shown above as anchors)
 group_sections = ""
-for group_name, group_posts in GROUPS:
+for group_name, group_posts in GROUPS[1:]:
     items = "\n".join(
         f'        <a class="post-item" href="/writing/{s}"><span class="pt">{html.escape(slug_to_meta[s][0])}</span><span class="pd">{html.escape(slug_to_meta[s][1])[:70]}</span></a>'
         for s, _ in group_posts if s in slug_to_meta)
