@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infrastructure Needs a Kernel</title>
+  <meta name="description" content="The last time we solved this problem, we called it an operating system. AI agents are writing directly to the hardware again — not actual hardware, infrastructure." />
+  <link rel="canonical" href="https://nexplane.ai/writing/infrastructure-needs-a-kernel" />
+  <meta property="og:title" content="Infrastructure Needs a Kernel">
+  <meta property="og:description" content="The last time we solved this problem, we called it an operating system. AI agents are writing directly to the hardware again — not actual hardware, infrastructure.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/infrastructure-needs-a-kernel">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Infrastructure Needs a Kernel</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/infrastructure-needs-a-kernel</span></div>
+    <div class="prose">
+      <p>The last time we solved this problem, we called it an operating system.</p>
+      <p>In the 1960s, programs wrote directly to hardware. You wanted disk access, you talked to the disk controller. You wanted memory, you reached for it. Every program was one bad pointer away from taking down the whole machine.</p>
+      <p>The OS fixed this with two ideas that now seem obvious:</p>
+      <ol>
+        <li><strong>An abstraction layer.</strong> Programs don't write to disk. They call <code>write()</code>. The OS translates intent into hardware operations — safely, with access control, with scheduling.</li>
+        <li><strong>A resource manager.</strong> No two processes own the same memory region. The OS mediates access, enforces isolation, and handles the cleanup when something goes wrong.</li>
+      </ol>
+      <p>Fifty years later, AI agents are writing directly to the hardware again.</p>
+      <p>Not actual hardware — infrastructure. Cloud APIs, IAM, firewall rules, DNS records. An agent with credentials is doing what those 1960s programs did: reaching past any abstraction layer, straight to the resource, and hoping nothing else is touching it at the same time.</p>
+      <p>The results look familiar too. A misaddressed API call deletes a database. An agent loops on a misconfigured task and spends $50k. A credential rotation goes wrong and takes down production. We've read these incident reports. They're not bugs in the agents — they're the natural consequence of raw resource access with no mediation layer between intent and execution.</p>
+      <p>What we built in the OS era was a kernel. What we need now is the same thing, one abstraction level up.</p>
+      <p><strong>Nexplane is a control plane for infrastructure change.</strong> The mental model I keep coming back to: it's what an OS is to hardware, applied to infrastructure operations.</p>
+      <p>When an agent (or a human) wants to change something, they don't reach for the AWS SDK directly. They express intent as a typed operation — rotate this credential, deploy this image, harden this endpoint. The platform translates that into execution steps, routes it for approval if the blast radius warrants it, executes against the real infrastructure, and stores a rollback path before any action runs.</p>
+      <p>The typed interface matters more than it sounds. An OS syscall has a defined signature — you can't pass a negative file descriptor to <code>read()</code>. A Nexplane change request has the same property: <code>rotate_ssh_key</code> takes a host asset ID and a key type. It doesn't accept arbitrary shell commands. The operation is bounded before it touches anything real.</p>
+      <p>The approval gate is the scheduler. No two changes fight over the same resource without mediation. The platform knows what's in-flight, what's pending, what needs human review before it can proceed.</p>
+      <p>The rollback guarantee is the memory manager. Before every execution, current state is captured. If something goes wrong — or if an engineer just changes their mind — the pre-change state is available for restoration. One operation, not a forensics exercise.</p>
+      <hr />
+      <p>I spent years teaching operating systems. The abstractions that make modern software possible — virtual memory, file systems, process isolation — all came from recognizing that raw hardware access didn't scale as programs got more complex and more numerous.</p>
+      <p>Infrastructure is at that same inflection point. The agents are here. They're capable. And they're running without a kernel.</p>
+      <p>The agents are here. They're capable. And they're running without a kernel. Nexplane is the control plane that changes that.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
