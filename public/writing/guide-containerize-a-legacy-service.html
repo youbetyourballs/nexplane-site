@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Containerize a Legacy Service Without Breaking Production</title>
+  <meta name="description" content="A practical guide to containerizing legacy services safely — covering hidden dependencies, staged migration, rollback, and verification." />
+  <link rel="canonical" href="https://nexplane.ai/writing/guide-containerize-a-legacy-service" />
+  <meta property="og:title" content="How to Containerize a Legacy Service Without Breaking Production">
+  <meta property="og:description" content="A practical guide to containerizing legacy services safely — covering hidden dependencies, staged migration, rollback, and verification.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/guide-containerize-a-legacy-service">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">How to Containerize a Legacy Service Without Breaking Production</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/guide-containerize-a-legacy-service</span></div>
+    <div class="prose">
+      <p>Legacy services are tricky to containerize for a reason that rarely shows up in blog posts: <strong>the service itself is usually not the problem — the assumptions baked in around it are.</strong> A service that has been running on bare metal for six years has accumulated undocumented dependencies. It expects a specific kernel version. It writes to a path that only exists because of a symlink set up in 2019 by someone who left the company. It reads from a shared NFS mount that nobody put in the config management system. When you lift that service into a container, you are not just changing packaging — you are surfacing every assumption that was never written down. That is where projects blow up, and that is why the pre-work matters more than the Dockerfile.</p>
+
+      <p>Before I write a single line of container configuration, I do a dependency capture that goes well beyond the obvious. <strong>Ports, environment variables, and secrets are table stakes — the things that trip teams are everything else.</strong> I want to know where the service writes logs and whether anything downstream reads from those paths. I want to know what it writes to disk and whether that state needs to persist across restarts. I want to know its startup order: does it need a database to be available before it binds its port, or does it tolerate a degraded start? What does a healthy instance look like, and what signals indicate a problem before a user notices one? How is it deployed today — is there a deployment mechanism that assumes the binary lives at a specific path? What service account permissions does it run under, and are any of those permissions granted at the OS level rather than the application level? What does the network path look like — does it reach back to other services by hostname, and if so, which DNS resolver does it use? Getting all of this written down before you start is the only way to know what you are actually migrating.</p>
+
+      <p>The migration itself should be staged, not a replacement. <strong>The pattern I rely on is parallel operation: run the containerized instance alongside the original, route a slice of real traffic to it, and compare outputs before you cut over.</strong> This sounds obvious but most teams skip it because it feels slow. It is not slow — it is the only way to discover that your containerized instance is silently dropping a class of requests that the original handled fine, or that your health check passes but the service is actually writing to a tmpfs mount that disappears on restart. You cannot find these things in staging. You find them with real traffic and real comparison. The cutover should be a deliberate, observable event — not a migration that happens to be complete when somebody notices the old instance is gone.</p>
+
+      <p>Rollback for a containerized migration looks different from rollback for a config change. <strong>If the original service is still running in parallel, rollback is just a traffic shift — you move requests back to the original instance and you have bought yourself time to diagnose.</strong> If you cut over completely before validating, rollback requires you to restart the original service from whatever state it was in at cutover time, which may include uncommitted state, open connections, or lock files that the containerized instance did not clean up properly. The teams that handle this well keep the original instance warm and monitor-able for a defined period after cutover — not because they expect to use it, but because having a known-good fallback changes how carefully you cut over in the first place.</p>
+
+      <p>Verification is not "the container starts and the health check passes." That bar is too low. <strong>Real verification means the service handles the full range of requests it handled before, at the same latency profile, with the same error rate, writing to the same downstream systems in the same format.</strong> It means the logs are going where they need to go. It means the persistent state survives a container restart. It means the monitoring signals that existed before the migration are still being emitted and still being received by the systems that consumed them. I have seen containerization projects declared complete while the service was silently failing to write audit logs — the container was healthy, the app was healthy, but a compliance requirement was broken and nobody noticed for weeks. Verification is a checklist derived from the dependency capture, not a gut feeling.</p>
+
+      <p>There is a deeper principle behind all of this. <strong>Modernization should not require blind faith.</strong> The teams that containerize legacy services without incidents are not the teams with the best Dockerfiles — they are the teams that built enough observability and fallback into the migration process that they could afford to be wrong about something and still recover cleanly. Every assumption you surface before the change is a potential incident you avoided. Every parallel-run hour is a blast radius you kept bounded. Every health signal you define before the change window opens is a rollback trigger you can actually act on. The container is the destination; the migration process is what keeps production safe while you get there.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

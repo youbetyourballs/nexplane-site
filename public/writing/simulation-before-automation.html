@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulation Before Automation</title>
+  <meta name="description" content="The question isn't whether AI can make a change. The question is whether we can predict what the change will affect before it happens." />
+  <link rel="canonical" href="https://nexplane.ai/writing/simulation-before-automation" />
+  <meta property="og:title" content="Simulation Before Automation">
+  <meta property="og:description" content="The question isn't whether AI can make a change. The question is whether we can predict what the change will affect before it happens.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/simulation-before-automation">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Simulation Before Automation</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/simulation-before-automation</span></div>
+    <div class="prose">
+      <p>The infrastructure industry is obsessed with autonomous execution. The benchmarks that get the most attention are about how quickly an AI agent can complete a task end to end, without human involvement. I understand the appeal. Autonomy is fast and it is impressive in demos. But I think the field is optimizing for the wrong thing. Simulation is more important than autonomy, and we have underinvested in it badly.</p>
+
+      <p>The question people ask is: can AI make this change? The question they should be asking is: can we predict what this change will affect before it happens? Those are very different questions with very different implications. A system that can execute changes autonomously without being able to simulate their effects first is not an infrastructure control plane. It is a faster way to cause incidents. Speed without predictability is not a feature in production environments.</p>
+
+      <p><strong>Simulation gives humans better judgment at the moment they need it most.</strong> A proposed change that can be inspected before it runs — showing which systems it will touch, which dependencies it will cross, what traffic patterns it will affect, what the rollback path looks like — changes the quality of the approval conversation entirely. The approver is no longer being asked to trust an abstract description. They are being asked to review a model of what will actually happen. That is a fundamentally different cognitive task, and it produces fundamentally better decisions.</p>
+
+      <p>There is also a practical benefit that gets overlooked. Simulation catches conflicting assumptions before they collide in production. Two changes that seem independent may touch the same resource. A proposed security policy may conflict with a network path that engineering depends on. A key rotation may have a timing dependency that was not visible in the ticket. Simulation surfaces these problems cheaply. Production surfaces them expensively.</p>
+
+      <p>Automation without simulation is acceleration. It makes changes happen faster. Automation with simulation is control. It makes changes happen with better information, at the right time, with a known recovery path. Those are not the same outcome. The teams building infrastructure tooling for the next decade would do well to invest in the second one, even if the first one is easier to demo.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

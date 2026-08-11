@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why I Didn't Start With the UI</title>
+  <meta name="description" content="The honest answer is that a beautiful UI on top of a shallow control plane is the wrong product. Sequencing matters in infrastructure software." />
+  <link rel="canonical" href="https://nexplane.ai/writing/why-i-didnt-start-with-the-ui" />
+  <meta property="og:title" content="Why I Didn't Start With the UI">
+  <meta property="og:description" content="The honest answer is that a beautiful UI on top of a shallow control plane is the wrong product. Sequencing matters in infrastructure software.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/why-i-didnt-start-with-the-ui">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Why I Didn't Start With the UI</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/why-i-didnt-start-with-the-ui</span></div>
+    <div class="prose">
+      <p>The honest answer is that the UI is not good enough yet. I know that. And I want to explain why, because it is not an accident and it is not laziness — it is a deliberate sequencing decision that I believe was right.</p>
+
+<p>The harder question at the start was whether the system could model and execute real infrastructure work safely. Not demo it. Not simulate it with mocks. Actually execute a change against live infrastructure, verify the result, and roll it back if it failed. A beautiful UI on top of a shallow control plane would be the wrong product. It would be another tool that looks impressive in a sales call and disappoints in production.</p>
+
+<p><strong>The sequence matters.</strong> The architecture has to be proven first — the data model, the execution model, the rollback guarantee. Then the execution has to be proven against real integrations: real cloud APIs, real Active Directory, real Vault clusters, real network devices. Then the rollback has to be verified not just as a theoretical capability but as something that actually works when things go sideways. Only after those foundations are solid does a great UX become the right investment. Building the experience first would be building on sand.</p>
+
+<p>This is not an excuse for poor UX, and I am not proud of the rough edges that exist today. They will get fixed. UX matters enormously — it is the difference between a tool that gets used and a tool that sits on a shelf. But a poor UX on top of a correct control plane can be improved. A beautiful UX on top of a broken execution model cannot be saved with better fonts.</p>
+
+<p>The goal is to get both right. We are not there yet on the experience side. We are further along than the outside might suggest on the execution side. That is the honest state of the product.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Microsegment One Application First</title>
+  <meta name="description" content="A practical guide to starting microsegmentation with one application — observing real traffic, staging enforcement, and building organizational confidence before scaling." />
+  <link rel="canonical" href="https://nexplane.ai/writing/guide-microsegment-one-application" />
+  <meta property="og:title" content="How to Microsegment One Application First">
+  <meta property="og:description" content="A practical guide to starting microsegmentation with one application — observing real traffic, staging enforcement, and building organizational confidence before scaling.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/guide-microsegment-one-application">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">How to Microsegment One Application First</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/guide-microsegment-one-application</span></div>
+    <div class="prose">
+      <p>Every microsegmentation project I have seen go wrong started the same way: the team tried to do too much at once. They mapped the entire environment, wrote a comprehensive policy, and attempted a broad rollout — and when something broke, they could not tell what caused it or how to fix it without pulling back everything. <strong>Starting with one application is not a concession to organizational politics or limited resources — it is the correct technical strategy.</strong> The first project is where you learn what your traffic map is actually missing, which teams you need buy-in from before you can enforce anything, and what your rollback process looks like when you block something you should not have. Trying to learn all of that across fifteen applications simultaneously is how you turn a segmentation project into an incident.</p>
+
+      <p>Picking the right first application matters more than most teams realize. The instinct is usually to pick the most critical application — the one where a breach would hurt the most — because the security case is obvious. That is the wrong pick. <strong>The first application should be one that is well-understood, has a relatively bounded set of dependencies, and has an owner who is willing to work through the noise with you.</strong> You are not trying to maximize security impact on the first project. You are trying to learn: what does observation actually show you, how do you write rules that match real traffic without over-fitting, what does enforcement feel like operationally, and how does the organization respond when something gets blocked unexpectedly. Pick something where a mistake costs you a conversation, not a production incident.</p>
+
+      <p>Before writing a single rule, spend time in pure observation mode. <strong>Real traffic will surprise you.</strong> There will be connections you did not know existed — a monitoring agent phoning home on a port not in the architecture diagram, a legacy integration that was supposed to be decommissioned two years ago, a batch job that only runs on the last day of the month. If you write rules before you observe, you will discover these the hard way when enforcement starts dropping connections. The observation window should be long enough to capture your full operational cycle: daily batch jobs, weekly reports, month-end processes, any on-call tooling that only runs during incidents. What you see in a 48-hour observation window is incomplete. What you see across a full month is close to accurate.</p>
+
+      <p>Staged enforcement is not "turn it on and watch." <strong>It means running your policy in log-only mode first, reviewing what would have been blocked, closing gaps in the allow-list, and repeating that cycle until the would-be block list is empty or everything on it is intentional.</strong> Each iteration of that loop teaches you something. You learn which teams own which flows and whether they knew about those flows. You learn whether your tooling surfaces denials in a way that is fast enough for on-call engineers to act on. You learn whether your rollback process is fast enough to matter — because the first time you block something in enforcement mode, you want to know you can undo it in minutes, not hours.</p>
+
+      <p>When you do block something you should not have, the response matters as much as the fix. <strong>Teams that handle this well treat the false block as data, not failure.</strong> They document what the missed flow was, why observation did not surface it, and what they would need to catch it in future projects. They fix the allow-list and re-enable enforcement. They do not roll back the entire project because of one gap. Organizations that respond to a false block by abandoning the project were never going to get microsegmentation to work anyway — they needed the first project to also be the confidence-builder, and one rough edge was enough to shake that confidence. The teams that succeed treat false blocks as a normal part of the process and design their operational workflow accordingly.</p>
+
+      <p>Success at the end of the first project is not defined by the policy you shipped. It is defined by what the organization learned and what it is now able to do. <strong>At the end of a well-run first project, you should have a reusable observation methodology, a working enforcement workflow, a tested rollback process, and a set of teams who have been through the experience and know what to expect next time.</strong> The policy itself will need tuning — that is normal. What you cannot afford to finish the first project without is organizational muscle memory: people who know how to respond when enforcement triggers unexpectedly, who know how to read the denial logs, and who trust the process enough to stay enrolled when it gets uncomfortable.</p>
+
+      <p>The real product of the first microsegmentation project is organizational confidence, and that confidence only comes from a process that was transparent about its risks, honest about its gaps, and demonstrably safe to roll back when something went wrong. <strong>Safe change is what makes the next change possible.</strong> Every time enforcement blocks something it should not have and the team recovers cleanly — fast rollback, clear diagnosis, no extended outage — the organization learns that microsegmentation is something it can operate, not just something it can deploy. That is the outcome the first project needs to deliver. Everything else follows from that.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

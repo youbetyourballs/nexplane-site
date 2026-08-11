@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Human-in-the-Loop Is Not a Checkbox</title>
+  <meta name="description" content="Approval without understanding is theater. A meaningful human-in-the-loop system gives the reviewer intent, blast radius, rollback, and confidence — not just a button." />
+  <link rel="canonical" href="https://nexplane.ai/writing/human-in-the-loop-is-not-a-checkbox" />
+  <meta property="og:title" content="Human-in-the-Loop Is Not a Checkbox">
+  <meta property="og:description" content="Approval without understanding is theater. A meaningful human-in-the-loop system gives the reviewer intent, blast radius, rollback, and confidence — not just a button.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/human-in-the-loop-is-not-a-checkbox">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Human-in-the-Loop Is Not a Checkbox</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/human-in-the-loop-is-not-a-checkbox</span></div>
+    <div class="prose">
+      <p>Human-in-the-loop is one of those phrases that feels like a safety guarantee but often isn't. The phrase gets used in AI product marketing the same way "enterprise-grade" and "production-ready" do — as a reassurance that something responsible is happening, without much specificity about what that actually means. In practice, many systems reduce human-in-the-loop to a button. The system proposes something. The human clicks approve or deny. That is supposed to be the safeguard.</p>
+
+      <p><strong>Approval without understanding is theater.</strong> If the person clicking approve does not know what they are approving — what the change actually does, what systems it touches, what could go wrong, what happens if it fails — then the approval is not a control. It is a signature on a document you did not read. It creates the appearance of accountability without the substance. And in infrastructure, where the consequences of a bad change can be severe and fast, that appearance is worse than useless because it produces false confidence.</p>
+
+      <p>A meaningful human-in-the-loop system has to give the reviewer real information. That means the intent of the change expressed plainly, not just the commands that will run. It means the dependency order — what has to happen before what, and what that means for timing. It means a blast radius estimate — which systems, users, or services could be affected if this goes wrong. It means confidence signals — does the system think this plan is solid, or are there known gaps? It means alternatives, when they exist. And it means a rollback path, specified before execution begins, so the reviewer knows recovery is not improvised after the fact.</p>
+
+      <p>The goal of a review interface is not to show everything. Showing everything is another way of showing nothing — the reviewer gets buried in detail and defaults to approving because they cannot process it all. The goal is to surface the right things at the right level so that a competent person can form a genuine opinion about whether to proceed. That means leading with intent and blast radius. It means making the detailed steps available but not forcing them on every reviewer. <strong>The system should make human judgment better, not merely present a button.</strong></p>
+
+      <p>I also think the reviewer should be able to push back in a structured way. Not just deny — but say what they disagree with, what they want changed, what additional verification they want before approval. The change request should be a conversation artifact, not a take-it-or-leave-it proposal. The human is not just a gatekeeper. The human is a participant in a process that should be designed to benefit from their judgment, not just to document that their judgment was consulted.</p>
+
+      <p>This is harder to build than a button. It requires the system to have actually reasoned about the change well enough to explain it. It requires the interface to be thoughtful about what matters at review time versus what matters at execution time. It requires investment in the review experience as a first-class concern, not a formality. But if you are building AI-assisted infrastructure tooling and you want the human to actually be in the loop, this is the work. The button is not enough.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

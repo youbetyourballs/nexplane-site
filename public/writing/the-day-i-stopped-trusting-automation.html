@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Day I Stopped Trusting Automation</title>
+  <meta name="description" content="Automation is dangerous not because it is fast, but because it often lacks context, reversibility, and an understanding of organizational risk. Trustworthy automation starts with accountable change." />
+  <link rel="canonical" href="https://nexplane.ai/writing/the-day-i-stopped-trusting-automation" />
+  <meta property="og:title" content="The Day I Stopped Trusting Automation">
+  <meta property="og:description" content="Automation is dangerous not because it is fast, but because it often lacks context, reversibility, and an understanding of organizational risk. Trustworthy automation starts with accountable change.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/the-day-i-stopped-trusting-automation">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The Day I Stopped Trusting Automation</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/the-day-i-stopped-trusting-automation</span></div>
+    <div class="prose">
+      <p>I stopped trusting automation the day I watched a script complete successfully — every step green, every log clean — and then spent four hours figuring out why half the environment was broken. The script did exactly what it was told. The problem was that what it was told was wrong, and no one had built in any way to ask whether it should stop.</p>
+
+<p>Automation is not dangerous because it is fast. Automation is dangerous because it often lacks context, reversibility, and an understanding of organizational risk. A script can do exactly what it was told and still cause an outage. A workflow can complete successfully and still violate the intent of the change. A tool can automate the wrong thing perfectly. Speed is not the variable. <strong>Accountability is the variable.</strong></p>
+
+<p>The scenario that haunts infrastructure teams is not the automation that fails loudly. It is the automation that succeeds quietly and leaves behind a state that is correct by the script's definition and broken by the organization's definition. No alerts fire. No errors appear. And then, hours or days later, something downstream starts behaving strangely, and the investigation begins. By then, the blast radius has had time to settle in.</p>
+
+<p>What I have come to believe is that automation without reversibility is not automation — it is a one-way door. And most teams do not think about the door until they are on the wrong side of it. The question that should precede every automated action is not "can we do this?" but "if this goes wrong, what is the path back?" If there is no good answer, the automation is not ready.</p>
+
+<p><strong>That is why Nexplane is not simply an automation tool.</strong> The goal is not to let machines act faster. The goal is to make actions more understandable, constrained, testable, and reversible. Every change should have a plan. Every plan should have a rollback. Every rollback should be tested. Not because failure is likely — but because confidence in the rollback is what makes the change safe enough to approve in the first place.</p>
+
+<p>Trustworthy automation starts with accountable change. That means knowing who approved it, what it was expected to do, how it was verified, and what the recovery path looks like. That is not bureaucracy. That is engineering discipline. And it is the only kind of automation I trust anymore.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

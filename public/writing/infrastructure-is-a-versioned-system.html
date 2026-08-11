@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infrastructure Is a Versioned System</title>
+  <meta name="description" content="Infrastructure change needs the same discipline as software — version control, review, testing, and rollback — applied to a more complicated surface." />
+  <link rel="canonical" href="https://nexplane.ai/writing/infrastructure-is-a-versioned-system" />
+  <meta property="og:title" content="Infrastructure Is a Versioned System">
+  <meta property="og:description" content="Infrastructure change needs the same discipline as software — version control, review, testing, and rollback — applied to a more complicated surface.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/infrastructure-is-a-versioned-system">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Infrastructure Is a Versioned System</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/infrastructure-is-a-versioned-system</span></div>
+    <div class="prose">
+      <p>One of the most persistent mistakes in enterprise infrastructure is treating changes as events rather than objects. An event happens and disappears. An object can be inspected, compared, rolled back, and learned from. Software engineering figured this out decades ago. Version control, pull requests, code review, automated testing, staged rollouts — all of these are mechanisms for making changes into objects that can be reasoned about. Infrastructure has been slower to adopt the same discipline, and that lag is costing us.</p>
+
+      <p>The surface area of infrastructure change is more complicated than application code. A meaningful change may touch cloud resources, network paths, DNS, certificates, IAM policies, runtime state, backups, monitoring configurations, and sometimes all of these at once. Each layer has its own state model, its own failure modes, and its own rollback complexity. That complexity is real. But it is not an argument against version discipline. It is an argument for a control plane that can hold all of those layers in a single structured object and make the whole thing inspectable at once.</p>
+
+      <p><strong>When a change is an event, the only record of it is whatever the person who made it happened to write down.</strong> That record is incomplete by definition. It captures intent, not execution. It captures the expected outcome, not the actual one. When the same change needs to be repeated, reversed, or explained in a postmortem, you are working from a document rather than from the system itself. The gap between the document and reality is where incidents live.</p>
+
+      <p>When a change is an object, the system holds the full record. What was proposed. What was approved. What was executed, in what order, against what targets. What verification ran afterward. What the rollback procedure is and whether it was ever tested. That object can be diff'd against previous changes of the same type. It can be compared to what succeeded and what failed. It can surface patterns that no individual engineer would have noticed by reading tickets.</p>
+
+      <p>The goal is not to pretend infrastructure is simple code. The goal is to make infrastructure change as inspectable and as recoverable as code has become. That requires treating the change itself as a first-class artifact rather than a log entry. The teams that get there first will be the ones who can move fast without the constant fear that the thing they changed three months ago is now the thing that is quietly breaking something else.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

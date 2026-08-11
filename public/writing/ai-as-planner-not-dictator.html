@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI as Planner, Not Dictator</title>
+  <meta name="description" content="AI is most valuable in infrastructure when it helps create plans that humans and systems can inspect — not when it acts unilaterally." />
+  <link rel="canonical" href="https://nexplane.ai/writing/ai-as-planner-not-dictator" />
+  <meta property="og:title" content="AI as Planner, Not Dictator">
+  <meta property="og:description" content="AI is most valuable in infrastructure when it helps create plans that humans and systems can inspect — not when it acts unilaterally.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/ai-as-planner-not-dictator">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">AI as Planner, Not Dictator</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/ai-as-planner-not-dictator</span></div>
+    <div class="prose">
+      <p>There is a meaningful difference between an AI that helps create a plan and an AI that acts. For most domains, the distinction is interesting. For infrastructure, the distinction is essential. Production systems do not have a generous error budget. When something goes wrong, the blast radius is real and the recovery is expensive. The mode of AI involvement matters as much as the capability of the AI itself.</p>
+
+      <p>A planner can reason about things that an actor cannot. It can model dependency order — what has to happen before what. It can reason about risk — which operations are reversible, which are not, which have side effects in other systems. It can propose rollback steps before a single change is made, so that if execution fails midway, the recovery path already exists. It can surface expected verification signals so that both humans and systems know what success looks like. <strong>Acting without planning skips all of that.</strong> It substitutes speed for understanding, and in production infrastructure, speed without understanding is how incidents start.</p>
+
+      <p>I want Nexplane to use AI to increase the quality of planning, not to replace it. That means using models to reason about what a change involves, what it might break, what it depends on, and what the recovery looks like — before any execution begins. That output becomes a structured artifact: something a human can review, something a system can verify against, something that captures intent rather than just commands. The plan is the thing. The execution is downstream of the plan.</p>
+
+      <p>This framing also preserves accountability, which matters more than it sounds. When an AI acts directly, it is genuinely unclear who is responsible for the outcome. When an AI produces a plan and a human approves it, accountability is clear. The human reviewed it. The human chose to proceed. The organization made a decision, not a black box. That clarity is not bureaucracy. It is how institutions are able to safely delegate hard work without losing the ability to audit and learn from it.</p>
+
+      <p>A well-designed AI planner does a few specific things. It makes the reasoning visible. It surfaces assumptions it is making. It tells you what it does not know. It presents alternatives when tradeoffs exist. It does not just produce a script — it produces a structured, reviewable artifact that a human can push back on, modify, or reject. <strong>What it does not do is act.</strong> Acting is a separate phase, with its own controls. The planner's job is to make the execution phase as safe as possible, not to collapse the two into one.</p>
+
+      <p>The goal is not to remove humans from responsibility. The goal is to give humans better plans so they can exercise responsibility more effectively. That is a different thing than automation. Automation replaces human judgment. Planning augments it. I think the infrastructure industry has spent a lot of time pursuing the former when the latter is where the real value is.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

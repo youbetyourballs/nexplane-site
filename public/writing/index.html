@@ -63,6 +63,25 @@
         <a class="post-item" href="/writing/the-asset-inventory-problem"><span class="pt">The Asset Inventory Problem</span><span class="pd">Every security program depends on knowing what you have. And in most o</span></a>
         <a class="post-item" href="/writing/the-ai-safety-harness-the-incidents"><span class="pt">The AI Safety Harness, Part 1: The Incidents</span><span class="pd">While I was building Nexplane, I asked Claude Code to fix a VPN proble</span></a>
         <a class="post-item" href="/writing/the-ai-safety-harness-the-mechanism"><span class="pt">The AI Safety Harness, Part 2: The Mechanism</span><span class="pd">In Part 1 I argued that you can&#x27;t prompt your way to a safe infra</span></a>
+        <a class="post-item" href="/writing/the-nexplane-manifesto"><span class="pt">The Nexplane Manifesto</span><span class="pd">Infrastructure changes are inevitable. Outages are optional. Every mea</span></a>
+        <a class="post-item" href="/writing/security-philosophy"><span class="pt">Security Philosophy</span><span class="pd">Security is the ability to safely improve a system, not merely protect</span></a>
+        <a class="post-item" href="/writing/why-change-management-failed"><span class="pt">Why Change Management Failed</span><span class="pd">Traditional change management became paperwork. Its original purpose w</span></a>
+        <a class="post-item" href="/writing/why-infrastructure-needs-a-control-plane"><span class="pt">Why Infrastructure Needs a Control Plane</span><span class="pd">Modern enterprises have tools for observing infrastructure, but far fe</span></a>
+        <a class="post-item" href="/writing/infrastructure-changes-are-inevitable"><span class="pt">Infrastructure Changes Are Inevitable. Outages Are Optional.</span><span class="pd">Every meaningful organization eventually has to change production infra</span></a>
+        <a class="post-item" href="/writing/safe-execution-is-the-product"><span class="pt">Safe Execution Is the Product</span><span class="pd">A lot of infrastructure products sell visibility. Visibility matters, </span></a>
+        <a class="post-item" href="/writing/the-change-request-is-the-product"><span class="pt">The Change Request Is the Product</span><span class="pd">Most products treat a change request as paperwork. Nexplane treats it </span></a>
+        <a class="post-item" href="/writing/the-change-request-as-a-primitive"><span class="pt">The Change Request as a Primitive</span><span class="pd">In many organizations, a change request is paperwork. That separation </span></a>
+        <a class="post-item" href="/writing/blast-radius-should-be-computed"><span class="pt">Blast Radius Should Be Computed, Not Guessed</span><span class="pd">Every production change has a blast radius. In many organizations, tha</span></a>
+        <a class="post-item" href="/writing/rollback-as-a-first-class-primitive"><span class="pt">Rollback as a First-Class Primitive</span><span class="pd">Rollback is usually treated as an emergency procedure. It should be de</span></a>
+        <a class="post-item" href="/writing/simulation-before-automation"><span class="pt">Simulation Before Automation</span><span class="pd">The industry is obsessed with autonomous execution. I think simulation</span></a>
+        <a class="post-item" href="/writing/infrastructure-is-a-versioned-system"><span class="pt">Infrastructure Is a Versioned System</span><span class="pd">One of the biggest mistakes in enterprise infrastructure is treating ch</span></a>
+        <a class="post-item" href="/writing/ai-as-planner-not-dictator"><span class="pt">AI as Planner, Not Dictator</span><span class="pd">AI is strongest when it helps create plans that humans and systems can</span></a>
+        <a class="post-item" href="/writing/human-in-the-loop-is-not-a-checkbox"><span class="pt">Human-in-the-Loop Is Not a Checkbox</span><span class="pd">Human-in-the-loop is often used as a comforting phrase. In practice, </span></a>
+        <a class="post-item" href="/writing/infrastructure-change-intelligence"><span class="pt">Infrastructure Change Intelligence</span><span class="pd">The long-term moat is not the model. The moat is accumulated operatio</span></a>
+        <a class="post-item" href="/writing/why-im-open-sourcing-nexplane"><span class="pt">Why I&#x27;m Open Sourcing Nexplane</span><span class="pd">This project started because I repeatedly encountered the same problem</span></a>
+        <a class="post-item" href="/writing/open-source-first-commercial-later"><span class="pt">Open Source First, Commercial Later</span><span class="pd">The open-source core of Nexplane should be genuinely useful. This matt</span></a>
+        <a class="post-item" href="/writing/the-databricks-analogy"><span class="pt">The Databricks Analogy</span><span class="pd">Databricks did not become valuable because Spark existed. It became va</span></a>
+        <a class="post-item" href="/writing/what-belongs-in-the-open-core"><span class="pt">What Belongs in the Open Core</span><span class="pd">The open core should include enough value that practitioners can solve</span></a>
       </div>
     </div>
     <div class="post-group">
@@ -78,17 +97,32 @@
       </div>
     </div>
     <div class="post-group">
+      <div class="post-group-label">Guides</div>
+      <div class="post-list">
+        <a class="post-item" href="/writing/guide-rotate-keys-without-panic"><span class="pt">How to Rotate Keys Without Panic</span><span class="pd">Key rotation is one of those tasks everyone agrees is important and ma</span></a>
+        <a class="post-item" href="/writing/guide-patch-production-safely"><span class="pt">How to Patch a Production Service Safely</span><span class="pd">Patching sounds simple until the service matters. The actual patch sho</span></a>
+        <a class="post-item" href="/writing/guide-move-dns-safely"><span class="pt">How to Move DNS Safely</span><span class="pd">DNS changes are small until they are not. A safe move starts long befo</span></a>
+        <a class="post-item" href="/writing/guide-microsegment-one-application"><span class="pt">How to Microsegment One Application First</span><span class="pd">Microsegmentation fails when organizations try to boil the ocean. Sta</span></a>
+        <a class="post-item" href="/writing/guide-containerize-a-legacy-service"><span class="pt">How to Containerize a Legacy Service Without Breaking Production</span><span class="pd">Containerizing a legacy service is rarely just a Dockerfile. The hard </span></a>
+      </div>
+    </div>
+    <div class="post-group">
       <div class="post-group-label">Founder</div>
       <div class="post-list">
         <a class="post-item" href="/writing/why-i-built-nexplane"><span class="pt">Why we built Nexplane</span><span class="pd">I&#x27;ve had a version of the same conversation more times than I can</span></a>
         <a class="post-item" href="/writing/we-gave-an-ai-agent-infrastructure-access"><span class="pt">We gave an AI agent infrastructure access. Here&#x27;s what we learned.</span><span class="pd">There&#x27;s a version of &quot;AI for infrastructure&quot; that sound</span></a>
         <a class="post-item" href="/writing/why-security-creates-work-for-engineering"><span class="pt">Why security teams keep creating work for engineering</span><span class="pd">If you&#x27;ve worked in security long enough, you&#x27;ve been in thi</span></a>
         <a class="post-item" href="/writing/recovering-an-ad-forest-after-ransomware"><span class="pt">What actually happens when you try to recover an AD forest after ransomware</span><span class="pd">In May 2017, WannaCry hit the NHS. Within hours, hospitals were divert</span></a>
+        <a class="post-item" href="/writing/built-on-real-infrastructure"><span class="pt">Built on Real Infrastructure</span><span class="pd">There is a meaningful difference between software that demos well and </span></a>
+        <a class="post-item" href="/writing/the-cost-of-fear-in-infrastructure"><span class="pt">The Cost of Fear in Infrastructure</span><span class="pd">Organizations pay a hidden tax when they are afraid to change infrastr</span></a>
+        <a class="post-item" href="/writing/the-day-i-stopped-trusting-automation"><span class="pt">The Day I Stopped Trusting Automation</span><span class="pd">Automation isn&#x27;t dangerous because it is fast. It&#x27;s dangerous</span></a>
+        <a class="post-item" href="/writing/why-i-didnt-start-with-the-ui"><span class="pt">Why I Didn&#x27;t Start With the UI</span><span class="pd">The honest answer is that the UI is not good enough yet. That is not </span></a>
       </div>
     </div>
     <div class="post-group">
       <div class="post-group-label">Short form</div>
       <div class="post-list">
+        <a class="post-item" href="/writing/fear-vs-risk"><span class="pt">Fear vs. Risk</span><span class="pd">Organizations often confuse fear with risk. Risk is an estimate. Fear </span></a>
         <a class="post-item" href="/writing/ai-shouldnt-have-root"><span class="pt">AI Shouldn&#x27;t Have Root</span><span class="pd">The industry&#x27;s biggest AI debate may be asking the wrong question</span></a>
         <a class="post-item" href="/writing/reasoning-is-the-new-source-code"><span class="pt">Reasoning Is the New Source Code</span><span class="pd">For decades, software engineering has treated source code as the prima</span></a>
         <a class="post-item" href="/writing/ai-doesnt-need-more-permissions"><span class="pt">AI Doesn&#x27;t Need More Permissions. It Needs a Better Change Process.</span><span class="pd">Every week there&#x27;s a new discussion about giving AI more access t</span></a>

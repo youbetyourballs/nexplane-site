@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security Philosophy</title>
+  <meta name="description" content="Security is the ability to safely improve a system, not merely protect it. The highest-performing security organizations are not simply stricter — they are more capable." />
+  <link rel="canonical" href="https://nexplane.ai/writing/security-philosophy" />
+  <meta property="og:title" content="Security Philosophy">
+  <meta property="og:description" content="Security is the ability to safely improve a system, not merely protect it. The highest-performing security organizations are not simply stricter — they are more capable.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/security-philosophy">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Security Philosophy</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/security-philosophy</span></div>
+    <div class="prose">
+      <p>Security is the ability to safely improve a system, not merely protect it. I have held this belief through four CISO roles and it has shaped every program I have built. The framing matters because most security programs are designed around protection — around keeping things out, locking things down, restricting access. That work is real and necessary. But an organization that can only protect and cannot confidently change is not secure. It is frozen. And frozen systems accumulate risk faster than most organizations realize.</p>
+
+<p>Architecture matters more than isolated controls. A firewall rule that compensates for a structural flaw is not a security control — it is a deferral. A credential rotation policy that cannot be executed safely is not a policy — it is a wish. The organizations that make meaningful, durable security progress are the ones that invest in the underlying structure of their environments: network topology, identity architecture, access patterns, secret management. <strong>Security should increase organizational capacity to change, not decrease it.</strong> A security program that makes the environment more brittle in the name of control has misunderstood its mandate.</p>
+
+<p>Every meaningful security change should be understandable, reviewable, explainable, attributable, verifiable, and reversible. These are not compliance requirements. They are engineering properties that determine whether a security change can actually be trusted. A change that cannot be reviewed is a change that cannot be approved with confidence. A change that cannot be rolled back is a change that carries unlimited downside. Security should reduce fear, not increase it. <strong>Zero Trust is a direction, not a product.</strong> It is achieved through continuous architectural improvement, not through buying a vendor's label.</p>
+
+<p>A security team that can identify risk but cannot safely change the environment is trapped. I have been in that position. You produce findings. You write reports. You brief the board. And then the same vulnerabilities persist because the change process is too dangerous, too slow, or too unclear. A security team that can produce findings but not execute remediation becomes a source of frustration — to the engineering teams who receive the tickets and to the security team itself. The gap between what the team knows and what the team can safely do is where organizations stay exposed.</p>
+
+<p>A security team that can safely plan, simulate, approve, execute, verify, and roll back infrastructure changes becomes a force multiplier. It can patch faster. It can segment more aggressively. It can rotate secrets without treating it as an emergency event. It can migrate brittle systems without pretending the risk is zero. <strong>It can make change boring.</strong> Boring is the target state. When security changes are boring, it means they are routine, well-understood, low-drama, and reversible. That is a mature program.</p>
+
+<p>Every security control should be evaluated by two measures: the risk it removes and the operational cost it creates. Controls that remove significant risk at low operational cost are the right investments. Controls that add friction without meaningfully reducing risk are a tax on the organization that produces resentment without improving the posture. Recovery is part of prevention. The ability to detect, respond, and restore is as important as the ability to prevent — and it requires the same discipline around change management, rollback, and documentation.</p>
+
+<p>The highest-performing security organizations are not simply stricter. They are more capable. They have built the infrastructure to act on what they know. They have earned the trust of engineering teams through reliable, predictable, reversible changes. They have made security a property of the system rather than a layer on top of it. That is the target state. It is achievable. It requires treating the ability to change production safely as a security outcome in its own right.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

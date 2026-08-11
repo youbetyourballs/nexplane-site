@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infrastructure Change Intelligence</title>
+  <meta name="description" content="The long-term moat for an infrastructure control plane isn't the model. It's accumulated operational memory — what kinds of changes are risky, what kinds of plans succeed." />
+  <link rel="canonical" href="https://nexplane.ai/writing/infrastructure-change-intelligence" />
+  <meta property="og:title" content="Infrastructure Change Intelligence">
+  <meta property="og:description" content="The long-term moat for an infrastructure control plane isn't the model. It's accumulated operational memory — what kinds of changes are risky, what kinds of plans succeed.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/infrastructure-change-intelligence">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Infrastructure Change Intelligence</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/infrastructure-change-intelligence</span></div>
+    <div class="prose">
+      <p>The long-term moat for Nexplane is not the model. Any team can call the same APIs. The model is a capability that is available to everyone. <strong>What is not available to everyone is accumulated operational memory</strong> — the specific record of what kinds of changes, against what kinds of infrastructure, in what kinds of environments, succeeded or failed and why. That is the thing that takes time to build and cannot be replicated by switching models.</p>
+
+      <p>The change request is the right unit of observation for this. A change request captures intent, proposed plan, execution steps, verification signals, outcome, and — when things go wrong — rollback. If you observe enough of those over time, across enough organizations and environments, you start to accumulate something genuinely valuable: a structured understanding of which plans tend to succeed, which tend to fail, which kinds of changes carry hidden dependencies, which rollback approaches actually work under pressure. That is different from what a general-purpose language model can offer. A language model can reason about infrastructure in the abstract. Infrastructure change intelligence is specific.</p>
+
+      <p>Concretely, accumulated operational memory means things like: knowing that key rotation changes in environments with certain authentication architectures tend to surface a particular class of dependency problem that the original plan did not account for. Knowing that network segmentation changes of a certain scope almost always require a verification step that teams skip. Knowing that rollback of a certain type of change frequently fails in a particular way and that the plan should be structured differently to account for it. <strong>These are not things you learn from training data. These are things you learn from watching real changes execute against real systems.</strong></p>
+
+      <p>This is why the structured change request matters from day one, not just as a workflow tool but as a data model. Every change that flows through the platform is a training example. Not in the model fine-tuning sense necessarily — but in the sense that the platform can observe patterns, surface them at planning time, and eventually use them to make better recommendations. The platform gets smarter as it sees more. That compounding effect is what creates durable value that competitors cannot simply copy by using the same underlying model.</p>
+
+      <p>I want to be clear about what this is and is not. This is not a pitch for surveillance or data harvesting. Organizations should own their own change data. The point is that the platform's ability to reason about risk, flag likely failure modes, and produce better plans should improve over time as it accumulates operational experience. <strong>The value is not just generation. The value is judgment earned through observation.</strong> A junior engineer can generate a script. A senior engineer who has watched dozens of similar changes execute knows where the script is likely to break. Infrastructure change intelligence is an attempt to make that experience systematic rather than personal.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

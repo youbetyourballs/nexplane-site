@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Source First, Commercial Later</title>
+  <meta name="description" content="The open-source core of an infrastructure control plane must be genuinely useful — not a teaser. Trust is the product, and open source is how you earn it." />
+  <link rel="canonical" href="https://nexplane.ai/writing/open-source-first-commercial-later" />
+  <meta property="og:title" content="Open Source First, Commercial Later">
+  <meta property="og:description" content="The open-source core of an infrastructure control plane must be genuinely useful — not a teaser. Trust is the product, and open source is how you earn it.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/open-source-first-commercial-later">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Open Source First, Commercial Later</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/open-source-first-commercial-later</span></div>
+    <div class="prose">
+      <p>The open-source core of Nexplane should be genuinely useful. That statement is both a strategic claim and a moral one, and I think both matter. On the strategy side: an infrastructure control plane is a trust-sensitive product. The teams that would adopt it are managing real production systems. They are not going to adopt something they cannot inspect. Open source gives practitioners the ability to read the code, understand what the system is doing, criticize the design, adapt it for their environment, and contribute improvements. That is how trust gets built in infrastructure tooling. <strong>You cannot shortcut it.</strong></p>
+
+      <p>On the moral side: if this work can help teams make infrastructure changes more safely, the community should have access to it. I do not think the value of building something useful should accrue entirely to whoever builds it first. The ideas in Nexplane — change requests as structured artifacts, rollback as a first-class design concern, human review as a genuine control rather than a checkbox — these ideas belong in the community. Putting them behind a paywall from day one would be the wrong call.</p>
+
+      <p>Commercial value can still exist, and I expect it will. Managed deployment for organizations that do not want to run their own instance. Enterprise governance features. Advanced RBAC and audit reporting. Team workflows for larger organizations. Support contracts. Managed upgrades. Integrations that require dedicated engineering effort to maintain. These are real problems that enterprises pay real money to solve, and they are a legitimate layer to build on top of a useful open-source core. <strong>But the core should not be a fake open-source teaser</strong> — a stripped-down version that demonstrates what the product could do if you paid for it. That approach poisons the well. Practitioners recognize it immediately and trust evaporates.</p>
+
+      <p>The line I am drawing is this: the community version should be capable enough that a team can use it to solve real infrastructure change problems in production. That means the change request specification, the execution engine, the rollback framework, the connector integrations for major platforms, local deployment support, and documentation. The commercial layer builds on top of that without hollowing it out. The community should not feel like they are getting a demo. They should feel like they are getting the real thing.</p>
+
+      <p>That is a harder line to hold over time than it sounds. There will be pressure to move features up into the commercial tier. I think that pressure has to be resisted systematically, not case-by-case. The community version stays real. The commercial version adds genuine enterprise capability. That is the deal, and keeping it is how the trust that makes the commercial version viable gets maintained in the first place.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Rotate Keys Without Panic</title>
+  <meta name="description" content="A practical guide to key rotation — covering inventory, dual-key parallel operation, migrating consumers, monitoring, and what rollback looks like for a revoked key." />
+  <link rel="canonical" href="https://nexplane.ai/writing/guide-rotate-keys-without-panic" />
+  <meta property="og:title" content="How to Rotate Keys Without Panic">
+  <meta property="og:description" content="A practical guide to key rotation — covering inventory, dual-key parallel operation, migrating consumers, monitoring, and what rollback looks like for a revoked key.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/guide-rotate-keys-without-panic">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">How to Rotate Keys Without Panic</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/guide-rotate-keys-without-panic</span></div>
+    <div class="prose">
+      <p>The reason teams delay key rotation is almost never technical — it is the inventory problem. <strong>Rotating a key you do not fully understand the blast radius of is genuinely dangerous, so the rational response to an incomplete inventory is to delay.</strong> The problem is that delaying does not fix the inventory — it just extends the window during which a compromised or overly permissive key is in use. The teams that rotate keys on schedule are not the ones with fewer dependencies; they are the ones who did the inventory work up front and built it into the process. The inventory is not a prerequisite for rotation — it is the prerequisite for being able to rotate without panic, and building it is the first step of every key rotation I do.</p>
+
+      <p>Building the consumer inventory means finding every place the key is used — not just the places you expect. <strong>A key that was created two years ago for one purpose has often been re-used by three other systems since then, because it was available and had the right permissions.</strong> The inventory should include: every service that uses the key, how it is stored in each service (environment variable, secrets manager, hardcoded config, encrypted at rest), whether there is a deployment step required to update it, who owns each consumer, and how long that consumer takes to pick up a new key value after it is updated. For a key with five consumers, this work takes an hour. For a key with fifteen consumers, it takes a day. Either way, it is work that has to be done before the rotation, not discovered mid-rotation when something breaks.</p>
+
+      <p>Dual-key parallel operation is the technique that makes rotation safe at scale, and it is simpler than it sounds. <strong>Instead of generating a new key and immediately revoking the old one, you generate the new key and run both keys as valid simultaneously for a migration window.</strong> During that window, you update each consumer to use the new key, verify the consumer is successfully authenticating with it, and mark it done. When every consumer is migrated, you revoke the old key. The migration window can be hours or days depending on how complex the consumer landscape is. The critical property is that at no point during the migration is any consumer left without a working key — the old key is valid until after every consumer has successfully switched to the new one. This is the difference between a rotation with a maintenance window and a rotation with no user impact.</p>
+
+      <p>Migrating consumers without a maintenance window requires knowing which consumers can pick up a new key value without a restart and which ones cannot. <strong>Services that read credentials at startup and cache them in memory will not automatically pick up the new key — you need a deliberate restart or a config reload.</strong> Services that read from a secrets manager on each request will pick up the new key as soon as the secrets manager is updated, with no restart required. The migration order matters: high-traffic or business-critical consumers should be migrated early in the window, while the old key is still valid and there is plenty of time to troubleshoot. Long-tail consumers — batch jobs, monthly reports, backup agents — need to be explicitly enumerated because they will not surface in normal traffic monitoring during a short observation window.</p>
+
+      <p>The monitoring you need during a key rotation is different from normal service monitoring. <strong>You are specifically looking for authentication failures using the old key — which would indicate a consumer that was not in your inventory and has not been migrated.</strong> These will not always surface as obvious errors. A service that silently retries authentication failures and eventually succeeds may not appear in error rate dashboards at all, but it will show up in access logs as repeated failed attempts with the old key ID. Before you revoke the old key, I want to see zero active authentications against it for long enough to cover the full operational cycle of every consumer — which for some environments means 24 hours, and for others means a full week. Revoking before that window closes is how you discover that the payroll batch job only runs on Fridays.</p>
+
+      <p>Rollback looks different depending on whether you have already revoked the old key. <strong>If you discover a missed consumer before revocation, rollback is trivial — the old key is still valid, the consumer has not changed, and you add it to the migration list.</strong> If you discover a missed consumer after revocation, you do not have a rollback in the traditional sense — you have a recovery path, which is issuing a new key to the missed consumer as quickly as possible. This is why the revocation step should be a deliberate, logged, approval-gated action and not something that happens automatically at the end of a script. The gap between "all known consumers migrated" and "old key revoked" should be a human decision point, not a timer. That decision point is where you protect yourself against the inventory being wrong.</p>
+
+      <p>Key rotation should be planned infrastructure change, not a fire drill — and the difference between those two things is almost entirely process, not technology. <strong>When rotation is an emergency response to a suspected compromise, you are doing it without a complete inventory, under time pressure, with incomplete monitoring, and with no migration window.</strong> That is the scenario that causes outages. When rotation is a scheduled, well-understood operational event with a complete consumer inventory, a dual-key migration window, and monitored revocation, it is a change with a known blast radius, a tested rollback path, and a predictable outcome. Building the process that makes rotation routine is the investment that removes the panic — not from any single rotation, but from every rotation that follows.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

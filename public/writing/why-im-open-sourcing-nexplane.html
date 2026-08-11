@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why I'm Open Sourcing Nexplane</title>
+  <meta name="description" content="This project started because I kept running into the same problem: more infrastructure changes to make than safe ways to make them. Here's why I'm open sourcing the core." />
+  <link rel="canonical" href="https://nexplane.ai/writing/why-im-open-sourcing-nexplane" />
+  <meta property="og:title" content="Why I'm Open Sourcing Nexplane">
+  <meta property="og:description" content="This project started because I kept running into the same problem: more infrastructure changes to make than safe ways to make them. Here's why I'm open sourcing the core.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/why-im-open-sourcing-nexplane">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Why I'm Open Sourcing Nexplane</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/why-im-open-sourcing-nexplane</span></div>
+    <div class="prose">
+      <p>This project started because I repeatedly encountered the same problem across different organizations, different environments, different teams: <strong>we have more infrastructure changes to make than we have safe ways to make them.</strong> Keys that need to rotate. Systems that need patching. Networks that need segmentation. Access patterns that need tightening. The work is clear. The machinery for doing it safely — planning, simulation, review, execution, verification, rollback — either does not exist or exists inconsistently, scattered across runbooks and tribal knowledge and the memory of whoever has been around longest.</p>
+
+      <p>Over the years I built tooling to address that problem. Not in a clean, abstract way — in the way you build things when you have a real problem in front of you and you need it solved for a real production environment. The early versions were rough. Some of them still are. But the core ideas have survived contact with real infrastructure. Real key rotations. Real network changes. Real rollbacks under pressure. That durability matters more to me than elegance.</p>
+
+      <p>I am open sourcing the core because I do not know whether Nexplane becomes a commercial company, and I think that is okay. I genuinely believe the community should have access to these ideas regardless of how the business side resolves. If this project grows into something larger — enterprise customers, a managed offering, a team — great. If it simply helps practitioners automate difficult infrastructure work more safely, that is already a success. Both outcomes are worth pursuing. Neither outcome requires keeping the core closed.</p>
+
+      <p>There is also something specific I believe about this moment. AI is making it easier to generate plans, scripts, and proposed changes. That is genuinely useful. I use it constantly. But it is also dangerous if the surrounding change machinery is weak. <strong>The question should not be "How do we give AI root?" The question should be "How do we let AI help while preserving accountability, review, simulation, verification, and rollback?"</strong> That is the question Nexplane is trying to answer. Opening the source means the community can see the answer, criticize it, improve it, and adapt it — rather than taking it on faith.</p>
+
+      <p>I have watched organizations spend years and real money on security and infrastructure tooling that either did not survive contact with their actual environment or could not be adapted when requirements changed. Closed systems that required vendor involvement for every customization. Opaque platforms where the organization could not understand what the tool was actually doing or why. That is a bad deal, especially for infrastructure work where trust is the entire foundation. If practitioners cannot inspect the system that is managing their infrastructure, they should not trust it. Open source is how you earn that trust.</p>
+
+      <p>My belief about infrastructure change is simple: the outage at the end of the deferred-change queue is not inevitable. It is the predictable result of not having the machinery to change safely. That machinery can be built. It can be systematic rather than personal. It can be available to teams that have not yet paid the expensive lessons that teach you why it matters. <strong>That is what I am trying to build, and it should be something the community can see, adapt, and improve.</strong></p>
+
+      <p>So that is why. Not because open source is a marketing strategy. Not because I have a clever business model that requires it. Because the problem is real, the ideas have been tested, and the right thing to do with tested ideas is share them.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

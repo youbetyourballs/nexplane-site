@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Change Request Is the Product</title>
+  <meta name="description" content="Most products treat a change request as paperwork. Nexplane treats it as the primary object in the system — one that should become smarter over time." />
+  <link rel="canonical" href="https://nexplane.ai/writing/the-change-request-is-the-product" />
+  <meta property="og:title" content="The Change Request Is the Product">
+  <meta property="og:description" content="Most products treat a change request as paperwork. Nexplane treats it as the primary object in the system — one that should become smarter over time.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/the-change-request-is-the-product">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">The Change Request Is the Product</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/the-change-request-is-the-product</span></div>
+    <div class="prose">
+      <p>When people ask what Nexplane is, the shortest answer I can give them is this: we built a platform where the Change Request is the primary object in the system. Not a ticket. Not a log entry. Not a form. The CR is a structured, typed, executable object that carries the full lifecycle of a change — from the first statement of intent through to the verified outcome and whatever lessons came after. Everything else in the platform exists to make that object as good as it can be.</p>
+
+      <p>Most infrastructure tools treat the change request as a side artifact. You use a tool to do a thing, and separately you file a ticket saying you did the thing. The tool does not know about the ticket. The ticket does not know what the tool actually did. The compliance team reads the ticket. The engineering team reads the tool logs. Neither reads the same story. That disconnect is expensive and it compounds over time — every change that runs outside a coherent record is organizational memory that was never written down.</p>
+
+      <p><strong>The CR should contain enough to reconstruct not just what happened, but why.</strong> Intent, scope, dependencies, risk assessment, blast radius, approvals, execution plan, verification criteria, rollback procedure, actual outcome. That is not a long list when you build a system around it. It becomes the natural shape of infrastructure work when the tooling supports it. When the CR is the primary object, engineers stop thinking of documentation as a tax. It becomes part of the workflow because the workflow runs through it.</p>
+
+      <p>The more interesting property is that this object should become smarter over time. A CR for rotating a set of credentials in 2026 should inform the risk model for rotating a different set of credentials in 2027. A failed rollback in one environment should surface as a warning the next time a similar change runs somewhere else. The change history is not an archive. It is training data for better decisions. That feedback loop is what separates a control plane from a change log.</p>
+
+      <p>This is why the Change Request is not a feature of Nexplane. It is the product. Everything we build is in service of making that object richer, more executable, more connected to the systems it touches, and more useful the second time than the first. If the CR is right, the audit trail is right, the rollback is right, and the organizational learning is right. If the CR is just paperwork, none of that follows.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

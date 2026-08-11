@@ -4,6 +4,9 @@
   <url><loc>https://nexplane.ai/enterprise</loc></url>
   <url><loc>https://nexplane.ai/licensing</loc></url>
   <url><loc>https://nexplane.ai/writing</loc></url>
+  <url><loc>https://nexplane.ai/writing/anchor-the-rollback-nobody-built</loc></url>
+  <url><loc>https://nexplane.ai/writing/anchor-the-organizational-memory-problem</loc></url>
+  <url><loc>https://nexplane.ai/writing/anchor-why-ai-needs-a-change-process</loc></url>
   <url><loc>https://nexplane.ai/writing/the-system-produces-bad-outcomes</loc></url>
   <url><loc>https://nexplane.ai/writing/the-incentive-mismatch</loc></url>
   <url><loc>https://nexplane.ai/writing/the-execution-gap</loc></url>
@@ -25,9 +28,9 @@
   <url><loc>https://nexplane.ai/writing/back-to-basics-secrets-rotation</loc></url>
   <url><loc>https://nexplane.ai/writing/back-to-basics-log-agent</loc></url>
   <url><loc>https://nexplane.ai/writing/back-to-basics-security-groups</loc></url>
-  <url><loc>https://nexplane.ai/writing/why-security-creates-work-for-engineering</loc></url>
-  <url><loc>https://nexplane.ai/writing/we-gave-an-ai-agent-infrastructure-access</loc></url>
   <url><loc>https://nexplane.ai/writing/why-i-built-nexplane</loc></url>
+  <url><loc>https://nexplane.ai/writing/we-gave-an-ai-agent-infrastructure-access</loc></url>
+  <url><loc>https://nexplane.ai/writing/why-security-creates-work-for-engineering</loc></url>
   <url><loc>https://nexplane.ai/writing/recovering-an-ad-forest-after-ransomware</loc></url>
   <url><loc>https://nexplane.ai/writing/ai-shouldnt-have-root</loc></url>
   <url><loc>https://nexplane.ai/writing/reasoning-is-the-new-source-code</loc></url>
@@ -76,7 +79,4 @@
   <url><loc>https://nexplane.ai/writing/reversibility-is-the-ultimate-safety-feature</loc></url>
   <url><loc>https://nexplane.ai/writing/building-an-ai-native-organization</loc></url>
   <url><loc>https://nexplane.ai/writing/next-decade-of-engineering</loc></url>
-  <url><loc>https://nexplane.ai/writing/anchor-the-rollback-nobody-built</loc></url>
-  <url><loc>https://nexplane.ai/writing/anchor-the-organizational-memory-problem</loc></url>
-  <url><loc>https://nexplane.ai/writing/anchor-why-ai-needs-a-change-process</loc></url>
 </urlset>

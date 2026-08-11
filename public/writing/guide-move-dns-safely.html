@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Move DNS Safely</title>
+  <meta name="description" content="A practical guide to DNS changes — covering TTL propagation, pre-work, what to watch during and after the change, and what rollback actually looks like." />
+  <link rel="canonical" href="https://nexplane.ai/writing/guide-move-dns-safely" />
+  <meta property="og:title" content="How to Move DNS Safely">
+  <meta property="og:description" content="A practical guide to DNS changes — covering TTL propagation, pre-work, what to watch during and after the change, and what rollback actually looks like.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/guide-move-dns-safely">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">How to Move DNS Safely</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/guide-move-dns-safely</span></div>
+    <div class="prose">
+      <p>DNS changes feel simple because the mechanism is simple: you update a record, and eventually the world sees the new value. That simplicity is deceptive. <strong>The danger in DNS changes is not the change itself — it is the gap between when you make the change and when every system that depends on it actually sees it.</strong> TTL propagation is not instant, and it is not uniform. Different resolvers will cache your old record for different amounts of time. Some clients ignore TTL entirely and cache for longer than they should. Some load balancers and CDNs have their own internal caches that do not flush just because you updated an upstream record. And if the name you are moving has a TLS certificate associated with it, the certificate validation chain may depend on the old record being in place in ways that are not obvious until you have already cut over.</p>
+
+      <p>The pre-work for a DNS change starts days before the change window, not hours. <strong>The first thing to do is audit what your TTL is set to today and lower it — substantially — well in advance of the change.</strong> If your record currently has a TTL of 3600 seconds, resolvers are allowed to cache the old value for up to an hour after you update it. Drop it to 60 or 120 seconds before you make any other change, then wait long enough for that lower TTL to propagate through the resolver chain. This compresses your blast radius in both directions: if the change goes wrong, you can put the old record back and the world will converge to it faster. The record audit should also surface every dependent record — CNAMEs, MX records, SPF and DKIM entries — and confirm that none of them will break as a side effect of the primary move.</p>
+
+      <p>During the change itself, the monitoring posture needs to be active, not passive. <strong>Do not wait for users or alerts to tell you something is wrong — watch the resolution actively from multiple vantage points.</strong> Query authoritative nameservers directly to confirm the record updated. Query from resolvers in different geographic regions and different networks to see what they are returning. Watch error rates on any service that depends on the name — a spike in connection failures or certificate errors is the signal that something is resolving wrong or cached stale. The first few minutes after a DNS change are the highest-risk window, and the teams that catch problems early are the ones who are actively watching rather than passively waiting.</p>
+
+      <p>After the change, the risk does not end when propagation looks complete. <strong>Negative caching is a specific hazard that catches teams off guard: if a resolver tried to resolve the name while the change was in flight and got an error, it may cache that failure for the negative TTL duration, which is set independently from the record TTL.</strong> Clients that were mid-session when the change happened may hold the old IP in memory until their connection times out or they re-query. Applications with persistent connection pools may never re-resolve the name at all unless you restart them. The post-change monitoring window needs to be long enough to catch all of these: not five minutes after propagation looks complete, but long enough to cover your connection pool lifetimes, your session durations, and your slowest-updating external resolvers.</p>
+
+      <p>Rollback for a DNS change is not instant even if you put the old record back the moment something goes wrong. <strong>The same TTL and propagation dynamics that slow down the forward change also slow down the rollback.</strong> If you lowered the TTL before the change, rollback propagation will be fast — but you still have to wait for it, and during that window you may have clients that are half-migrated, resolving to different addresses depending on which resolver they hit. The rollback plan needs to account for this: what do you do with requests that land on the new target while rollback is in progress? Is the old target still running and accepting connections? If you decommissioned the old target before rollback propagation completed, you do not have a rollback — you have a longer outage. Keep the old target live until you are confident the transition is stable and well past the maximum possible cache duration.</p>
+
+      <p>The principle that holds all of this together is that blast radius should be computed before you act. <strong>A DNS change with a 3600-second TTL and no pre-work has a potential blast radius of every client that resolves that name, for up to an hour after you realize something is wrong.</strong> A DNS change with a 60-second TTL, a well-understood dependent record map, active monitoring from multiple vantage points, and a live old target ready for rollback has a blast radius measured in seconds and bounded to the clients currently in flight. The same change, with completely different risk profiles, depending entirely on the pre-work. That gap — between acting with and without a computed blast radius — is where DNS incidents are made and avoided.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

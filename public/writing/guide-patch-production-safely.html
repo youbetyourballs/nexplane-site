@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Patch a Production Service Safely</title>
+  <meta name="description" content="A practical guide to patching production services — covering the pre-patch checklist, dependency mapping, snapshot state, health signals, and what rollback actually looks like." />
+  <link rel="canonical" href="https://nexplane.ai/writing/guide-patch-production-safely" />
+  <meta property="og:title" content="How to Patch a Production Service Safely">
+  <meta property="og:description" content="A practical guide to patching production services — covering the pre-patch checklist, dependency mapping, snapshot state, health signals, and what rollback actually looks like.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/guide-patch-production-safely">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">How to Patch a Production Service Safely</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/guide-patch-production-safely</span></div>
+    <div class="prose">
+      <p>Most production patching failures are not caused by a bad patch — they are caused by a team that skipped the pre-patch checklist because the patch looked routine. <strong>The checklist is not bureaucracy; it is the difference between a patch that takes fifteen minutes and a patch that turns into a two-hour incident.</strong> The questions that need answers before the change window opens are: What is the current state of the service — is it healthy, and do we have a baseline to compare against after the patch? What packages will this update, and are any of them shared libraries that other services depend on? Is there a service restart required, and if so, how long does the service take to come back up? What is the rollback path, and how long does it take? Has this patch been applied in a non-production environment, and did anything unexpected happen there? Teams that skip this work are not saving time — they are borrowing it from the incident they will have later.</p>
+
+      <p>Running a package manager against a production service and assuming the output is the complete picture is how teams get surprised. <strong>The dependency graph for a real service is rarely what the package manager shows you.</strong> A service may depend on a shared library that other services on the same host also depend on — and upgrading that library may break those other services in ways that are not obvious until they next restart. A patch to a system library may change behavior that application code relies on implicitly, through undocumented assumptions about buffer sizes, locale handling, or signal behavior. The services that depend on the thing you are patching are as important as the thing itself. Before the change window opens, I want a written map of what shares dependencies with the target service — on the same host, in the same container runtime, or using the same shared storage layer.</p>
+
+      <p>The snapshot state that needs to exist before the window opens goes beyond a package version list. <strong>For a service that writes data, I want a verified backup or snapshot taken as close to the change window as operationally possible — not the nightly backup from twelve hours ago.</strong> I want the current running configuration captured: which config files were in place, what environment variables were set, what version of the service was running before the patch. I want a health baseline: what were the key metrics — request rate, error rate, latency percentiles, queue depth, whatever signals matter for this service — in the hour before the change. That baseline is what I will compare against after the patch is applied. Without it, I am making a judgment call about whether the post-patch state is acceptable with no reference point.</p>
+
+      <p>Health signals need to be defined before the change, not improvised after it. <strong>A service that starts up and passes its own health check is not the same thing as a service that is actually healthy.</strong> The health check may only cover the happy path. The service may be up but processing requests at double its normal latency. It may be writing to a log that looks clean while silently dropping a category of requests. The signals I care about after a patch are the ones that would surface a problem before a user reports it: error rates by endpoint, latency distribution, downstream write verification, and any compliance or audit-relevant output the service produces. These should be defined as a post-patch verification checklist that someone runs through deliberately, not inferred from silence.</p>
+
+      <p>Rollback for a live patched service is not just "uninstall the package." <strong>If the service wrote data during the post-patch period, or if the patch included a schema migration, or if other services updated their behavior based on an API change the patch introduced, reverting the package version does not undo those effects.</strong> A complete rollback plan identifies what state was written after the patch was applied and whether it is safe to discard or whether it needs to be migrated back. For most patches, the answer is that the data written during the post-patch window is still valid and the service can be rolled back cleanly — but the team needs to have confirmed that before the change, not be trying to figure it out under pressure during a post-patch incident. The rollback plan is part of the patch plan, and it should be reviewed by someone who was not the person who wrote it.</p>
+
+      <p>When patching goes well consistently, something changes in how the organization thinks about patching. <strong>Teams that have a clean, tested, well-documented patch workflow stop avoiding patches — they start treating them as routine infrastructure maintenance instead of high-stakes events.</strong> That shift matters enormously for security posture. The organizations that delay patches the longest are not the ones with the most complex environments — they are the ones that have had enough bad patch experiences that the organization learned to fear them. A good patch workflow is not just operationally useful; it is the organizational foundation that makes the next patch, and the one after that, progressively less frightening. Safe change, repeated enough times, becomes the baseline expectation rather than the exceptional outcome.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
