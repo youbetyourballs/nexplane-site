@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rollback Has to Be Designed In</title>
+  <meta name="description" content="A rollback you haven't exercised is not a rollback. It's a hope with a UI. Real rollback is a design decision made before a change runs, not a procedure improvised after something breaks." />
+  <link rel="canonical" href="https://nexplane.ai/writing/rollback-has-to-be-designed-in" />
+  <meta property="og:title" content="Rollback Has to Be Designed In">
+  <meta property="og:description" content="A rollback you haven't exercised is not a rollback. It's a hope with a UI. Real rollback is a design decision made before a change runs, not a procedure improvised after something breaks.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/rollback-has-to-be-designed-in">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">Rollback Has to Be Designed In</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/rollback-has-to-be-designed-in</span></div>
+    <div class="prose">
+      <p>I've heard "we have rollbacks" more times than I can count. For a while I took it at face value. Then I started asking a follow-up question, and the follow-up is where it falls apart: when's the last time you actually did it? Not planned to. Not wrote the runbook for. Actually restored a system to the state it was in before a change and confirmed it came back the way you expected. Most of the time, the honest answer is never. They have a button. They've never pushed it. <strong>A rollback you haven't exercised is not a rollback. It's a hope with a UI.</strong></p>
+
+      <p>When you press on it, "we have rollbacks" almost always turns out to mean something weaker. Sometimes it means backups — which restore the whole system to a point in time, a blunt instrument that loses everything after the snapshot and assumes the backup survived the same event that took out production. In 2014 an attacker got into Code Spaces' AWS control panel and deleted everything, including the backups. Production and backups lived in the same blast radius. The company shut down. Sometimes "we can roll it back" means re-running a playbook or re-applying a previous config — which moves you toward a state that resembles the one you had, not the exact state you were in. The before-state is gone. You're building something new that resembles the old thing. Sometimes it means CloudTrail, which tells you what happened but doesn't undo it. Forensics and rollback are not the same tool. People reach for one when they needed the other.</p>
+
+      <p>The common thread across every incident where rollback failed is that the path existed on paper but had never been exercised against the specific failure it was supposed to cover. An AI coding agent wired into a production environment recently deleted a database and its backups in under ten seconds. The recovery plan assumed the backups would be in a separate enough place. They weren't, and nobody had tested the assumption. That's what untested rollback looks like in practice: you find out whether it works at the exact moment you need it to work, which is the worst possible time to learn something new about your own infrastructure.</p>
+
+      <p>The reason organizations end up here is that rollback is usually treated as an emergency procedure rather than a design constraint. Something goes wrong, an incident fires, and someone starts frantically tracing through what changed and whether it can be reversed. That is the wrong order of operations. <strong>Rollback should be designed before execution begins, not improvised after something breaks.</strong> If a system can execute a change but cannot articulate how to reverse it, that system is incomplete — it has half an answer. Before a change is approved, the question should already be answered: if this goes wrong at step three, what exactly do we do? That question disciplines the planning. It surfaces assumptions. It often catches complexity that would have been invisible until production.</p>
+
+      <p>The economics of this are straightforward. Organizations obsess over preventing mistakes, but no review process eliminates uncertainty and no senior engineer sees every failure mode. A better strategy is making mistakes inexpensive. If recovery is fast and reliable, teams can test assumptions. If every change feels irreversible, teams become conservative, accumulate risk slowly, and eventually experience the failure they were trying to avoid anyway — just at a worse time and at larger scale. Rollback is not a sign of failure. Rollback is resilience. Teams that can roll back quickly can ship more aggressively because the cost of being wrong is bounded.</p>
+
+      <p>What real rollback requires is specific. The exact before-state, captured at execution time — not what the config said last week, not what the audit log recorded after the fact, but the actual state of the specific resources being modified in the moment before they're touched. That state stored bound to the specific change, not in a separate log you have to correlate under pressure. And a typed, tested restore operation — rolling back a credential rotation is a different operation than re-enabling a disabled account, and the undo has to know how to restore its specific kind of change. The last known good state should carry more than configuration: the assumptions that made the change reasonable, the recent changes that preceded it, the validation evidence that confirmed it, the rollback procedure attached to it. That is the object you need when something breaks. Not logs. Not a runbook. A preserved decision context you can actually return to.</p>
+
+      <p>The next time someone tells you they have rollbacks, ask them the follow-up. When did you last run it? Against what? Did the system come back the way you expected? If the answer is a shrug, they don't have rollbacks. They have a story they're telling themselves about the worst day they haven't had yet.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
