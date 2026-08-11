@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Doesn't Need Root. It Needs a Better Engineering Process.</title>
+  <meta name="description" content="The debate about giving AI production access may be asking the wrong question entirely. AI isn't creating a new engineering problem. It's exposing an old one." />
+  <link rel="canonical" href="https://nexplane.ai/writing/ai-doesnt-need-root" />
+  <meta property="og:title" content="AI Doesn't Need Root. It Needs a Better Engineering Process.">
+  <meta property="og:description" content="The debate about giving AI production access may be asking the wrong question entirely. AI isn't creating a new engineering problem. It's exposing an old one.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nexplane.ai/writing/ai-doesnt-need-root">
+  <meta property="article:author" content="John Terrill">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Nexplane</a>
+    <div class="nav-links">
+      <a href="/#platform">Platform</a>
+      <a href="/#use-cases">Use cases</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/#integrations">Integrations</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="/writing">Writing</a>
+      <a href="/#request-demo" class="btn-nav">Request demo</a>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="container article-head">
+    <div class="section-eyebrow"><a href="/writing" style="color:var(--brand-light)">John · Writing</a></div>
+    <h2 class="article-title">AI Doesn't Need Root. It Needs a Better Engineering Process.</h2>
+    <div class="byline"><b>John Terrill</b> · <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">LinkedIn</a> · <span class="permalink">/writing/ai-doesnt-need-root</span></div>
+    <div class="prose">
+      <p>The industry's biggest AI debate may be asking the wrong question. Everyone seems focused on one problem: how do we safely give AI access to production? That assumes the destination is correct. Maybe it isn't. Maybe AI shouldn't have direct production access at all.</p>
+
+      <p>Imagine a senior engineer wants to modify production networking. In a mature engineering organization they shouldn't simply SSH into a router and start making changes. Instead, there is a process. Someone documents what is changing, why it needs to change, what the expected outcome is, what systems could be affected, the implementation plan, the rollback plan, and the validation steps. Other engineers review the proposal. Rollback procedures are verified. Only then does the change reach production. Notice something important: none of this exists because we distrust engineers. It exists because complex systems deserve disciplined change management.</p>
+
+      <p><strong>Why should AI be exempt from the engineering process we've already learned humans should follow?</strong> That framing changes everything. Instead of asking how we make AI safe enough for production access, we should ask why AI would bypass the same structured workflow every consequential engineering decision deserves. AI shouldn't bypass engineering governance. It should participate in it — proposing changes, analyzing dependencies, identifying risks, generating implementation plans, estimating blast radius, recommending rollback strategies. But the change itself still moves through the same structured workflow.</p>
+
+      <p>The most important place for AI involvement is before execution, not during it. If an AI proposes a firewall change, the interesting question is not whether it can generate the command — it probably can. The interesting question is whether it can help the organization understand the change well enough to approve it. That means surfacing affected systems, dependent services, historical incidents, similar prior changes, rollback strategy, validation steps, confidence level, and evidence gaps. This is where AI becomes genuinely useful. Not by bypassing the process. By improving it.</p>
+
+      <p>Ironically, AI may improve human engineering more than human engineering improves AI. To make AI effective, organizations have to make engineering reasoning explicit. Questions that previously lived inside senior engineers' heads suddenly become artifacts: Why is this safe? What assumptions are we making? Which dependencies matter? What evidence supports this approach? What would convince us not to deploy? Those questions benefit future engineers, new hires, incident responders, auditors, and AI alike. <strong>AI isn't creating a new engineering problem. It's exposing an old one.</strong> If we solve that problem well, the solution benefits every participant in the process.</p>
+
+      <p>The future probably isn't AI systems with unrestricted production access and better guardrails. It's organizations with disciplined engineering processes that both humans and AI participate in — where every consequential action is understandable, reviewable, observable, and reversible. That is a much stronger safety model than simply trying to make an AI careful. Careful systems still make mistakes. Well-designed systems make mistakes recoverable. That difference matters more than any permission model we could design.</p>
+    </div>
+    <div class="ref-row">
+      <span>Reference:</span>
+      <a href="https://www.linkedin.com/in/johnterrill" target="_blank" rel="noopener">Share on LinkedIn</a>
+      <a href="/writing">← All writing</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nexplane</div>
+    <p class="footer-tagline">The control plane for infrastructure change.</p>
+    <div class="footer-links">
+      <a href="/writing">Writing</a>
+      <a href="/enterprise">Enterprise</a>
+      <a href="/licensing">Licensing</a>
+      <a href="https://docs.nexplane.ai" target="_blank" rel="noopener">Docs</a>
+      <a href="mailto:hello@nexplane.ai">hello@nexplane.ai</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Nexplane. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
