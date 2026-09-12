@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexplane — Infrastructure Change Risk</title>
+  <meta name="description" content="Infrastructure change is the riskiest thing you do routinely. Nexplane adds state capture, approval gates, and one-click rollback to every change." />
+  <meta property="og:title" content="Nexplane — Infrastructure Change Risk" />
+  <meta property="og:description" content="Fable 5 is surfacing vulnerabilities faster than most teams can respond. Without a reliable undo, fast patching is the same risk at higher velocity." />
+  <meta property="og:url" content="https://nexplane.ai/infographic" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080C10;
+      --surface: #0F1419;
+      --surface2: #151C24;
+      --border: #1E2A36;
+      --border-mid: #243040;
+      --text: #D8E4F0;
+      --text-muted: #6B7E8F;
+      --text-dim: #384654;
+      --green: #2EA84A;
+      --green-light: #3FC85C;
+      --green-bg: rgba(46,168,74,0.07);
+      --green-border: rgba(46,168,74,0.2);
+      --red: #E5463D;
+      --red-light: #F05850;
+      --red-bg: rgba(229,70,61,0.07);
+      --red-border: rgba(229,70,61,0.2);
+      --blue: #3D8EF0;
+      --blue-light: #58A6FF;
+      --blue-bg: rgba(61,142,240,0.07);
+      --blue-border: rgba(61,142,240,0.2);
+      --amber: #C8922A;
+      --amber-light: #E3B341;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #050709;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 0 48px;
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    .site-nav {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 6vw, 40px) 20px;
+    }
+
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue-light);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-link {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .nav-link:hover { color: var(--text); }
+
+    .infographic {
+      width: 100%;
+      max-width: 560px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .ig-header,
+    .ig-section,
+    .ig-footer {
+      padding-left: clamp(20px, 6vw, 40px);
+      padding-right: clamp(20px, 6vw, 40px);
+    }
+
+    @media (max-width: 400px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .ig-footer { flex-direction: column; gap: 16px; }
+      .footer-star { align-items: flex-start; }
+      .failure-row { flex-direction: column; gap: 6px; }
+    }
+
+    /* HEADER */
+    .ig-header {
+      padding-top: 36px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ig-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--blue) 50%, var(--green) 100%);
+    }
+
+    .ig-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue-light);
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+
+    .ig-title {
+      font-size: clamp(18px, 5vw, 26px);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
+      margin-bottom: 12px;
+    }
+
+    .ig-title em { font-style: normal; color: var(--red-light); }
+
+    .ig-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 42ch;
+    }
+
+    /* SECTION */
+    .ig-section {
+      padding-top: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ig-section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+
+    /* FAILURES */
+    .failures { display: flex; flex-direction: column; gap: 8px; }
+
+    .failure-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--red);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .failure-icon {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--red);
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      border-radius: 3px;
+      padding: 2px 6px;
+      white-space: nowrap;
+      margin-top: 1px;
+    }
+
+    .failure-text { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    .failure-text strong { font-weight: 600; color: var(--text); display: block; margin-bottom: 2px; }
+
+    /* PRESSURE */
+    .pressure-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .pressure-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--amber-light);
+      background: rgba(200,146,42,0.1);
+      border: 1px solid rgba(200,146,42,0.25);
+      border-radius: 3px;
+      padding: 3px 7px;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+      margin-top: 1px;
+    }
+
+    .pressure-text { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+    .pressure-text strong { color: var(--text); font-weight: 600; }
+
+    /* ROLLBACK DIAGRAM */
+    .rb-timeline { display: flex; flex-direction: column; gap: 0; }
+
+    .rb-step { display: flex; align-items: stretch; gap: 0; }
+
+    .rb-rail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 32px;
+      flex-shrink: 0;
+    }
+
+    .rb-node {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      flex-shrink: 0;
+      z-index: 1;
+      position: relative;
+    }
+    .rb-node.ok { background: var(--surface2); border: 2px solid var(--border-mid); color: var(--text-muted); }
+    .rb-node.captured { background: var(--blue-bg); border: 2px solid var(--blue-border); color: var(--blue-light); }
+    .rb-node.fail { background: var(--red-bg); border: 2px solid var(--red-border); color: var(--red-light); }
+    .rb-node.restored { background: var(--green-bg); border: 2px solid var(--green-border); color: var(--green-light); }
+
+    .rb-line { width: 2px; flex: 1; min-height: 12px; background: var(--border); }
+    .rb-line.dashed {
+      background: none;
+      background-image: repeating-linear-gradient(180deg, var(--blue) 0, var(--blue) 4px, transparent 4px, transparent 8px);
+      opacity: 0.5;
+    }
+
+    .rb-content {
+      flex: 1;
+      padding: 0 0 16px 14px;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 2px;
+    }
+    .rb-content:last-child { padding-bottom: 0; }
+
+    .rb-card {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .rb-card.neutral { background: var(--surface); border: 1px solid var(--border); }
+    .rb-card.snap { background: var(--blue-bg); border: 1px solid var(--blue-border); }
+    .rb-card.broke { background: var(--red-bg); border: 1px solid var(--red-border); }
+    .rb-card.back { background: var(--green-bg); border: 1px solid var(--green-border); }
+
+    .rb-card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      flex: 1;
+    }
+    .rb-card-label.muted { color: var(--text-muted); }
+    .rb-card-label.blue { color: var(--blue-light); }
+    .rb-card-label.red { color: var(--red-light); }
+    .rb-card-label.green { color: var(--green-light); }
+    .rb-card-ver { color: var(--amber-light); font-weight: 600; }
+
+    .rb-card-tag {
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .rb-card-tag.cap { background: var(--blue-bg); color: var(--blue-light); border: 1px solid var(--blue-border); }
+    .rb-card-tag.fail { background: var(--red-bg); color: var(--red-light); border: 1px solid var(--red-border); }
+    .rb-card-tag.done { background: var(--green-bg); color: var(--green-light); border: 1px solid var(--green-border); }
+
+    .rollback-bridge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px 6px 46px;
+      margin: -4px 0;
+      flex-wrap: wrap;
+    }
+
+    .rb-bridge-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--blue-light);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      border-radius: 3px;
+      padding: 2px 8px;
+    }
+
+    .rb-bridge-line {
+      flex: 1;
+      height: 1px;
+      background: repeating-linear-gradient(90deg, var(--blue-light) 0, var(--blue-light) 3px, transparent 3px, transparent 6px);
+      opacity: 0.4;
+    }
+
+    .rb-bridge-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    /* FEATURES GRID */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .feature-cell {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .feature-name { font-size: 11px; font-weight: 600; color: var(--text); }
+    .feature-desc { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+    .feature-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--blue-light);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    /* FOOTER */
+    .ig-footer {
+      padding-top: 28px;
+      padding-bottom: 28px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .ig-footer-left { display: flex; flex-direction: column; gap: 4px; }
+
+    .footer-oss {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green-light);
+    }
+
+    .footer-oss-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green-light); }
+
+    .footer-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue-light);
+      letter-spacing: 0.01em;
+    }
+
+    .footer-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+    .footer-star { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+
+    .star-btn {
+      display: inline-block;
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      color: var(--blue-light);
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .star-btn:hover { background: rgba(61,142,240,0.15); }
+
+    .star-sub {
+      font-size: 10px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .ig-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 clamp(20px, 6vw, 40px);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="/" class="nav-logo">nexplane</a>
+    <a href="https://github.com/youbetyourballs/nexplane" class="nav-link" target="_blank" rel="noopener">GitHub →</a>
+  </nav>
+
+  <div class="infographic">
+
+    <div class="ig-header">
+      <div class="ig-logo">nexplane</div>
+      <div class="ig-title">Infrastructure change is <em>the riskiest thing</em> you do routinely.</div>
+      <div class="ig-subtitle">Fable 5 is surfacing vulnerabilities faster than most teams can respond. The patch fixes the vuln. It also breaks something. Without a reliable undo, fast patching is the same risk at higher velocity.</div>
+    </div>
+
+    <div class="ig-section">
+      <div class="section-label">Why changes get deferred</div>
+      <div class="failures">
+        <div class="failure-row">
+          <div class="failure-icon">kernel</div>
+          <div class="failure-text">
+            <strong>Linux upgrade breaks application dependencies</strong>
+            nobody documented what relied on the old ABI
+          </div>
+        </div>
+        <div class="failure-row">
+          <div class="failure-icon">postgres</div>
+          <div class="failure-text">
+            <strong>Major version migration changes query behavior</strong>
+            extension incompatibilities surface only in production
+          </div>
+        </div>
+        <div class="failure-row">
+          <div class="failure-icon">firewall</div>
+          <div class="failure-text">
+            <strong>Rule change takes down an unrelated service</strong>
+            blast radius was larger than anyone modeled
+          </div>
+        </div>
+        <div class="failure-row">
+          <div class="failure-icon">creds</div>
+          <div class="failure-text">
+            <strong>Credential rotation drops a connection</strong>
+            hardcoded secret in a service nobody's touched in three years
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ig-section">
+      <div class="section-label">The new pressure</div>
+      <div class="pressure-block">
+        <div class="pressure-badge">Fable 5</div>
+        <div class="pressure-text">
+          <strong>AI is compressing remediation windows.</strong> Vulnerabilities that had 90-day cycles are getting weaponized faster. The "we'll get to it" queue isn't safe anymore — and the tooling hasn't kept up.
+        </div>
+      </div>
+    </div>
+
+    <div class="ig-section">
+      <div class="section-label">What rollback actually looks like</div>
+      <div class="rb-timeline">
+
+        <div class="rb-step">
+          <div class="rb-rail">
+            <div class="rb-node ok">●</div>
+            <div class="rb-line"></div>
+          </div>
+          <div class="rb-content">
+            <div class="rb-card neutral">
+              <div class="rb-card-label muted"><span class="rb-card-ver">postgresql-14</span> &nbsp;running</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rb-step">
+          <div class="rb-rail">
+            <div class="rb-node captured">◎</div>
+            <div class="rb-line"></div>
+          </div>
+          <div class="rb-content">
+            <div class="rb-card snap">
+              <div class="rb-card-label blue">State captured before execution</div>
+              <div class="rb-card-tag cap">snapshot</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rb-step">
+          <div class="rb-rail">
+            <div class="rb-node fail">✕</div>
+            <div class="rb-line dashed"></div>
+          </div>
+          <div class="rb-content">
+            <div class="rb-card broke">
+              <div class="rb-card-label red"><span class="rb-card-ver">postgresql-15</span> &nbsp;extension conflict</div>
+              <div class="rb-card-tag fail">failed</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rollback-bridge">
+          <div class="rb-bridge-label">↩ rollback triggered</div>
+          <div class="rb-bridge-line"></div>
+          <div class="rb-bridge-time">4 seconds</div>
+        </div>
+
+        <div class="rb-step">
+          <div class="rb-rail">
+            <div class="rb-node restored">✓</div>
+          </div>
+          <div class="rb-content">
+            <div class="rb-card back">
+              <div class="rb-card-label green"><span class="rb-card-ver">postgresql-14</span> &nbsp;restored</div>
+              <div class="rb-card-tag done">prior state</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="ig-section">
+      <div class="section-label">The platform</div>
+      <div class="features-grid">
+        <div class="feature-cell">
+          <div class="feature-count">70+</div>
+          <div class="feature-name">Connectors</div>
+          <div class="feature-desc">Cloud, identity, network, endpoints, secrets</div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-name">Impact simulation</div>
+          <div class="feature-desc">See what breaks before you approve the change</div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-name">Approval gates</div>
+          <div class="feature-desc">Human in the loop before anything executes</div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-name">Rollback center</div>
+          <div class="feature-desc">Exact prior state, one click, designed in before execution</div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-name">LLM / MCP access</div>
+          <div class="feature-desc">Let AI propose changes — not execute them directly</div>
+        </div>
+        <div class="feature-cell">
+          <div class="feature-name">Full audit trail</div>
+          <div class="feature-desc">Who approved, what changed, what the undo looks like</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ig-footer">
+      <div class="ig-footer-left">
+        <div class="footer-oss"><div class="footer-oss-dot"></div> Open source · AGPL-3.0 · Free to self-host</div>
+        <div class="footer-url">github.com/youbetyourballs/nexplane</div>
+        <div class="footer-sub">nexplane.ai</div>
+      </div>
+      <div class="footer-star">
+        <a href="https://github.com/youbetyourballs/nexplane" class="star-btn" target="_blank" rel="noopener">⭐ Star on GitHub</a>
+        <div class="star-sub">helps others find it</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
