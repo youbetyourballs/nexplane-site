@@ -204,7 +204,7 @@
         <div class="question-icon">&#8617;</div>
         <div class="question-text">Can I safely undo it?</div>
         <div class="question-capability">Rollback center</div>
-        <div class="question-desc">Every change ships with a typed rollback plan, last-known-good snapshot, and one-click undo. Verified against live infrastructure before it ships.</div>
+        <div class="question-desc">Every change ships with a typed rollback plan, last-known-good snapshot, and one-click undo. High-risk change types are live-verified against real infrastructure — the change runs, rollback triggers, system state confirmed.</div>
         <span class="question-tag">rollback-center</span>
       </div>
     </div>
@@ -529,7 +529,7 @@
     <div class="section-eyebrow">Rollback Center</div>
     <h2>Infrastructure should<br>be <em>reversible.</em></h2>
     <p class="section-sub">
-      Every change should have a rollback plan, validation checks, last-known-good state, and audit trail. Most platforms claim rollback capability. Nexplane verifies it &mdash; every change type ships with a live smoke test that executes the change, triggers the rollback, and confirms the system returned to its prior state. Against real infrastructure, not mocks.
+      Every change should have a rollback plan, validation checks, last-known-good state, and audit trail. Most platforms claim rollback support. Nexplane enforces it architecturally &mdash; every change type is designed with an explicit rollback path, and the high-risk ones are live-verified against real infrastructure: the change executes, rollback triggers, and the system confirms it returned to prior state. Not mocks. Not assertions. Running code.
     </p>
     <div class="rollback-grid">
       <div class="rollback-card">
